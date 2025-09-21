@@ -29,6 +29,7 @@ $DOWNLOADS_DIR/dockertex/install.sh --app-prefix $DST_DIR/desktop --bin-prefix $
 echo "==> Fixing start of TexStudio"
 ## 3.3 Исправление для запуска TexStudio
 sed -i '/--net=host\ \\/d' $DST_DIR/bin/dockertexstudio
+sed -i '10i xhost local:root' $DST_DIR/bin/dockertexstudio
 sed -i "s|HOME=/home/|HOME=$(pwd)|g; s|--workdir=/home/|--workdir=$(pwd)|g" $DST_DIR/bin/dockertexstudio
 sed -i '/image_tag="${DOCKERTEX_DEFAULT_TAG}"/i DOCKERTEX_DEFAULT_TAG=latest' $DST_DIR/bin/dockertexstudio
 sed -i '/image_tag="${DOCKERTEX_DEFAULT_TAG}"/i DOCKERTEX_DEFAULT_TAG=latest' $DST_DIR/bin/dockertex
