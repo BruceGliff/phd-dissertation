@@ -1,0 +1,77 @@
+% This file was created with tikzplotlib v0.10.1.post13.
+\begin{tikzpicture}
+
+\definecolor{darkgrey176}{RGB}{176,176,176}
+\definecolor{lightgrey}{RGB}{211,211,211}
+\definecolor{lightgrey204}{RGB}{204,204,204}
+
+\begin{axis}[
+height=0.4\textheight,
+legend cell align=right,
+legend pos=north west,
+legend style={  at={(1,1.03)},  anchor=south east},
+tick align=outside,
+tick pos=left,
+width=0.95\textwidth,
+x grid style={darkgrey176},
+xlabel={Вероятность зависимости между элементами, \(\displaystyle p_{D}\)},
+xmin=-0.0665, xmax=1.0665,
+xtick style={color=black},
+y grid style={darkgrey176},
+ylabel style={text width=10cm, align=center},
+ylabel={Количество линейных перестановок
+в логарифмическом масштабе, \(\displaystyle log_{10}(\text{шт})\)},
+ymin=0, ymax=7.01323097713965,
+ytick style={color=black}
+]
+\draw[draw=black,fill=black] (axis cs:0.005,0) rectangle (axis cs:0.015,0);
+\addlegendimage{ybar,ybar legend,draw=black,fill=black}
+\addlegendentry{Обход с учётом зависимости, Алгоритм 2}
+
+\draw[draw=black,fill=black] (axis cs:0.105,0) rectangle (axis cs:0.115,2.15836249209525);
+\draw[draw=black,fill=black] (axis cs:0.205,0) rectangle (axis cs:0.215,3.2895889525426);
+\draw[draw=black,fill=black] (axis cs:0.305,0) rectangle (axis cs:0.315,3.74083620705731);
+\draw[draw=black,fill=black] (axis cs:0.405,0) rectangle (axis cs:0.415,4.57801998503221);
+\draw[draw=black,fill=black] (axis cs:0.505,0) rectangle (axis cs:0.515,4.88829746216554);
+\draw[draw=black,fill=black] (axis cs:0.605,0) rectangle (axis cs:0.615,5.21851712477091);
+\draw[draw=black,fill=black] (axis cs:0.705,0) rectangle (axis cs:0.715,5.58294243056767);
+\draw[draw=black,fill=black] (axis cs:0.805,0) rectangle (axis cs:0.815,5.9647525881337);
+\draw[draw=black,fill=black] (axis cs:0.905,0) rectangle (axis cs:0.915,6.28133522204542);
+\draw[draw=black,fill=black] (axis cs:1.005,0) rectangle (axis cs:1.015,6.60437381770785);
+\draw[draw=black,fill=white] (axis cs:-0.015,0) rectangle (axis cs:-0.005,4.63578523553365);
+\addlegendimage{ybar,ybar legend,draw=black,fill=white}
+\addlegendentry{Обход с учётом независимости, Алгоритм 1}
+
+\draw[draw=black,fill=white] (axis cs:0.085,0) rectangle (axis cs:0.095,4.78859255592036);
+\draw[draw=black,fill=white] (axis cs:0.185,0) rectangle (axis cs:0.195,4.91948080530445);
+\draw[draw=black,fill=white] (axis cs:0.285,0) rectangle (axis cs:0.295,5.118215108501);
+\draw[draw=black,fill=white] (axis cs:0.385,0) rectangle (axis cs:0.395,5.44137145388074);
+\draw[draw=black,fill=white] (axis cs:0.485,0) rectangle (axis cs:0.495,5.56050560995127);
+\draw[draw=black,fill=white] (axis cs:0.585,0) rectangle (axis cs:0.595,5.71155501203113);
+\draw[draw=black,fill=white] (axis cs:0.685,0) rectangle (axis cs:0.695,5.88895076288752);
+\draw[draw=black,fill=white] (axis cs:0.785,0) rectangle (axis cs:0.795,6.13416817925776);
+\draw[draw=black,fill=white] (axis cs:0.885,0) rectangle (axis cs:0.895,6.3165498571675);
+\draw[draw=black,fill=white] (axis cs:0.985,0) rectangle (axis cs:0.995,6.60437381770785);
+\addplot [semithick, red, dash pattern=on 1pt off 3pt on 3pt off 3pt]
+table {%
+-0.0665 6.60437381770785
+1.0665 6.60437381770785
+};
+\addlegendentry{Вычисление по формуле 1}
+\addplot [semithick, lightgrey]
+table {%
+0 0.17129391428814
+0.1 1.90632082152951
+0.2 3.14208626146731
+0.3 3.98780434183084
+0.4 4.5526891703494
+0.5 4.94595485475229
+0.6 5.26496572446256
+0.7 5.55968699567826
+0.8 5.86823410629118
+0.9 6.22872249419311
+1 6.67926759727586
+};
+\end{axis}
+
+\end{tikzpicture}
