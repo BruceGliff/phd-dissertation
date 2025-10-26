@@ -1,0 +1,10 @@
+{
+0:a2=x;1:s7=x;
+}
+
+P0                      | P1                     ;
+Start0:                 | Start1:                ;
+  lr.w.aq s7, (a2)      |   lr.w.aq a4, (s7)     ;
+  li s8, 2              |   li a1, 1             ;
+  sc.w.rl s8, s8, (a2)  |   sc.w.rl a1, a1, (s7) ;
+  bne zero, s8, Start0  |   bne zero, a1, Start1 ;

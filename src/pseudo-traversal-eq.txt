@@ -1,0 +1,14 @@
+def traversal(P, Path):
+  PrevX = Path.back()
+  Processed = PrevX
+               .parent
+                .processed
+
+  Xs = X in getMin(P)
+         if Processed
+             .notContains(X, PrevX)
+
+  for X in Xs:
+    Path.append(X)
+    Processed.insert(X, PrevX)
+    traversal(P\X, Path)

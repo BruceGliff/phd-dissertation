@@ -1,0 +1,9 @@
+  li      a1, 2
+  li      a2, 5
+.LBB0_1:
+  lr.w.aqrl       a3, (a0)
+  bne     a3, a2, .LBB0_3
+  sc.w.rl a4, a1, (a0)
+  bnez    a4, .LBB0_1
+.LBB0_3:
+  ...

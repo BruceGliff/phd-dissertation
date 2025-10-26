@@ -1,0 +1,5 @@
+def traversal(P, Path):
+  Xs = getMin(P);
+  for X in Xs:
+    Path.append(X)
+    traversal(P\X, Path)

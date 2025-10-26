@@ -1,0 +1,10 @@
+auto Nodes = DAG.Nds;
+decltype(Nodes) ToDelete;
+
+for (auto CurrNd : Nodes)
+  for (auto Child : CurrNd.Edges)
+    for (auto Grandchild : breadth_first(Child))
+      if (Child != Grandchild and CurrNd.Edges.contains(Grandchild))
+        ToDelete.insert({CurrNd, Grandchild});
+
+DAG.delete(ToDelete);

@@ -1,0 +1,1 @@
+0 = cmpxchg i, i32 5, i32 2 seq_cst seq_cst

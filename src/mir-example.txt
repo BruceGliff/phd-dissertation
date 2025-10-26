@@ -1,0 +1,18 @@
+---
+name: Function0
+ ...
+body:
+  $x2 = LUI 262192
+  $x2 = SLLI $x2, 4
+  $x2 = ADDI $x2, -16
+  SD $x1, $x2, 0
+ ...
+  $x0 = ADDI $x0, 0
+  $x22 = LUI 1024
+  $x22 = SLLI $x22, 12
+  $x21 = LD $x22, -1049
+ ...
+  $x0 = ADDI $x0, 0
+  $x27 = LD $x2, 0
+  $x2 = ADDI $x2, 16
+ ...

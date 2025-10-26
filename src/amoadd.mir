@@ -1,0 +1,9 @@
+---
+name:            OnThread0
+body:             |
+  bb.0:
+    $x11 = ADDI $x0, 16
+    $x30 = ADDI $x0, 1
+    $x27 = AMOADD_W_AQ $x11, $x30
+    PseudoRET
+...

@@ -1,0 +1,4 @@
+mov     eax, 5
+mov     edx, 2
+lock cmpxchg    DWORD PTR [rdi], edx
+...
