@@ -55,6 +55,7 @@
 \section{Топологическая сортировка}\label{sec:ch2/topol}
 
 Обозначим $l_P$ -- линейный порядок множества $P$, $L(P) : \forall l_P \in L(P)$.
+Линейный порядок множества $P$ тоже самое, что типологическая сортировка графа $G$, поэтому $L(P) \equiv L(G) \equiv L$
 
 Для построения $L(P)$ используется алгоритм топологической сортировки~\ref{alg:topo} аналогично формуле~\ref{eq:lin-ext}.
 
@@ -74,3 +75,106 @@
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
+
+Расчитаем количесвтво линейных порядков в $L(P)$ и сложность алгоритма их построения. Частично упорядоченое множество может быть описано ацикличным направленным графом.
+Рассмотрим случайный DAG -- $G$, построенный следующим образом:
+\begin{itemize}
+  \item фиксировано число вершин $n = |V(G)|$;
+  \item $\sigma_i \in V(G) \mid 1 \leq i \leq n$;
+  \item выбираем любую перестановку из $\sigma_1 \dots \sigma_n$. Это будет заданный топологический порядок DAG;
+  \item Независимо $\forall (i, j) \mid i < j$, проводим ребро $(\sigma_i, \sigma_j) \in E(G)$ с вероятностью $p$;
+\end{itemize}
+Данное построение, гарантирует построение корректного DAG и позволяет варировать его топологию параметром $p$.
+
+\subsection{Количство линейных порядков}\label{sec:ch2/linext-count}
+
+Обозначим $\sigma_i$ -- вершина $\sigma \in V(G)$, с порядковым номером $i$. И $\text{id}^{\alpha}(\sigma_i)$ -- позиция вершины $\sigma_i$ в топологическом порядке $\alpha$.
+Пусть $\tau$ -- топологический порядок, по которому строился граф и $\text{id}^{\tau}(\sigma_i) \equiv i$.
+Тогда $\forall (\sigma_i, \sigma_j) \in E(G) | \mid i < j$ по построению.
+
+Возьмём другой порядок $\pi$. $\pi$ является топологическим порядком графа $G$, тогда и только тогда, если в графе нет ребра, направленного в противоположную сторону относительно $\pi$.
+\begin{equation}
+  \nexists (\sigma_i, \sigma_j) \in E(G) \mid \text{id}^{\pi}(\sigma_j) < \text{id}^{\pi}(\sigma_i)
+\end{equation}
+
+Для фиксированного порядка $\pi$, количество пар вершин $(\sigma_i, \sigma_j) | i < j$, но расположенных в $\pi$ в обратном порядке $\text{id}^{\pi}(\sigma_j) < \text{id}^{\pi}(\sigma_i)$ в точности равно $\text{inv}(\pi)$ -- числу инверсий перестановки $\pi$ относительно $\tau$.\fixme{find cite}
+Чтобы перестановка $\pi$ была корректной топологической сортировкой $G$, ниодного потенциально неправильно направленного ребра не должно существовать.
+
+Вероятность, что ребра не существует -- $1-p$ и рёбра расставляются независимо, тогда:
+\begin{equation}
+  \mathbb{P}[\pi \text{ -- топологическая сортировка}] = (1-p)^{\text{inv}(\pi)}
+\end{equation}
+а общее количество линейных порядков суммируется по всем возможным $n!$ перестановкам \fixme{find cite}:
+\begin{equation}
+  \mathbb{E}(|L|) = \sum_{\pi}{(1-p)^{\text{inv}(\pi)}} = \prod_{k=1}^{n}{\frac{1-q^k}{1-q}}, \text{ где } q = 1-p
+\end{equation}
+
+Оценим некоторые пределы.
+\begin{subequations}
+    \label{eq:linext-count-lims}
+    \begin{align}
+      p & = 1,\ \mathbb{E} = 1 \label{eq:linext-count-lims-p1} \\
+      p & = 0,\ \mathbb{E} = \sum_{\pi}{1^{\text{inv}(\pi)}} = n! \label{eq:linext-count-lims-p0} \\
+      p & = \frac{1}{2},\ \mathbb{E} = 2^n \prod_{k=1}^{n} (1 - \frac{1}{2}^k) \rightarrow 0.29*2^n, \text{ при } n \rightarrow \infty \label{eq:linext-count-lims-p12}
+    \end{align}
+\end{subequations}
+$Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
+Случай \cref{eq:linext-count-lims-p1} соответсвует единственному допустимому линейному порядку, по которому строился DAG.
+
+\subsection{Количство минимальных элементов}\label{sec:ch2/min-elems}
+
+Расчитаем, среднее количество минимальных элементов в случайном DAG.
+
+Выберем и зафиксируем случайную вершину $\sigma$ и выберем топологическую перестановку, использованную при построении графа $\tau$.
+Пусть $\text{id}^{\tau}(\sigma) = k$ -- позиция $\sigma$ с вероятностью:
+\begin{equation}
+  \label{eq:p-pos-k}
+  \mathbb{P}[\text{id}^{\tau}(\sigma) = k] = \frac{1}{n}
+\end{equation}
+Тогда ребро в $\sigma$ может входить только в из вершин, стоящих левее в порядке с вероятностью:
+\begin{equation}
+  \label{eq:no-in-k}
+  \mathbb{P}[\text{нет входящих рёбер} \mid \text{id}^{\tau}(\sigma) = k] = (1-p)^{k-1}
+\end{equation}
+И из формул~\ref{eq:p-pos-k}~\ref{eq:no-in-k} следует вероятность $\sigma \in \text{min}(G)$:
+\begin{equation}
+  \label{eq:n-is-min}
+    \begin{multlined}
+      \mathbb{P}[\sigma \in \text{min}(G)] = \\
+      = \sum_{k=1}^{n}{\mathbb{P}[\text{id}^{\tau}(\sigma) = k]\mathbb{P}[\text{нет входящих рёбер} \mid \text{id}^{\tau}(\sigma) = k]} = \\
+      = \sum_{k=1}^{n}{\frac{1}{n}(1-p)^{k-1}} = \frac{1}{n}\frac{1-q^n}{1-q}, \text{ где } q = 1-p
+    \end{multlined}
+\end{equation}
+И математическое ожидание количества минимальных элеметов:
+\begin{equation}
+  \label{eq:num-of-min}
+  \mathbb{E}(|min(G)|) = \frac{1-q^n}{1-q}
+\end{equation}
+
+\subsection{Сложность алгоритма построения всех линейных порядков алгоритмом~\ref{alg:topo}}\label{sec:ch2/topoalg-comp}
+
+Рассмотрим $N$ шаг рекурсии в алгоритме ~\ref{alg:topo}, где $N = |P|$.
+Вычислим сколько операций $C_N$ занимает вычисление одного шага рекурсии.
+Вычисление минимальных элементов требует $|P|$ операций, а одна итерация цикла занимает $C_{N-1}$ операций.
+Вместе с формулой~\cref{eq:num-of-min} Получаем рукурсивную формулу вычисления количества операций на $N$-ом шаге рекурсии:
+\begin{equation}
+  \begin{multlined}
+    \label{eq:topo-comp}
+    C_N = |P| + \mathbb{E}(|min(G)|)C_{N-1} = N + \frac{1-q^N}{1-q}C_{N-1} = \dots = \\
+    = \sum_{k=1}^{N}{k\prod_{l=1}^{N-k}{\frac{1-q^{k+l}}{1-q}}}
+  \end{multlined}
+\end{equation}
+
+Оценим некоторые пределы.
+\begin{subequations}
+    \label{eq:topo-comp-lims}
+    \begin{align}
+      q & \rightarrow 0,\ C_N \approx \frac{N(N-1)}{2} \label{topo-comp-lims-p1} \\
+      q & = 1 - \varepsilon,\ \varepsilon \rightarrow 0, \ C_N \approx N! \sum_{k=1}^{N}{\frac{1}{(k-1)!}} \rightarrow eN!, \text{ при } N \rightarrow \infty \label{topo-comp-lims-p1} \\
+      q & = \frac{1}{2},\ C_N = \sum_{k=1}^{N}{k 2^{N-k}\prod_{j=k+1}^{N}{1-2^{-j}}} = \\
+        & = \sum_{k=1}^{N}{k 2^{N-k} \frac{Q_N}{Q_k}} \approx \\
+        & \approx Q_{\infty}\sum_{m=0}^{N-1}\frac{2^m}{Q_{N-m}} \approx \\
+        & \lgroup Q_{N-m} \approx Q_{\infty}, \text{ при } m \ll N \rgroup \\
+        & \approx \sum_{m=0}^{N-1}{(N-m)2^m} = 2^{N+1} - N - 2 \label{eq:topo-comp-lims-p12}
+    \end{align}
+\end{subequations}
