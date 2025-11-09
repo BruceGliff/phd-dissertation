@@ -1,0 +1,129 @@
+\begin{tikzpicture}[
+    node distance=1.5cm and 1cm,
+    stepnode/.style={rectangle, draw=black, dashed, thick, inner sep=5pt, rounded corners=5pt},
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt, minimum size=8mm},
+    arrow/.style={-stealth, thick}
+]
+
+% Step 1
+\node (step1) [stepnode] {
+    \begin{tikzpicture}
+        \node[dag] (1-1) {1};
+        \node[dag, below left=0.5cm of 1-1] (1-2) {2};
+        \node[dag, right=1.0cm of 1-1] (1-3) {3};
+        \node[dag, below left=0.5cm of 1-3] (1-4) {4};
+        \node[dag, below left=0.5cm of 1-4] (1-5) {5};
+
+        \draw[arrow] (1-1) -- (1-2);
+        \draw[arrow] (1-1) -- (1-4);
+        \draw[arrow] (1-3) -- (1-4);
+        \draw[arrow] (1-4) -- (1-5);
+    \end{tikzpicture}
+};
+
+% Step 2
+\node (step2) [stepnode, below left=1.0cm and 0.0cm of step1] {
+    \begin{tikzpicture}
+        \node[dag] (2-2) {2};
+        \node[dag, right=1.0cm of 2-2] (2-3) {3};
+        \node[dag, below left=0.5cm of 2-3] (2-4) {4};
+        \node[dag, below left=0.5cm of 2-4] (2-5) {5};
+
+        \draw[arrow] (2-3) -- (2-4);
+        \draw[arrow] (2-4) -- (2-5);
+    \end{tikzpicture}
+};
+
+% Step 3
+\node (step3) [stepnode, below=1.0cm of step2] {
+    \begin{tikzpicture}
+        \node[dag] (3-3) {3};
+        \node[dag, below left=0.5cm of 3-3] (3-4) {4};
+        \node[dag, below left=0.5cm of 3-4] (3-5) {5};
+
+        \draw[arrow] (3-3) -- (3-4);
+        \draw[arrow] (3-4) -- (3-5);
+    \end{tikzpicture}
+};
+
+% Step 4
+\node (step4) [stepnode, below=1.0cm of step3] {
+    \begin{tikzpicture}
+        \node[dag] (4-4) {4};
+        \node[dag, below left=0.5cm of 4-4] (4-5) {5};
+
+        \draw[arrow] (4-4) -- (4-5);
+    \end{tikzpicture}
+};
+
+% Step 5
+\node (step5) [stepnode, below=1.0cm of step4] {
+    \begin{tikzpicture}
+        \node[dag] (5-5) {5};
+    \end{tikzpicture}
+};
+
+% Step 6
+\node (step6) [stepnode, below right=1cm and 0.0cm of step1] {
+    \begin{tikzpicture}
+        \node[dag] (6-1) {1};
+        \node[dag, below left=0.5cm of 6-1] (6-2) {2};
+        \node[dag, below right=0.5cm of 6-1] (6-4) {4};
+        \node[dag, below left=0.5cm of 6-4] (6-5) {5};
+
+        \draw[arrow] (6-1) -- (6-2);
+        \draw[arrow] (6-1) -- (6-4);
+        \draw[arrow] (6-4) -- (6-5);
+    \end{tikzpicture}
+};
+
+% Step 7
+\node (step7) [stepnode, below=1.0cm of step6] {
+    \begin{tikzpicture}
+        \node[dag] (7-2) {2};
+        \node[dag, right=1.0cm of 7-2] (7-4) {4};
+        \node[dag, below left=0.5cm of 7-4] (7-5) {5};
+
+        \draw[arrow] (7-4) -- (7-5);
+    \end{tikzpicture}
+};
+
+% Step 8
+\node (step8) [stepnode, below=1.0cm of step7] {
+    \begin{tikzpicture}
+        \node[dag] (8-2) {2};
+        \node[dag, right=0.5cm of 8-2] (8-5) {5};
+    \end{tikzpicture}
+};
+
+% Step 9
+\node (step9) [stepnode, below=1.0cm of step8] {
+    \begin{tikzpicture}
+        \node[dag] (9-5) {5};
+    \end{tikzpicture}
+};
+
+% Step 10
+\node (step10) [stepnode, left=1.0cm of step9] {
+    \begin{tikzpicture}
+        \node[dag] (10-2) {2};
+    \end{tikzpicture}
+};
+
+% Transitions between steps
+\draw[arrow] (step1) -- (step2);
+\draw[arrow] (step2) -- (step3);
+\draw[arrow] (step3) -- (step4);
+\draw[arrow] (step4) -- (step5);
+
+\draw[arrow] (step1) -- (step6);
+\draw[arrow] (step6) -- (step7);
+\draw[arrow] (step7) -- (step8);
+
+\draw[arrow] (step8) -- (step9);
+\draw[arrow] (step8) -- (step10);
+
+\draw[arrow] (step2) -- (step7);
+\draw[arrow] (step7) -- (step4);
+
+\end{tikzpicture}

@@ -76,6 +76,22 @@
 \end{algorithmic}
 \end{algorithm}
 
+В начале алгоритма выбираются минимальные элементы из частично упорядоченного множества.
+Для каждого из этих элементов производится добавление его в текущую генерируемую перестановку, а затем он удаляется из множества.
+После этого алгоритм повторяется для нового частично упорядоченного множества.
+
+На рисунке~\ref{fig:topo-trav} проиллюстрирован пример обхода частично упорядоченного множества алгоритмом~\ref{alg:topo}.
+
+\begin{figure}[htbp]
+    \centerfloat{
+      \input{Dissertation/images/topo-traversal.tex}
+    }
+    \caption{Пример обхода частично упорядоченного множества}\label{fig:topo-trav}
+    %task: topo-traversal.txt
+\end{figure}
+
+
+
 Расчитаем количесвтво линейных порядков в $L(P)$ и сложность алгоритма их построения. Частично упорядоченое множество может быть описано ацикличным направленным графом.
 Рассмотрим случайный DAG -- $G$, построенный следующим образом:
 \begin{itemize}
@@ -151,7 +167,7 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
   \mathbb{E}(|min(G)|) = \frac{1-q^n}{1-q}
 \end{equation}
 
-\subsection{Сложность алгоритма построения всех линейных порядков алгоритмом~\ref{alg:topo}}\label{sec:ch2/topoalg-comp}
+\subsection{Сложность алгоритма построения всех линейных порядков топологической сортировкой}\label{sec:ch2/topoalg-comp}
 
 Рассмотрим $N$ шаг рекурсии в алгоритме ~\ref{alg:topo}, где $N = |P|$.
 Вычислим сколько операций $C_N$ занимает вычисление одного шага рекурсии.
@@ -170,7 +186,7 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
     \label{eq:topo-comp-lims}
     \begin{align}
       q & \rightarrow 0,\ C_N \approx \frac{N(N-1)}{2} \label{topo-comp-lims-p1} \\
-      q & = 1 - \varepsilon,\ \varepsilon \rightarrow 0, \ C_N \approx N! \sum_{k=1}^{N}{\frac{1}{(k-1)!}} \rightarrow eN!, \text{ при } N \rightarrow \infty \label{topo-comp-lims-p1} \\
+      q & = 1 - \varepsilon,\ \varepsilon \rightarrow 0, \ C_N \approx N! \sum_{k=1}^{N}{\frac{1}{(k-1)!}} \rightarrow eN!, \text{ при } N \rightarrow \infty \label{topo-comp-lims-p0} \\
       q & = \frac{1}{2},\ C_N = \sum_{k=1}^{N}{k 2^{N-k}\prod_{j=k+1}^{N}{1-2^{-j}}} = \\
         & = \sum_{k=1}^{N}{k 2^{N-k} \frac{Q_N}{Q_k}} \approx \\
         & \approx Q_{\infty}\sum_{m=0}^{N-1}\frac{2^m}{Q_{N-m}} \approx \\
@@ -178,3 +194,5 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
         & \approx \sum_{m=0}^{N-1}{(N-m)2^m} = 2^{N+1} - N - 2 \label{eq:topo-comp-lims-p12}
     \end{align}
 \end{subequations}
+
+\section{Построение линейных порядков с учётом независимости}\label{sec:ch2/indep}

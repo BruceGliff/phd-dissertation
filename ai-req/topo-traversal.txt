@@ -1,0 +1,69 @@
+write the following diagram using tikz
+
+Each step is drawn with DAG in dashed rectangle. Transitions from steps are represented with arrows
+DAG in one step must be completely inside rectangle.
+Size of rectangle must be adjusted to the DAG inside it.
+It is preferable to keep relative positions of the DAG's nodes inside each step.
+Make it to fit a4 vertical orientation.
+
+Write the following process:
+
+There are 10 steps.
+1 step has dag in it:
+```
+1->2
+1->4
+3->4->5
+```
+2 step has dag in it:
+```
+2
+4
+3->4->5
+```
+3 step has dag in it:
+```
+3->4->5
+```
+4 step has dag in it:
+```
+4->5
+```
+5 step has dag in it:
+```
+5
+```
+6 step has dag in it:
+```
+1->2
+1->4
+4->5
+```
+7 step has dag in it:
+```
+2
+4
+4->5
+```
+8 step has dag in it:
+```
+2
+5
+```
+9 step has dag in it:
+```
+5
+```
+10 step has dag in it:
+```
+2
+```
+and transitions from steps to steps:
+```
+1->2->3->4->5
+1->6->7->8
+8->9
+8->10
+2->7
+7->4
+```
