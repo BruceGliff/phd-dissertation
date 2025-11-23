@@ -192,14 +192,14 @@
   \nexists (\sigma_i, \sigma_j) \in E(G) \mid \text{id}^{\pi}(\sigma_j) < \text{id}^{\pi}(\sigma_i)
 \end{equation}
 
-Для фиксированного порядка $\pi$, количество пар вершин $(\sigma_i, \sigma_j) | i < j$, но расположенных в $\pi$ в обратном порядке $\text{id}^{\pi}(\sigma_j) < \text{id}^{\pi}(\sigma_i)$ в точности равно $\text{inv}(\pi)$ -- числу инверсий перестановки $\pi$ относительно $\tau$.\fixme{find cite}
+Для фиксированного порядка $\pi$, количество пар вершин $(\sigma_i, \sigma_j) | i < j$, но расположенных в $\pi$ в обратном порядке $\text{id}^{\pi}(\sigma_j) < \text{id}^{\pi}(\sigma_i)$ равно $\text{inv}(\pi)$ -- числу инверсий перестановки $\pi$ относительно $\tau$.
 Чтобы перестановка $\pi$ была корректной топологической сортировкой $G$, ниодного потенциально неправильно направленного ребра не должно существовать.
 
 Вероятность, что ребра не существует -- $1-p$ и рёбра расставляются независимо, тогда:
 \begin{equation}
   \mathbb{P}[\pi \text{ -- топологическая сортировка}] = (1-p)^{\text{inv}(\pi)}
 \end{equation}
-а общее количество линейных порядков суммируется по всем возможным $n!$ перестановкам \fixme{find cite}:
+а общее количество линейных порядков суммируется по всем возможным $n!$ перестановкам~\cite{q-factor}:
 \begin{equation}
   \mathbb{E}(|L|) = \sum_{\pi}{(1-p)^{\text{inv}(\pi)}} = \prod_{k=1}^{n}{\frac{1-q^k}{1-q}}, \text{ где } q = 1-p
 \end{equation}
@@ -264,12 +264,12 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
 \begin{subequations}
     \label{eq:topo-comp-lims}
     \begin{align}
-      q & \rightarrow 0,\ C_N \approx \frac{N(N-1)}{2} \label{topo-comp-lims-p1} \\
+      q & \rightarrow 0,\ C_N \approx \frac{N(N-1)}{2} \label{eq:topo-comp-lims-p1} \\
       q & = 1 - \varepsilon,\ \varepsilon \rightarrow 0, \ C_N \approx N! \sum_{k=1}^{N}{\frac{1}{(k-1)!}} \rightarrow eN!, \text{ при } N \rightarrow \infty \label{eq:topo-comp-lims-p0} \\
-      q & = \frac{1}{2},\ C_N = \sum_{k=1}^{N}{k 2^{N-k}\prod_{j=k+1}^{N}{1-2^{-j}}} = \\
-        & = \sum_{k=1}^{N}{k 2^{N-k} \frac{Q_N}{Q_k}} \approx \\
-        & \approx Q_{\infty}\sum_{m=0}^{N-1}\frac{2^m}{Q_{N-m}} \approx \\
-        & \lgroup Q_{N-m} \approx Q_{\infty}, \text{ при } m \ll N \rgroup \\
+      q & = \frac{1}{2},\ C_N = \sum_{k=1}^{N}{k 2^{N-k}\prod_{j=k+1}^{N}{1-2^{-j}}} = \nonumber \\
+        & = \sum_{k=1}^{N}{k 2^{N-k} \frac{Q_N}{Q_k}} \approx \nonumber \\
+        & \approx Q_{\infty}\sum_{m=0}^{N-1}\frac{2^m}{Q_{N-m}} \approx \nonumber \\
+        & \lgroup Q_{N-m} \approx Q_{\infty}, \text{ при } m \ll N \rgroup \nonumber \\
         & \approx \sum_{m=0}^{N-1}{(N-m)2^m} = 2^{N+1} - N - 2 \label{eq:topo-comp-lims-p12}
     \end{align}
 \end{subequations}
@@ -372,3 +372,114 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
     }
     \caption{Пример построенного дерева (сжатого в ОАГ) линейных порядков с учётом независимости}\label{fig:topo-trav-indep-tree}
 \end{figure}
+
+Видно, что порядки $13452$ и $31245$ не были обработаны, так как $13452 \in Eq(13425, B^|)$ и $31245 \in Eq(31425, B^|)$.
+
+
+Применение цепочки последовательных эквивалентных перестановок порождает перестановку, эквивалентную данной.
+Рассмотрим это на примере. Пусть $B^{|} = \{\{01, 10\}, \{02, 20\}\}$ и $\pi = 012$.
+Тогда $012 \stackrel{Eq(\pi, B^{|})}{=} 102 \stackrel{Eq(\pi, B^{|})}{=} 120$.
+Таким образом, $012 \stackrel{Eq(\pi, B)}{=} 120$, где $B = \{012, 120\} \cup B^{|}$.
+
+Обобщим данное свойство. \fixme{утверждение или теорема}.
+
+\begin{lemma}
+Последовательными действиями переупорядочивания эквивалентных пар можно переставить элемент с подпорядком любой длины, если все элементы этого подпорядка независимы с данным.
+\label{lm:n-reorder}
+\end{lemma}
+
+\begin{proof}
+  Пусть $\tau = \pi x \mathrm{Y} \gamma $ -- линейный порядок, такой что:
+ $\forall y \in \mathrm{Y} \rightarrow \{xy, yx\} \in B^| $ и
+ $\forall g \in \gamma \rightarrow \{xg, gx\} \not \in B^|$.
+
+\begin{align}
+   \tau & = \pi \pmb{xy} \mathrm{Y}^{'} \gamma
+   \stackrel{Eq(\tau, B^|)}{=}
+   \pi \pmb{yx} \mathrm{Y}^{'} \gamma
+   \stackrel{Eq(\tau, B^|)}{=} \nonumber \\
+        & \dots \text{так же последовательно переставляем } x \text{ со следующим элементом из } \mathrm{Y}^{'} \dots \nonumber \\
+        & \stackrel{Eq(\tau, B^|)}{=}
+   \pi y \mathrm{Y}^{'} x \gamma
+   = \pi \mathrm{Y} x \gamma = \tau^{'} \nonumber
+\end{align}
+ Таким образом, \[
+   \tau^{'} = Eq(\tau, B^| \cup \{x\mathrm{Y}, \mathrm{Y}x\})
+ \]
+
+\end{proof}
+
+Задача пострения всевозможных разбиений из независимых элементов так же не имеет оптимального решения
+и нет смысла её решать, чтобы учитывать всевозможные перестановки независимых элементов.
+Однако, можно дополнить алгоритм~\ref{alg:topo-indep}, чтобы свойство, представленное с лемме~\ref{lm:n-reorder}.
+Алгоритм~\ref{alg:topo-indep-lookup} учитывает отброшенные ветви исполнения, транзитивно обновляя информацию о независимых парах элементов.
+
+\fixme{нормальное название и нормальное задание $B$}
+\begin{algorithm}[H]
+\caption{Обход частично упорядоченного множества с полным учётом независимости}
+\label{alg:topo-indep-lookup}
+\begin{algorithmic}[1]
+\Require $P$ -- частично упорядоченное множество. $B^{|}$ -- разбиение из независимых элементов. $l_P$ -- текущий линейный порядок. $B^{|}_{parent}$ -- разбиение с предыдущего шага рекурсии. $B^{|}_{grparent}$ -- разбиение с предпредыдущего шага рекурсии. $y$ -- вершина, обработаная на предыдущем шаге рекурсии.
+\Function{Traverse}{$P$, $B^{|}$, $B^{|}_{parent}$, $B^{|}_{grparent}$, $l_P$, $y$}
+\If{$P = \emptyset$}
+  \State $L(P) = l_P \cup L(P)$ \Comment Полностью построили линейный порядок
+\EndIf
+\State $B^{|}_{y} = \emptyset$
+\State $B^{|}_{parent} = B^{|}_{parent} \cup \{xz, zx\} \in B^{|} : \forall z \in P,\ \forall x \mid \{xy, yx\} \in B^{|}_{grparent}$
+\ForAll{$\forall x \in min(P) : \{xy, yx\} \not \in B^{|}_{grparent}$}
+  \State \Call{Process}{$x$} \Comment Обработка элемента множества
+  \State \Call{Traverse}{$P \setminus x$, $B^{|}$, $B^{|}_{y}$, $B^{|}_{parent}$, $l_P \stackrel{add}{\longleftarrow} x$, $x$}
+  \If{$\{xy, yx\} \in B^{|}$}
+    \State $B^{|}_{y} = \{xy, yx\} \cup B^{|}_{y}$
+  \EndIf
+\EndFor
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Обновление множества $B^{|}_{parent}$ позволяет не терять информацию при отбрасывании уже обработанных элементов на строке~6.
+Покажем, что данных обход реализует свойство~\ref{lm:n-reorder}.
+
+\begin{lemma}
+  Алгоритм~\ref{alg:topo-indep-lookup} учитывает перестановки независимых последовательностей элементов.
+\label{lm:algo}
+\end{lemma}
+\begin{proof}
+  Пусть $\tau = \pi x \mathrm{Y} \gamma$ -- уже построенный линейный порядок, такой что:
+ $\forall y \in \mathrm{Y} \rightarrow \{xy, yx\} \in B^| $ и
+ $\forall g \in \gamma \rightarrow \{xg, gx\} \not \in B^|$. \\
+ Обозначим $\mathrm{Y}^{min}$ -- множество минимальных элементов из множества $\mathrm{Y}$.
+ На каждом шаге рекурсии будем рассматривать такой $y \in \mathrm{Y}^{min}$, чтобы сохранять подпорядок элементов как в $\mathrm{Y}$. \\
+ Пусть уже построен подпорядок $\pi y$ на шаге рекурсии $n$. Следующими элементами в ней могут быть $x, \dot{y} \in \mathrm{\dot{Y}}^{min}$. \\
+ $\pi y x$ -- не будет рассмотрен из-за того, что $\{xy, yx\} \in B^{|}_{grparent}$, но \\
+ $B^{|}_{parent} = \{x\dot{y}, \dot{y}x\}: \dot{y} \in \mathrm{\dot{Y}}^{min} = B^{|}_{grparent}\text{ со следующего шага}$.\\
+ Рассмотрим следующий шаг рекурсии $n+1$, на котором уже построен подпорядок $\pi y \dot{y}$. Следующими элементами в ней могут быть $x, \ddot{y} \in \mathrm{\ddot{Y}}^{min}$. \\
+ $\pi y \dot{y}x$ -- не будет рассмотрен из-за того, что $\{x\dot{y}, \dot{y}x\} \in B^{|}_{grparent}$. Продолжим рассуждения, пока из имнимальных элементов не останется только $x$. Тогда $\pi y\dot{y}\ddot{y}\dots x = \pi \mathrm{Y} x$ -- не будет рассмотрен. Что и требовалось доказать.
+
+\end{proof}
+
+\subsection{Сложность алгоритма построения всех линейных порядков топологической сортировкой с учётом независимости}\label{sec:ch2/topoalg-indep-comp}
+
+Востпользуемся полученной формулой количества вычислений~\ref{eq:topo-comp}
+
+\[
+    C_N = \sum_{k=1}^{N}{k\prod_{l=1}^{N-k}{\frac{1-q^{k+l}}{1-q}}}
+\]
+Где $q = 1 - p$, a $p$ -- вероятность, что любые два элемента $xy$ частично упорядоченного множества $P$ имеют отнешение $x <_p y$.
+Введём $p_{i}(x, y) = p_{i} = \mathbb{P}[\{xy, yx\} \in B^|]$ -- вероятность, что любые два элемента независимы.
+По алгоритму~\ref{alg:topo-indep}, если подпорядок $\pi xy$ уже был построен и $\{xy, yx\} \in B^|$, то подпорядок $\pi yx$ не будет никогда построен.
+Это эквалентно утверждению, что $x <_p y$.\fixme{lie}
+Таким образом, можно заменить $p$ в формуле~\ref{eq:topo-comp} на $p_{<i} = \mathbb{P}[x <_p y \parallel \{xy, yx\} \in B^|] = p + p_i - pp_i$ и $q_{<i} = 1 - p_{<i}$.
+Получим формулу сложности топологической сортировки с учётом независимости~\ref{eq:topo-indep-comp}.
+\begin{equation}
+    \label{eq:topo-indep-comp}
+    C_N = \sum_{k=1}^{N}{k\prod_{l=1}^{N-k}{\frac{1-q^{k+l}_{<i}}{1-q_{<i}}}}
+\end{equation}
+
+Оценим сложность при $p_i \approx 1$:
+\begin{equation}
+    \label{eq:topo-indep-comp-lims}
+      p_i \approx 1 \Rightarrow q_{<i} \rightarrow 0 \stackrel{\text{формула~\ref{eq:topo-comp-lims-p1}}}{\Rightarrow} C_N = \frac{N(N-1)}{2}
+\end{equation}
+Остальные оценки остаются аналогичными, как в формулах~\ref{eq:topo-comp-lims}.
+Преимуществом обхода топологической сортировкой с учётом независимости является то, что в частично упорядоченных множествах, где много независимых элементов, такой обход может существенно сократить количество потсроений линейных порядков, как видно из формулы~\ref{eq:topo-indep-comp}.
