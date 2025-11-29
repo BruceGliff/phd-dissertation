@@ -5,10 +5,10 @@
     order/.style={-stealth, thick},
 ]
     \node[dag] (0) {0};
-    \node[dag, below left=0.5cm of 0] (4) {4};
-    \node[dag, right=1.0cm of 4] (1) {1};
-    \node[dag, below=0.5cm of 1] (2) {2};
-    \node[dag, below=0.5cm of 4] (3) {3};
+    \node[dag, below left=1.0 and 0.5cm of 0] (4) {4};
+    \node[dag, below right=1.0 and 0.5cm of 0] (1) {1};
+    \node[dag, below=1.0cm of 1] (2) {2};
+    \node[dag, below=1.0cm of 4] (3) {3};
 
     \draw[order] (0) -- (1);
     \draw[order] (1) -- (3);
