@@ -1,0 +1,20 @@
+\begin{tikzpicture}[
+    node distance=1.5cm and 1cm,
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt, minimum size=8mm},
+    dep/.style={thick, dashed, draw=black!50},
+    indep/.style={line width=1pt, double distance=3pt}
+]
+    \node[dag] (0) {0};
+    \node[dag, below=1.0cm of 0] (1) {1};
+    \node[dag, right=1.0cm of 0] (2) {2};
+    \node[dag, below=1.0cm of 2] (3) {3};
+
+    \draw[indep] (0) -- (1);
+    \draw[indep] (0) -- (2);
+    \draw[indep] (3) -- (2);
+    \draw[indep] (3) -- (1);
+
+    \draw[dep] (0) -- (3);
+    \draw[dep] (1) -- (2);
+
+\end{tikzpicture}

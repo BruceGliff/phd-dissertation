@@ -1,0 +1,16 @@
+\begin{tikzpicture}[
+    node distance=1.5cm and 1cm,
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt, minimum size=8mm},
+    dep/.style={-stealth, thick, dashed},
+    order/.style={-stealth, thick},
+]
+    \node[dag] (0) {0};
+    \node[dag, right=1.0cm of 0] (1) {1};
+    \node[dag, right=1.0cm of 1] (2) {2};
+
+    \draw[order] (0) -- (1);
+    \draw[order] (1) -- (2);
+
+    \draw[dep] (2) to[bend right] (0);
+
+\end{tikzpicture}
