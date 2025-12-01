@@ -2,8 +2,10 @@
 \begin{tikzpicture}
 
 \definecolor{darkgrey176}{RGB}{176,176,176}
+\definecolor{green}{RGB}{0,128,0}
 \definecolor{lightgrey}{RGB}{211,211,211}
 \definecolor{lightgrey204}{RGB}{204,204,204}
+\definecolor{orange}{RGB}{255,165,0}
 
 \begin{axis}[
 height=0.4\textheight,
@@ -24,23 +26,23 @@ ylabel={Количество линейных перестановок
 ymin=0, ymax=7.01323097713965,
 ytick style={color=black}
 ]
-\draw[draw=black,fill=black] (axis cs:0.005,0) rectangle (axis cs:0.015,0);
-\addlegendimage{ybar,ybar legend,draw=black,fill=black}
-\addlegendentry{Обход с учётом зависимости, Алгоритм 2}
+\draw[draw=black,fill=orange] (axis cs:0.005,0) rectangle (axis cs:0.015,0);
+\addlegendimage{ybar,ybar legend,draw=black,fill=orange}
+\addlegendentry{Обход с учётом зависимости, Алгоритм~\ref{alg:topo-dep}}
 
-\draw[draw=black,fill=black] (axis cs:0.105,0) rectangle (axis cs:0.115,2.15836249209525);
-\draw[draw=black,fill=black] (axis cs:0.205,0) rectangle (axis cs:0.215,3.2895889525426);
-\draw[draw=black,fill=black] (axis cs:0.305,0) rectangle (axis cs:0.315,3.74083620705731);
-\draw[draw=black,fill=black] (axis cs:0.405,0) rectangle (axis cs:0.415,4.57801998503221);
-\draw[draw=black,fill=black] (axis cs:0.505,0) rectangle (axis cs:0.515,4.88829746216554);
-\draw[draw=black,fill=black] (axis cs:0.605,0) rectangle (axis cs:0.615,5.21851712477091);
-\draw[draw=black,fill=black] (axis cs:0.705,0) rectangle (axis cs:0.715,5.58294243056767);
-\draw[draw=black,fill=black] (axis cs:0.805,0) rectangle (axis cs:0.815,5.9647525881337);
-\draw[draw=black,fill=black] (axis cs:0.905,0) rectangle (axis cs:0.915,6.28133522204542);
-\draw[draw=black,fill=black] (axis cs:1.005,0) rectangle (axis cs:1.015,6.60437381770785);
+\draw[draw=black,fill=orange] (axis cs:0.105,0) rectangle (axis cs:0.115,2.15836249209525);
+\draw[draw=black,fill=orange] (axis cs:0.205,0) rectangle (axis cs:0.215,3.2895889525426);
+\draw[draw=black,fill=orange] (axis cs:0.305,0) rectangle (axis cs:0.315,3.74083620705731);
+\draw[draw=black,fill=orange] (axis cs:0.405,0) rectangle (axis cs:0.415,4.57801998503221);
+\draw[draw=black,fill=orange] (axis cs:0.505,0) rectangle (axis cs:0.515,4.88829746216554);
+\draw[draw=black,fill=orange] (axis cs:0.605,0) rectangle (axis cs:0.615,5.21851712477091);
+\draw[draw=black,fill=orange] (axis cs:0.705,0) rectangle (axis cs:0.715,5.58294243056767);
+\draw[draw=black,fill=orange] (axis cs:0.805,0) rectangle (axis cs:0.815,5.9647525881337);
+\draw[draw=black,fill=orange] (axis cs:0.905,0) rectangle (axis cs:0.915,6.28133522204542);
+\draw[draw=black,fill=orange] (axis cs:1.005,0) rectangle (axis cs:1.015,6.60437381770785);
 \draw[draw=black,fill=white] (axis cs:-0.015,0) rectangle (axis cs:-0.005,4.63578523553365);
 \addlegendimage{ybar,ybar legend,draw=black,fill=white}
-\addlegendentry{Обход с учётом независимости, Алгоритм 1}
+\addlegendentry{Обход с учётом независимости, Алгоритм~\ref{alg:topo-indep}}
 
 \draw[draw=black,fill=white] (axis cs:0.085,0) rectangle (axis cs:0.095,4.78859255592036);
 \draw[draw=black,fill=white] (axis cs:0.185,0) rectangle (axis cs:0.195,4.91948080530445);
@@ -52,12 +54,26 @@ ytick style={color=black}
 \draw[draw=black,fill=white] (axis cs:0.785,0) rectangle (axis cs:0.795,6.13416817925776);
 \draw[draw=black,fill=white] (axis cs:0.885,0) rectangle (axis cs:0.895,6.3165498571675);
 \draw[draw=black,fill=white] (axis cs:0.985,0) rectangle (axis cs:0.995,6.60437381770785);
+\draw[draw=black,fill=green] (axis cs:-0.005,0) rectangle (axis cs:0.005,0);
+\addlegendimage{ybar,ybar legend,draw=black,fill=green}
+\addlegendentry{Обход с учётом независимости, Алгоритм~\ref{alg:topo-indep-lookup}}
+
+\draw[draw=black,fill=green] (axis cs:0.095,0) rectangle (axis cs:0.105,2.15836249209525);
+\draw[draw=black,fill=green] (axis cs:0.195,0) rectangle (axis cs:0.205,3.2895889525426);
+\draw[draw=black,fill=green] (axis cs:0.295,0) rectangle (axis cs:0.305,3.74083620705731);
+\draw[draw=black,fill=green] (axis cs:0.395,0) rectangle (axis cs:0.405,4.57801998503221);
+\draw[draw=black,fill=green] (axis cs:0.495,0) rectangle (axis cs:0.505,4.88829746216554);
+\draw[draw=black,fill=green] (axis cs:0.595,0) rectangle (axis cs:0.605,5.21851712477091);
+\draw[draw=black,fill=green] (axis cs:0.695,0) rectangle (axis cs:0.705,5.58294243056767);
+\draw[draw=black,fill=green] (axis cs:0.795,0) rectangle (axis cs:0.805,5.9647525881337);
+\draw[draw=black,fill=green] (axis cs:0.895,0) rectangle (axis cs:0.905,6.28133522204542);
+\draw[draw=black,fill=green] (axis cs:0.995,0) rectangle (axis cs:1.005,6.60437381770785);
 \addplot [semithick, red, dash pattern=on 1pt off 3pt on 3pt off 3pt]
 table {%
 -0.0665 6.60437381770785
 1.0665 6.60437381770785
 };
-\addlegendentry{Вычисление по формуле 1}
+\addlegendentry{Обход топологической сортировкой, Алгоритм~\ref{alg:topo}}
 \addplot [semithick, lightgrey]
 table {%
 0 0.17129391428814
