@@ -1,0 +1,41 @@
+\begin{tikzpicture}[
+    node distance=1.5cm and 1cm,
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt, minimum size=8mm},
+    order/.style={-stealth, thick},
+]
+\begin{scope}[xshift=-2cm]
+\node[dag] (0_0) {0};
+\node[dag, below left=0.5cm of 0_0] (4_1) {4};
+\node[dag, right=1.0cm of 4_1] (1_1) {1};
+\node[dag, below left=0.5cm of 1_1] (2_2) {2};
+\node[dag, right=1.0cm of 2_2] (3_2) {3};
+\node[dag, below=0.5cm of 3_2] (2_3) {2};
+\node[dag, below=0.5cm of 2_2] (3_3) {3};
+
+\draw[order] (0_0) -- (4_1);
+\draw[order] (0_0) -- (1_1);
+\draw[order] (1_1) -- (2_2);
+\draw[order] (2_2) -- (3_3);
+\draw[order] (1_1) -- (3_2);
+\draw[order] (3_2) -- (2_3);
+\end{scope}
+
+\begin{scope}[xshift=2cm]
+\node[dag] (4_0) {4};
+\node[dag, below=0.5cm of 4_0] (0_1) {0};
+\node[dag, below=0.5cm of 0_1] (1_2) {1};
+\node[dag, below left=0.5cm of 1_2] (2_3) {2};
+\node[dag, right=1.0cm of 2_3] (3_3) {3};
+\node[dag, below=0.5cm of 3_3] (2_4) {2};
+\node[dag, below=0.5cm of 2_3] (3_4) {3};
+
+
+\draw[order] (4_0) -- (0_1);
+\draw[order] (0_1) -- (1_2);
+\draw[order] (1_2) -- (2_3);
+\draw[order] (2_3) -- (3_4);
+\draw[order] (1_2) -- (3_3);
+\draw[order] (3_3) -- (2_4);
+\end{scope}
+
+\end{tikzpicture}
