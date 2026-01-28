@@ -307,7 +307,7 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
 \textbf{Условие корректности} исполнения многопоточной программы: существует линейный порядок, который приводит систему в состояние, наблюдаемое при её исполнении.
 
 \begin{equation}
-  \label{eq:verif_cond}
+  \label{eq:verif-base}
   \exists \alpha \in L(P) \mid \forall x \in P \rightarrow reg_{\alpha}(x) \in trace
 \end{equation}
 
@@ -315,7 +315,7 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
 
 \begin{algorithm}[H]
 \caption{Верификация результата исполнения программы по линейному порядку}
-\label{alg:verif_linext}
+\label{alg:verif-linext}
 \begin{algorithmic}[1]
 \Require $l$ -- линейный подпорядок операций. $x$ -- текущая проверяемая операция. $trace$ -- состояние исполнения программы.
 \Function{Process}{$l$, $x$, $trace$}
@@ -334,7 +334,7 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
 Если был найден хоть один линейный порядок, приводящий систему в тоже состояние, что и наблюдалось при её исполнении, то её исполнение было корректно.
 
 Следующие главы~\ref{sec:ch2/indep},\ref{sec:ch2/dep} описывают подходы, существенно уменьшающие количество линейныйх порядков, необходимых для анализа.
-Но условие корректности исполнения программы останется по формуле~\ref{eq:verif_cond}.
+Но условие корректности исполнения программы останется по формуле~\ref{eq:verif-cond}.
 В главе~\ref{sec:ch2/stategraph} будет представлена новая структура данных для представления состояний многопоточной программы и новые подходы верификации.
 
 
@@ -985,23 +985,63 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
   \forall \rho_{\pi}(x) \in SG(V, E) \; \exists! x \in P \; \text{ такой, что } \; x = op(\rho_{\pi}(x))
 \]
 
-Вершина графа состояний соответвует состоянию системы $reg(\rho_{\alpha}(x)) \equiv reg_{\alpha}(x)$.
-Так как никакая операция $W$ не изменяет регистры, то $\forall x \in W \rightarrow reg_{\alpha}(x) = reg_{\beta}(x) \forall \alpha,\beta \in L_P$.
+Вершина графа состояний соответвует состоянию системы $reg_{\alpha}(x) \equiv reg(\rho_{\alpha}(x))$.
+Так как никакая операция $W$ не изменяет регистры, то $\forall x \in W \rightarrow reg_{\alpha}(x) = reg_{\beta}(x), \forall \alpha,\beta \in L_P$.
 
-Зададим множество маркированных вершин графа: $\mathcal{M} = \{\rho_{\alpha}(x) \mid reg_{\alpha}(x) \in trace(x), \forall x \in P, \forall \alpha \in L_P\}$.
+Зададим множество маркированных вершин графа: $\mathcal{M} = \{\rho_{\alpha}(x) \mid reg_{\alpha}(x) \in trace, \forall x \in P, \forall \alpha \in L_P\}$.
 
-\textbf{Нулевое условие корректности} исполнения многопоточной программы: все операции с памятью в многопоточной программе промаркированны.
+\textbf{Первое условие корректности} исполнения многопоточной программы: все операции с памятью в многопоточной программе промаркированны.
 \begin{equation}
+    \label{eq:verif-1st}
   \forall x \in P \; \exists \alpha \in L_P \rightarrow \rho_{\alpha}(x) \in \mathcal{M}
 \end{equation}
-Если существует операция, для которой нет вершины в графе состояния, то исполнение этой операции привело к нарушению значений операции.
+Если существует операция, для которой нет вершины в графе состояния, то исполнение этой операции привело ошибке, не связанной с моделью памяти.
 
-\textbf{Первое условие корректности} исполнения многопоточной программы: существует множество путей из стока графа состояния, поерывающее все маркированные вершины графа.
+\textbf{Второе условие корректности} исполнения многопоточной программы: существует множество путей из стока графа состояния, поерывающее все маркированные вершины графа.
 \begin{align}
-  & checked = \{BFSRev(SG, l) \mid \forall l \text{ -- сток }, \forall \rho \in BFSRev(SG, l) \rightarrow \rho \in \mathcal{M} \} \nonumber \\
+    \label{eq:verif-2nd}
+  & checked = \{\text{BFSRev}(SG, l) \mid \forall l \text{ -- сток }, \forall \rho \in \text{BFSRev}(SG, l) \rightarrow \rho \in \mathcal{M} \} \nonumber \\
   & \text{Исполнение программы корректно, если } |op(checked)| = |P|
 \end{align}
 Выполнение этого условия обеспечивает соответвие исполнение многопоточной программе заданной модели памяти.
 
-\fixme{нужно доказать, что данный алгоритм найдёт нужный и не найдёт ненужный порядок (необходимости и достаточности)}
+\begin{lemma}
+  Из условия корректности верификции по графу состояний \ref{eq:verif-1st} и \ref{eq:verif-2nd}(1) следует условие корректности верификации по линейным порядкам~\ref{eq:verif-base}(2).
+\label{lm:verif-equals}
+\end{lemma}
+
+\begin{proof}
+
+  $\forall x \in P \rightarrow \exists \rho_{\alpha}(x) \in checked$. Это всегда можно сделать из условия~\ref{eq:verif-2nd}.
+  Выберем такие $drain = \{\rho_{\alpha}(x) \mid \rho_{\alpha}(x) \text{ -- сток}\}$.
+  Тогда построим линейный порядок следующим образом:
+
+\begin{algorithm}[H]
+\caption{Построение линейного порядка из множества стоков графа состояния}
+\label{alg:linext-from-leaf}
+\begin{algorithmic}[1]
+\Require $drain$ -- стоки. $SG$ -- граф состояния.
+\Ensure $\pi$ -- линейный порядок.
+\Function{ConstructLinext}{$drain$, $SG$}
+\State $\pi \gets \text{пустой порядок}$
+\ForAll{$l \in drain$}
+\State $ops \gets (op(\rho) \mid \forall \rho \in \text{BFSRev}(SG, \rho))$ \Comment $\forall x \in ops \rightarrow reg(x) \in trace$ из условия~\ref{eq:verif-1st}
+\ForAll{$x \in op \mid x \not \in \pi$}
+\State $\pi\text{.add\_front}(x)$
+\EndFor
+\EndFor
+
+\State \Return $\pi$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Порядок, построенный по алгоритму~\ref{alg:linext-from-leaf} всегда состоит из операций, которые соответствуют состоянию программы(условие~\ref{eq:verif-1st}).
+Порядок операций сохранён относительно начального частично упорядоченного множества программы, так как граф состояния сохраняет относительный порядок операций.
+И в построенном порядке присутствуют все элементы частично упорядоченного множества, из условия~\ref{eq:verif-2nd}.
+
+Таким образом, найден линейный порядок $\pi$, удовлетворяющий условию~\ref{eq:verif-base}.
+
+\end{proof}
+
 \fixme{нужно показать примеры на литмусах}
