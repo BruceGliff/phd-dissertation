@@ -1,0 +1,14 @@
+digraph unnamed {
+	Node1[style=bold,shape=box,group="Node",label="W_x"];
+	Node2[style=bold,shape=box,group="Node",label="R_x\nEAX=1"];
+	Node3[style=bold,shape=box,group="Node",label="R_x\nEAX=0"];
+	Node4[style=bold,shape=box,group="Node",label="W_x"];
+	Node5[style=bold,shape=box,group="Node",label="W_y"];
+	Node6[style=bold,shape=box,group="Node",label="R_y\nEAX=1"];
+	Node7[style=bold,shape=box,group="Node",label="R_y\nEAX=0"];
+	Node8[style=bold,shape=box,group="Node",label="W_y"];
+	Node1->Node2[style=bold]
+	Node3->Node4[style=bold]
+	Node5->Node6[style=bold]
+	Node7->Node8[style=bold]
+}

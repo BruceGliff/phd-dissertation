@@ -1,0 +1,22 @@
+digraph unnamed {
+	Node1[style=bold,shape=box,group="Node",label="W_x"];
+	Node2[style=bold,shape=box,group="Node",label="W_y"];
+	Node3[style=bold,shape=box,group="Node",label="R_y\nEAX=0"];
+	Node4[style=bold,shape=box,group="Node",label="W_y"];
+	Node5[style=bold,shape=box,group="Node",label="R_x\nEAX=1"];
+	Node6[style=bold,shape=box,group="Node",label="R_x\nEAX=1"];
+	Node7[style=bold,shape=box,group="Node",label="R_y\nEAX=1"];
+	Node8[style=bold,shape=box,group="Node",label="R_x\nEAX=0"];
+	Node9[style=bold,shape=box,group="Node",label="W_x"];
+	Node10[style=bold,shape=box,group="Node",label="R_y\nEAX=1"];
+	Node1->Node3[style=bold]
+	Node1->Node6[style=bold]
+	Node1->Node7[style=bold]
+	Node2->Node6[style=bold]
+	Node2->Node7[style=bold]
+	Node2->Node8[style=bold]
+	Node3->Node4[style=bold]
+	Node4->Node5[style=bold]
+	Node8->Node9[style=bold]
+	Node9->Node10[style=bold]
+}
