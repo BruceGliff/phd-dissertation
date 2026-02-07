@@ -858,6 +858,7 @@ $\forall \pi \in L_P \nexists \tau \in L_P\mid \tau \neq \pi, \tau \in Eq(\pi, B
 
 % FIXME \fixme{text\{id\} == \#}
 
+\fixme{Путём $\rho$ назовём... переформулировать}
 \begin{definition}
   \textbf{Путь $\rho_{\pi}(x) = \rho$} для порядка $\pi \in L_P$ -- такой подпорядок порядка $\pi$ от элемента $x$, что:
 \begin{equation}
@@ -1063,4 +1064,101 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
 \end{proof}
 
 \subsection{Пример}
+
+\fixme{this already has been printed. ~\ref{fig:litmus-ex}}
+
+Рассмострим подробнее использование графа состояния на примере литмус теста~\ref{fig:litmus-ex}.
+
+\begin{minipage}[ht]{\textwidth}
+\centering
+\lstinputlisting[caption={Пример литмуса}, label={fig:litmus-ex-copy}, captionpos=b]{src/litmus-example.txt}
+\end{minipage}
+
+Обозначим:
+$\text{W}_y = \texttt{MOV [y],\$1}$,
+$\text{R}_x = \texttt{MOV EAX,[x]}$,
+$\text{W}_x = \texttt{MOV [x],\$1}$,
+$\text{R}_y = \texttt{MOV EAX,[y]}$,
+
+\begin{figure}[ht]
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \input{Dissertation/images/litmus-SC.tex}
+        \caption{Частично упорядоченное множество для SC модели памяти}
+        \label{fig:litmus-sc-program-graph}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \input{Dissertation/images/litmus-TSO.tex}
+        \caption{Частично упорядоченное множество для TSO модели памяти}
+        \label{fig:litmus-tso-program-graph}
+    \end{subfigure}
+    \caption{Частично упорядоченные множества для литмус-теста~\ref{fig:litmus-ex}}
+    \label{fig:litmus-program-graph}
+\end{figure}
+
+На рисунках~\ref{fig:litmus-program-graph} представлены частично упорядоченные множества для двух различных моделей памяти:
+слева для SC~\ref{fig:litmus-sc-program-graph},
+справа для TSO~\ref{fig:litmus-tso-program-graph}.
+Грасное направденное ребро обозначает PPO порядок, пунктирное направленное -- PO, пунктирное ненаправленное -- зависимости операций.
+SC модель памяти отличается от TSO, тем, что эффект операций $W$, $R$ в памяти может быть наблюдаем в другом порядке.
+
+Различные $\rho_{\pi}(x)$ для SC модели памяти~\ref{fig:litmus-sc-program-graph} и граф состояний продемострированы в таблице~\ref{tab:litmus-sc-rho} и на рисунке~\ref{fig:sg-litmus-sc}.
+
+\begin{table}[ht]
+\caption{$\rho_{\pi}(x)$ для частично упорядоченного множества~\ref{fig:litmus-sc-program-graph}.}
+\centering
+\begin{tabular}{llllll}
+Линейный порядок $\pi$ & $\rho_{\pi}(\text{W}_x)$ & $\rho_{\pi}(\text{W}_y)$ & $\rho_{\pi}(\text{R}_x)$ & $\rho_{\pi}(\text{R}_y)$ \\
+$\alpha = \text{W}_x \text{R}_y \text{W}_y \text{R}_x$ & $\text{W}_x$ & $\text{W}_x \text{R}_y \text{W}_y $ & $\text{W}_x \text{R}_y \text{W}_y \text{R}_x$ & $\text{W}_x \text{R}_y $ \\
+$\beta = \text{W}_x \text{W}_y \text{R}_x \text{R}_y$ & $\text{W}_x $ & $\text{W}_y$ & $\text{W}_x \text{W}_y \text{R}_x$ & $\text{W}_x \text{W}_y \text{R}_y$ \\
+$\gamma = \text{W}_y \text{R}_x \text{W}_x \text{R}_y$ & $\text{W}_y \text{R}_x \text{W}_x $ & $\text{W}_y $ & $\text{W}_y \text{R}_x $ & $\text{W}_y \text{R}_x \text{W}_x \text{R}_y$
+\end{tabular}
+\label{tab:litmus-sc-rho}
+\end{table}
+
+\begin{figure}[ht]
+    \centerfloat{
+        \input{Dissertation/images/sc.tex}
+    }
+    \caption{Граф состояний теста~\ref{fig:litmus-ex} для SC модели памяти.}
+    \label{fig:sg-litmus-sc}
+\end{figure}
+
+
+Различные $\rho_{\pi}(x)$ для TSO модели памяти~\ref{fig:litmus-tso-program-graph} и граф состояний продемострированы в таблице~\ref{tab:litmus-tso-rho} и на рисунке~\ref{fig:sg-litmus-tso}.
+
+\begin{table}[ht]
+\caption{$\rho_{\pi}(x)$ для частично упорядоченного множества~\ref{fig:litmus-tso-program-graph}.}
+\centering
+\begin{tabular}{llllll}
+Линейный порядок $\pi$ & $\rho_{\pi}(\text{W}_x)$ & $\rho_{\pi}(\text{W}_y)$ & $\rho_{\pi}(\text{R}_x)$ & $\rho_{\pi}(\text{R}_y)$ \\
+$\alpha = \text{W}_x \text{R}_y \text{W}_y \text{R}_x$ & $\text{W}_x$ & $\text{R}_y \text{W}_y$ & $\text{W}_x \text{R}_x$ & $\text{R}_y $ \\
+$\beta = \text{W}_x \text{W}_y \text{R}_x \text{R}_y$ & $\text{W}_x $ & $\text{W}_y$ & $\text{W}_x \text{R}_x$ & $\text{W}_y \text{R}_y$ \\
+$\gamma = \text{W}_y \text{R}_x \text{W}_x \text{R}_y$ & $\text{R}_x \text{W}_x $ & $\text{W}_y $ & $\text{R}_x$ & $\text{W}_y \text{R}_y$ \\
+$\zeta = \text{R}_x \text{R}_y \text{W}_x \text{W}_y$ & $\text{R}_x \text{W}_x $ & $\text{R}_y \text{W}_y $ & $\text{R}_x$ & $\text{R}_y$
+
+\end{tabular}
+\label{tab:litmus-tso-rho}
+\end{table}
+
+\begin{figure}[ht]
+    \centerfloat{
+        \input{Dissertation/images/weak.tex}
+    }
+    \caption{Граф состояний теста~\ref{fig:litmus-ex} для TSO модели памяти.}
+    \label{fig:sg-litmus-tso}
+\end{figure}
+
+Граф состояний хранит в себе информацию о всех возможных эффектах в памяти, а так же информацию о порядке исполнения операций, который приводит к этим эффектам в памяти.
+
+\fixme{написать нормальную формулу???}
+Пусть многопоточной программе соостветвует смешанный граф~\ref{eq:gset}.
+\fixme{T или +}
+Построим неориентированный граф $G_u = (V, E_{order} \bigcup \E_{order}^T \bigcup E_{dep})$.
+
+\begin{definition}
+  \textbf{Компонентой связности смешанного графа $G$} назовём компоненту связности графа $G_u$.
+  Пусть $C(G)$ -- множество компонент связности смешанного графа $G$.
+\end{definition}
 

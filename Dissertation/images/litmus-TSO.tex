@@ -1,0 +1,20 @@
+\begin{tikzpicture}[
+    node distance=1.5cm and 1.5cm,
+    >=Stealth,
+    every node/.style={on grid, rectangle, draw, minimum size=8mm}
+]
+
+% Define nodes
+\node (Wy) {$\text{W}_y$};
+\node[below=of Wy] (Rx) {$\text{R}_x$};
+
+\node[right=of Wy] (Wx) {$\text{W}_x$};
+\node[below=of Wx] (Ry) {$\text{R}_y$};
+
+\draw[black, dashed, ->] (Wx) -- (Ry);
+\draw[black, dashed, ->] (Wy) -- (Rx);
+
+\draw[black, dashed, -] (Wx) -- (Rx);
+\draw[black, dashed, -] (Wy) -- (Ry);
+
+\end{tikzpicture}

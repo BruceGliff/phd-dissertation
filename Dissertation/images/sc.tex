@@ -1,0 +1,36 @@
+
+\begin{tikzpicture}[
+    node distance=1.5cm and 1cm,
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt, minimum size=20mm, align=center},
+    order/.style={-stealth, thick},
+]
+\node[dag] (1) {$W_x$};
+\node[dag, right=1.0cm of 1] (2) {$W_y$};
+
+\node[dag, below=1.0cm of 1] (4) {$R_x$\\EAX=1};
+\node[dag, left=1.0cm of 4] (3) {$R_y$\\EAX=0};
+\node[dag, below=1.0cm of 2] (5) {$R_y$\\EAX=1};
+\node[dag, right=1.0cm of 5] (6) {$R_x$\\EAX=0};
+
+\node[dag, below=1.0cm of 3] (7) {$W_y$};
+\node[dag, below=1.0cm of 7] (8) {$R_x$\\EAX=1};
+
+\node[dag, below=1.0cm of 6] (9) {$W_x$};
+\node[dag, below=1.0cm of 9] (10) {$R_y$\\EAX=1};
+
+\draw[order] (1) -- (3);
+\draw[order] (1) -- (4);
+\draw[order] (1) -- (5);
+
+\draw[order] (2) -- (4);
+\draw[order] (2) -- (5);
+\draw[order] (2) -- (6);
+
+\draw[order] (3) -- (7);
+\draw[order] (7) -- (8);
+
+\draw[order] (6) -- (9);
+\draw[order] (9) -- (10);
+
+
+\end{tikzpicture}
