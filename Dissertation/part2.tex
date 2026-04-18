@@ -573,6 +573,7 @@ $Q_n = \prod_{k=1}^{n} (1 - \frac{1}{2}^k), Q_{\infty} \approx 0.29$.
 \section{Построение линейных порядков с учётом зависимости}\label{sec:ch2/dep}
 
 \begin{definition}
+\label{def:dep}
 Два элемента частично упорядоченного множества $x, y \in P$ \textbf{зависимыe}, если $\{xy, yx\} \notin B^{|}$.
 \end{definition}
 То есть, для этих элементов существует такой относительный порядок, который порождает перестановку, не принадлежащую классу эквивалентности оригинальной перестановки.
@@ -1265,4 +1266,132 @@ $\zeta = \text{R}_x \text{R}_y \text{W}_x \text{W}_y$ & $\text{R}_x \text{W}_x $
 
 \section{Кластеризация графа состояний}\label{sec:ch2/stategraph-cluster}
 
-\fixme{что-то про кластеризацию}
+Представление всех порядков операций с памятью в виде графа состояний открывает новые возможности анализа конфигурации частично упорядоченного множества.
+
+Рассмотрим граф $G_{unorder}$, построенный из смешанного графа $G(V, E_{order}, E_{dep})$~\ref{eq:gset}, путём замены ориентированных рёбер порядка $E_{order}$ на неориентированные рёбра.
+Получим граф~\ref{eq:unorder_set}.
+
+\begin{equation}
+\label{eq:unorder_set}
+\begin{aligned}
+&G_{unorder} = (V, E), \\
+&V \text{ -- то же множество вершин из смешанного графа} \\
+&E = E_{dep} \bigcup \{\{x, y\} \mid \{x, y\} \in E_{order} \text{ или } \{y, x\} \in E_{order}\}
+\end{aligned}
+\end{equation}
+
+В таком графе можно выделить компоненты связности~\cite{connected-component}.
+
+Пусть $G(U_i)$ -- это $i$-ая компонента связности графа $G$.
+Тогда для любых двух разичных компонент связности $U_i$ и $U_j$ можно выделить следующие свойства:
+
+\begin{subequations}
+    \label{eq:clusters_properties}
+    \begin{align}
+          \forall x \in U_i, \forall y \in U_j &\rightarrow \{xy, yx\} \in B^{|} \label{eq:clusters_in_equiv} \\
+          \forall x \in U_i, \forall y \in U_j, \forall \pi \in L_P &\rightarrow \nexists (\rho_\pi(x), \rho_\pi(y)) \in E_{SG} \label{eq:clusters_in_sg}
+    \end{align}
+\end{subequations}
+
+\begin{proof}[Доказательство свойства~\ref{eq:clusters_in_equiv}]
+
+Для любых двух компонент связности $U_i$ и $U_j$ не сущесвует ребра между элементами множества $U_i$ и $U_j$:
+$\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
+
+Тогда, между элементами $x, y$ нет ребра порядка: $(x, y) \not \in E_{order} \text{ и } (y, x) \not \in E_{order}$, следовательно существуют подпорядки $xy$, $yx$ частично упорядоченного множества $P$.
+И между элементами $x, y$ нет ребра зависимости: $\{x, y\} \not \in D$, следовательно $\{xy, yx\} \in B^{|}$, по определению~\ref{def:dep}.
+
+Таким образом, любое взаимное переупорядочивание элементов множества $U_i$ относительно элементов множества $U_j$ принадлежат одному классу эквивалентности.
+\end{proof}
+
+\begin{proof}[Доказательство свойства~\ref{eq:clusters_in_sg}]
+
+  \fixme{Доделать и дать нормальное поределение SG.}
+
+\end{proof}
+
+\begin{definition}
+  Компоненту связности $U_i$ графа $G_{unorder}$ будем называть \textbf{кластером операций $C_{i}$}.
+
+  $\forall U_i\ \exists C_{i} = \{ x \mid x \in U_i \}$
+\end{definition}
+
+\begin{definition}
+  Вершины графа состояний для одного линейного порядка $\pi$, состоящие только из операций с памятью, принадлежащих одному кластеру, будем называть \textbf{кластером состояния $C_{i}^{\pi}$}.
+
+  $\forall \pi\ \exists C_{i}^{\pi} = \{ \rho_{\pi}(x) \mid x \in C_{i}^{op}\}$
+\end{definition}
+
+\subsection{Различные конфигурации графа состояний}\label{sec:ch2/stategraph-configs}
+
+Рассмотрим, какие различные конфигурации с точки зрения кластеров операций и состояний возможны в графе состояний.
+Конфигурацией будем называть различные взаимные расположения вершин графа.
+
+На рисунке~\ref{fig:all_sg_conf} представлены всевозмножные конфигурации графа состояний.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sg_conf/one_linext_intersect.png}
+        \caption{Один линейный подпорядка с общим подграфом.}
+        \label{fig:one_linext_intersect}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sg_conf/one_linext_notintersect.png}
+        \caption{Один линейный подпорядка с непересекающимися подграфами.}
+        \label{fig:one_linext_notintersect}
+    \end{subfigure}
+
+    \vspace{5mm}
+
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sg_conf/two_linext_intersect.png}
+        \caption{Два линейных подпорядка с общим подграфом.}
+        \label{fig:two_linext_intersect}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sg_conf/two_linext_notintersect.png}
+        \caption{Два линейных подпорядка с непересекающимися подграфами.}
+        \label{fig:two_linext_notintersect}
+    \end{subfigure}
+
+    \caption{
+      Возмножные конфигурации графа состояний.
+      Треугольником обозначается подграф, состоящий из вершин $BFSRev(G, drain)$.
+      Основание треугольника состоит из вершин с нулевой степенью входящих рёбер.
+      Вершина треугольника является стоком графа.
+      Различным цветом обозначаются треугольники, построенным по различным линейным подпорядкам.
+    }
+\label{fig:all_sg_conf}
+\end{figure}
+
+На рисунке~\ref{fig:all_impossible} представлена невозможная конфигурация графа состояний.
+\fixme{elaborate why}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sg_conf/impossible_case_a.png}
+        \caption{Общий вид.}
+        \label{fig:impossible_config}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sg_conf/impossible_case_closer_look.png}
+        \caption{Относительное расположение вершин.}
+        \label{fig:impossible_config_closer_look}
+    \end{subfigure}
+
+    \caption{
+      Невозможная конфигурация графа состояний.
+    }
+\label{fig:all_impossible}
+\end{figure}
