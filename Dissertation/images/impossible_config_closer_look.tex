@@ -1,0 +1,43 @@
+\begin{tikzpicture}[scale=0.7]
+
+\clip (4, -1) rectangle (11, -9);
+
+\node at (9, -1.7) [magenta!70, font=\fontsize{24}{28}\selectfont] {$\alpha$};
+
+\node at (10.15, -1.7) [cyan, font=\fontsize{24}{28}\selectfont] {$\beta$};
+
+\drawInvertedTriangle{magenta!70}{2.5pt}{10cm}{20cm}{(0,0)}
+
+\begin{scope}
+
+   \coordinate (leftTop) at (6, -4);
+   \coordinate (middle) at ([xshift=4cm] leftTop);
+   \coordinate (middleTop) at ([xshift=1cm, yshift=4cm] middle);
+   \coordinate (rightTop) at ([xshift=4cm] middleTop);
+   \coordinate (bottom) at ([yshift=-15cm] middleTop);
+
+   \draw[cyan, line width=2.5pt] (leftTop) -- (middle) -- (middleTop) -- (rightTop) -- (bottom)--  cycle;
+
+\end{scope}
+
+
+\node at (6, 0) (out1) {};
+\node at (8, 0) (out2) {};
+
+\node at (6, -8) (out3) {};
+\node at (9, -8) (out4) {};
+
+\node[circle, draw=magenta!70, line width=1.5pt, inner sep=0pt, minimum size=0.8cm] at (7,-2.5) [magenta!70, font=\fontsize{20}{28}\selectfont] (first) {1};
+
+\node[circle, draw=cyan, line width=1.5pt, inner sep=0pt, minimum size=0.8cm] at (7.5,-5) [cyan, font=\fontsize{20}{28}\selectfont] (second) {2};
+
+\draw[magenta!70, line width=1.5pt, -{Stealth}] (first) to[bend left] (second);
+
+\draw[magenta!70, dashed, line width=1.5pt, -{Stealth}] (out1) to (first);
+\draw[magenta!70, dashed, line width=1.5pt, -{Stealth}] (out2) to (first);
+, line width=1.5pt
+\draw[magenta!70, dashed, line width=1.5pt] (second) to (out3);
+\draw[cyan, line width=1.5pt, dashed] (second) to (out4);
+
+
+\end{tikzpicture}

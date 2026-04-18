@@ -1,0 +1,18 @@
+\begin{tikzpicture}[scale=0.3]
+
+\draw[gray, thick, dashed] (4, -1) rectangle (11, -9);
+
+\drawInvertedTriangle{magenta!70}{2.5pt}{10cm}{20cm}{(0,0)}
+
+\begin{scope}
+
+   \coordinate (leftTop) at (6, -4);
+   \coordinate (middle) at ([xshift=4cm] leftTop);
+   \coordinate (middleTop) at ([xshift=1cm, yshift=4cm] middle);
+   \coordinate (rightTop) at ([xshift=4cm] middleTop);
+   \coordinate (bottom) at ([yshift=-15cm] middleTop);
+
+   \draw[cyan, line width=2.5pt] (leftTop) -- (middle) -- (middleTop) -- (rightTop) -- (bottom)--  cycle;
+
+\end{scope}
+\end{tikzpicture}

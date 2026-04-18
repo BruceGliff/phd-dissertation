@@ -127,3 +127,19 @@
 \newtheorem{lemma}{Лемма}     % Нумерация лемм продолжает нумерацию теорем
 \newtheorem{definition}{Определение}   % Стиль definition
 \newtheorem{example}{Пример}
+
+\newcommand{\drawInvertedTriangle}[5]{%
+% Function to draw an isosceles triangle with base on top, vertex at bottom
+% Arguments:
+% #1 = color (e.g., blue, red, green)
+% #2 = line width (e.g., 0.5pt, 1pt, thin, thick)
+% #3 = base length
+% #4 = height
+% #5 = left up first point coordinate (e.g., (0,0))
+    \begin{scope}
+        \coordinate (leftTop) at #5;
+        \coordinate (rightTop) at ([xshift=#3] leftTop);
+        \coordinate (bottom) at ([xshift=#3/2, yshift=-#4] leftTop);
+        \draw[#1, line width=#2] (leftTop) -- (rightTop) -- (bottom) -- cycle;
+    \end{scope}
+}
