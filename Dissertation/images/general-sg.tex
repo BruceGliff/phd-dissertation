@@ -8,7 +8,7 @@
         font=\small
     },
     edge style/.style={
-        ->,
+        <-,
         >=Stealth,
         thick
     }
@@ -44,7 +44,21 @@
 \node (N22) [below=of N20] {22};
 \node (N23) [below=of N18, xshift=-1cm] {23};
 
-% Рёбра (направление снизу вверх)
+% Рёбра (направление от истоков к стокам)
+\draw[edge style] (N21) -- (N19);
+\draw[edge style] (N22) -- (N20);
+\draw[edge style] (N23) -- (N18);
+
+\draw[edge style] (N19) -- (N16);
+\draw[edge style] (N19) -- (N17);
+\draw[edge style] (N20) -- (N18);
+
+\draw[edge style] (N16) -- (N11);
+\draw[edge style] (N16) -- (N12);
+\draw[edge style] (N17) -- (N14);
+\draw[edge style] (N18) -- (N14);
+\draw[edge style] (N18) -- (N15);
+
 \draw[edge style] (N11) -- (N1);
 \draw[edge style] (N11) -- (N2);
 \draw[edge style] (N12) -- (N3);
@@ -53,19 +67,5 @@
 \draw[edge style] (N14) -- (N8);
 \draw[edge style] (N15) -- (N9);
 \draw[edge style] (N15) -- (N10);
-
-\draw[edge style] (N16) -- (N11);
-\draw[edge style] (N16) -- (N12);
-\draw[edge style] (N17) -- (N14);
-\draw[edge style] (N18) -- (N14);
-\draw[edge style] (N18) -- (N15);
-
-\draw[edge style] (N19) -- (N16);
-\draw[edge style] (N19) -- (N17);
-\draw[edge style] (N20) -- (N18);
-
-\draw[edge style] (N21) -- (N19);
-\draw[edge style] (N22) -- (N20);
-\draw[edge style] (N23) -- (N18);
 
 \end{tikzpicture}
