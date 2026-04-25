@@ -21,43 +21,31 @@
 \node (N4) [right=of N3] {4};
 \node (N7) [right=of N4] {7};
 \node (N8) [right=of N7] {8};
-\node (N9) [right=of N8] {9};
-\node (N10) [right=of N9] {10};
 
 % Уровень A
 \node (N11) [below=of $(N1)!0.5!(N2)$] {11};
 \node (N12) [below=of $(N3)!0.5!(N4)$] {12};
 \node (N14) [below=of $(N7)!0.5!(N8)$] {14};
-\node (N15) [below=of $(N9)!0.5!(N10)$] {15};
 
 % Уровень B
 \node (N16) [below=of $(N11)!0.5!(N12)$] {16};
 \node (N17) [below=of N14, xshift=-2cm] {17};
-\node (N18) [below=of $(N14)!0.5!(N15)$] {18};
 
 % Уровень C
 \node (N19) [below=of $(N16)!0.5!(N17)$] {19};
-\node (N20) [below=of N18, xshift=1cm] {20};
 
 % Нижний уровень: истоки
 \node (N21) [below=of N19] {21};
-\node (N22) [below=of N20] {22};
-\node (N23) [below=of N18, xshift=-1cm] {23};
 
 % Рёбра (направление от истоков к стокам)
 \draw[edge style] (N21) -- (N19);
-\draw[edge style] (N22) -- (N20);
-\draw[edge style] (N23) -- (N18);
 
 \draw[edge style] (N19) -- (N16);
 \draw[edge style] (N19) -- (N17);
-\draw[edge style] (N20) -- (N18);
 
 \draw[edge style] (N16) -- (N11);
 \draw[edge style] (N16) -- (N12);
 \draw[edge style] (N17) -- (N14);
-\draw[edge style] (N18) -- (N14);
-\draw[edge style] (N18) -- (N15);
 
 \draw[edge style] (N11) -- (N1);
 \draw[edge style] (N11) -- (N2);
@@ -65,7 +53,5 @@
 \draw[edge style] (N12) -- (N4);
 \draw[edge style] (N14) -- (N7);
 \draw[edge style] (N14) -- (N8);
-\draw[edge style] (N15) -- (N9);
-\draw[edge style] (N15) -- (N10);
 
 \end{tikzpicture}

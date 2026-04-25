@@ -1350,6 +1350,39 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
         \label{fig:general-sg}
 \end{figure}
 
+В алгоритмах анализа графа состояний используется обход $BFSRev(v, SG)$, потому что он формирует множество вершин, достижимых из вершины $v$ в транспонированном графе $SG$.
+
+На рисунках~\ref{fig:sg_subgraphs} представленны все подграфы, построенные из множества достижимых вершин из стоков.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \input{Dissertation/images/sg_subgraph_21.tex}
+        \caption{Множество вершин, достижимых из вершины $21$.}
+        \label{fig:sg_subgraph_21}
+    \end{subfigure}
+
+    \vspace{5mm}
+
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \input{Dissertation/images/sg_subgraph_23.tex}
+        \caption{Множество вершин, достижимых из вершины $23$.}
+        \label{fig:sg_subgraph_23}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \input{Dissertation/images/sg_subgraph_22.tex}
+        \caption{Множество вершин, достижимых из вершины $22$.}
+        \label{fig:sg_subgraph_22}
+    \end{subfigure}
+    \caption{
+      Все подграфы, достижимые из истоков.
+    }
+\label{fig:sg_subgraphs}
+\end{figure}
 
 Конфигурацией будем называть различные взаимные расположения вершин графа.
 
