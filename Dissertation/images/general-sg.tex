@@ -1,4 +1,5 @@
 \begin{tikzpicture}[
+    node distance=0.8cm and 1cm,
     every node/.style={
         circle,
         draw,
@@ -15,33 +16,33 @@
 
 % Верхний уровень: стоки
 \node (S1) {1};
-\node (S2) [right=0.5cm of S1] {2};
-\node (S3) [right=0.5cm of S2] {3};
-\node (S4) [right=0.5cm of S3] {4};
-\node (S7) [right=1cm of S4] {7};
-\node (S8) [right=0.5cm of S7] {8};
-\node (S9) [right=0.5cm of S8] {9};
-\node (S10) [right=0.5cm of S9] {10};
+\node (S2) [right=of S1] {2};
+\node (S3) [right=of S2] {3};
+\node (S4) [right=of S3] {4};
+\node (S7) [right=of S4] {7};
+\node (S8) [right=of S7] {8};
+\node (S9) [right=of S8] {9};
+\node (S10) [right=of S9] {10};
 
 % Уровень A
-\node (A1) [below=1.5cm of $(S1)!0.5!(S2)$] {11};
-\node (A2) [below=1.5cm of $(S3)!0.5!(S4)$] {12};
-\node (A4) [below=1.5cm of $(S7)!0.5!(S8)$] {14};
-\node (A5) [below=1.5cm of $(S9)!0.5!(S10)$] {15};
+\node (A1) [below=of $(S1)!0.5!(S2)$] {11};
+\node (A2) [below=of $(S3)!0.5!(S4)$] {12};
+\node (A4) [below=of $(S7)!0.5!(S8)$] {14};
+\node (A5) [below=of $(S9)!0.5!(S10)$] {15};
 
 % Уровень B
-\node (B1) [below=1.5cm of $(A1)!0.5!(A2)$] {16};
-\node (B2) [below=1.5cm of A4, xshift=-0.8cm] {17};
-\node (B3) [below=1.5cm of $(A4)!0.5!(A5)$] {18};
+\node (B1) [below=of $(A1)!0.5!(A2)$] {16};
+\node (B2) [below=of A4, xshift=-1cm] {17};
+\node (B3) [below=of $(A4)!0.5!(A5)$] {18};
 
 % Уровень C
-\node (C1) [below=1.5cm of $(B1)!0.5!(B2)$] {19};
-\node (C2) [below=1.5cm of B3, xshift=1cm] {20};
+\node (C1) [below=of $(B1)!0.5!(B2)$] {19};
+\node (C2) [below=of B3, xshift=1cm] {20};
 
 % Нижний уровень: истоки
-\node (I1) [below=1.5cm of C1] {21};
-\node (I2) [below=1.5cm of C2] {22};
-\node (I3) [right=0.8cm of C1] {23};
+\node (I1) [below=of C1] {21};
+\node (I2) [below=of C2] {22};
+\node (I3) [below=of B3, xshift=-1cm] {23};
 
 % Рёбра (направление снизу вверх)
 \draw[edge style] (A1) -- (S1);
