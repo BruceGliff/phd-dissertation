@@ -966,7 +966,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
 \label{eq:sg_def}
   \begin {align}
     &V_{SG} = \{ \rho_{\pi}(x) \mid (x, \pi) \in P \times L_P \} \label{eq:sg_nodes} \\
-    &E_{SG} = \{ (\rho_{\pi}(x), \rho_{\pi}(y)) \mid \forall \pi \in L_P, \forall x, y \in P \mid \text{id}^{\pi}(x) < \text{id}^{\pi}(y), \rho_{\pi}(x) \cap \rho_{\pi}(y) \neq \emptyset\}  \label{eq:sg_edges}\\
+    &E_{SG} = \{ (\rho_{\pi}(x), \rho_{\pi}(y)) \mid \forall \pi \in L_P, \forall x, y \in P \mid \text{id}^{\pi}(y) < \text{id}^{\pi}(x), \rho_{\pi}(x) \cap \rho_{\pi}(y) \neq \emptyset\}  \label{eq:sg_edges}\\
     &SG = (V_{SG}, E_{SG}) \nonumber
   \end {align}
 \end{subequations}
@@ -974,6 +974,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
 
 На рисунке~\ref{fig:sg-topo-dep} изображён граф состояния для примера~\ref{fig:topo-dep}.
 Для простоты здесь и далее будем изображать рёбра графа только с отношением ближайшего соседства.
+Так же, истоки графа изображены снизу, потому что исток отражает путь максимальной длины для данного подпорядка.
 
 \begin{figure}[htbp]
     \centerfloat{
@@ -983,7 +984,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
     \label{fig:sg-topo-dep}
 \end{figure}
 
-По построению графа состояния в вершине $\rho_{\pi}(x)$ нет необходимости хранить сам подпорядок, так как его можно восстановить алгоритмом~\ref{alg:bfs_sg} обхода в ширину от вершины $x$ по транспонированному графу состояний.
+По построению графа состояния в вершине $\rho_{\pi}(x)$ нет необходимости хранить сам подпорядок, так как его можно восстановить алгоритмом~\ref{alg:bfs_sg} обхода в ширину от вершины $x$ по графу состояний.
 
 \begin{algorithm}[H]
 \caption{Построение пути по графу состояний}
@@ -993,7 +994,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
   $SG(V, E)$ -- граф состояний.
   $x$ -- вершина графа состояния,
 \Ensure $\rho$ -- путь.
-\Function{BFSRev}{$SG$, $x$}
+\Function{bfs}{$x$}
 
     \State $queue \gets$ пустая очередь
     \State $\rho \gets$ пустой список
@@ -1006,7 +1007,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
         \State $queue.\text{pop}()$
         \State $\rho.\text{push\_front}(u)$
 
-        \For{$(v, u) \in E$}
+        \For{$(u, v) \in E$}
             \If{$v \not \in visited$}
                 \State $visited \gets visited \cup v$
                 \State $queue.\text{push}(v)$
@@ -1042,9 +1043,9 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
   \fixme{доделать}
 \end{proof}
 
-Из леммы~\ref{lm:path-unique}, следует, что каждый сток графа состояния соответвует уникальному состоянию системы.
-Всё множество стоков формирует множество всех допустимых состояний системы.
-И существует подмножество стоков(вершин с исходящей степенью 0), которое описывает полное состояние системы.
+Из леммы~\ref{lm:path-unique}, следует, что каждый исток графа состояния соответвует уникальному состоянию системы.
+Всё множество истоков формирует множество всех допустимых состояний системы.
+И существует подмножество истоков(вершин с входящей степенью 0), которое описывает полное состояние системы.
 
 \subsection{Алгоритм построения графа состояния многопоточной программе}
 
@@ -1092,10 +1093,10 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
 \end{equation}
 Если существует операция, для которой нет вершины в графе состояния, то исполнение этой операции привело ошибке, не связанной с моделью памяти.
 
-\textbf{Второе условие корректности} исполнения многопоточной программы: существует множество путей из стока графа состояния, покрывающее все маркированные вершины графа.
+\textbf{Второе условие корректности} исполнения многопоточной программы: существует множество путей из истоков графа состояния, покрывающее все маркированные вершины графа.
 \begin{align}
     \label{eq:verif-2nd}
-  & visited = \{\text{BFSRev}(SG, l) \mid \forall l \text{ -- сток }, \forall \rho \in \text{BFSRev}(SG, l) \rightarrow \rho \in \mathcal{M} \} \nonumber \\
+  & visited = \{\text{bfs}(l) \mid \forall l \text{ -- исток }, \forall \rho \in \text{bfs}(l) \rightarrow \rho \in \mathcal{M} \} \nonumber \\
   & \text{Исполнение программы корректно, если } op(visited) = P
 \end{align}
 Выполнение этого условия обеспечивает соответвие исполнение многопоточной программе заданной модели памяти.
@@ -1108,19 +1109,19 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
 \begin{proof}
 
   $\forall x \in P \rightarrow \exists \rho_{\alpha}(x) \in visited$. Это всегда можно сделать из условия~\ref{eq:verif-2nd}.
-  Выберем такие $drain = \{\rho_{\alpha}(x) \mid \rho_{\alpha}(x) \text{ -- сток}\}$.
+  Выберем такие $src = \{\rho_{\alpha}(x) \mid \rho_{\alpha}(x) \text{ -- исток}\}$.
   Тогда построим линейный порядок следующим образом:
 
 \begin{algorithm}[H]
-\caption{Построение линейного порядка из множества стоков графа состояния}
+\caption{Построение линейного порядка из множества истоков графа состояния}
 \label{alg:linext-from-leaf}
 \begin{algorithmic}[1]
-\Require $drain$ -- стоки. $SG$ -- граф состояния.
+\Require $src$ -- истоки. $SG$ -- граф состояния.
 \Ensure $\pi$ -- линейный порядок.
-\Function{ConstructLinext}{$drain$, $SG$}
+\Function{ConstructLinext}{$src$, $SG$}
 \State $\pi \gets \text{пустой порядок}$
-\ForAll{$l \in drain$}
-\State $ops \gets ( op(\rho) \mid \rho \in  \mathcal{M}, \forall \rho \in \text{BFSRev}(SG, l))$ \Comment $\forall x \in ops \rightarrow reg(x) \in trace$ из условия~\ref{eq:verif-1st}
+\ForAll{$l \in src$}
+\State $ops \gets ( op(\rho) \mid \rho \in  \mathcal{M}, \forall \rho \in \text{bfs}(l))$ \Comment $\forall x \in ops \rightarrow reg(x) \in trace$ из условия~\ref{eq:verif-1st}
 \ForAll{$x \in ops \mid x \not \in \pi$}
 \State $\pi\text{.add\_front}(x)$
 \EndFor
@@ -1326,15 +1327,14 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
   \label{def:st_cluster}
 \end{definition}
 
-Стоит отметить, что для любого кластера состояний и для любого стока в подграфе состояний из элеметов кластера выполняется свойство~\ref{eq:state_cluster_property}.
+Стоит отметить, что для любая достижимая вершина от вершины $x$, принадлежащей кластеру сотояний $C_i^\pi$ так же принадлежит, так же принадлежит $C_i^\pi$ (см. формулу~\ref{eq:state_cluster_property}).
 \begin{equation}
 \label{eq:state_cluster_property}
 \begin{aligned}
-  \forall C_i^\pi\ \forall drain \in C_i^\pi \rightarrow BFSRev(drain, SG) \subseteq C_i^\pi
+  \forall C_i^\pi\ \forall s \in C_i^\pi \rightarrow \text{bfs}(s) \subseteq C_i^\pi
 \end{aligned}
 \end{equation}
-То есть все вершины кластера состояний достижими алгоритмом $BFSRev$ из стоков, принадлежащиъ этому кластеру.
-\fixme{proper order of args in BFSRev}.
+То есть все вершины кластера состояний достижими алгоритмом обхода в ширину bfs из истоков, принадлежащих этому кластеру.
 
 \subsection{Различные конфигурации графа состояний}\label{sec:ch2/stategraph-configs}
 
@@ -1350,9 +1350,9 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
         \label{fig:general-sg}
 \end{figure}
 
-В алгоритмах анализа графа состояний используется обход $BFSRev(v, SG)$, потому что он формирует множество вершин, достижимых из вершины $v$ в транспонированном графе $SG$.
+В алгоритмах анализа графа состояний используется обход bfs потому что он формирует множество вершин, достижимых из данной вершины $v$.
 
-На рисунках~\ref{fig:sg_subgraphs} представленны все подграфы, построенные из множества достижимых вершин из стоков.
+На рисунках~\ref{fig:sg_subgraphs} представленны все подграфы, построенные из множества достижимых вершин из истоков.
 
 \begin{figure}[htbp]
     \centering
@@ -1387,14 +1387,6 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
 Конфигурацией будем называть различные взаимные расположения вершин графа.
 
 Рассмотрим, какие различные конфигурации с точки зрения кластеров операций и состояний возможны в графе состояний.
-
-\begin{figure}[htbp]
-        \centering
-        \input{Dissertation/images/bfs-subgraph.tex}
-        \caption{Пример подграфа, из вершин множества $BFSRev(1, SG)$.}
-        \label{fig:sg_subgraph_from_leaf}
-\end{figure}
-
 
 На рисунке~\ref{fig:all_sg_conf} представлены всевозмножные конфигурации графа состояний.
 
@@ -1432,9 +1424,9 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
 
     \caption{
       Возмножные конфигурации графа состояний.
-      Треугольником обозначается подграф, состоящий из вершин $BFSRev(G, drain)$.
-      Основание треугольника состоит из вершин с нулевой степенью входящих рёбер.
-      Вершина треугольника является стоком графа.
+      Треугольником обозначается подграф, состоящий из вершин $\text{bfs}(src)$.
+      Основание треугольника состоит из вершин с нулевой степенью исходящих рёбер.
+      Вершина треугольника является истоком графа.
       Различным цветом обозначаются треугольники, построенным по различным линейным подпорядкам.
     }
 \label{fig:all_sg_conf}
@@ -1480,7 +1472,7 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
 
 На примере одного линейного порядка с общим подграфом~\ref{fig:one_linext_intersect}, можно выделить части с общим подграфом, и непересекающиеся части.
 Это общее описание конфигурации линейного порядка.
-В общем случае, можно выделить общую и непересекающюся части, однако могут быть и вырожденные случаи, когда во всём линейном порядке сток только один.
+В общем случае, можно выделить общую и непересекающюся части, однако могут быть и вырожденные случаи, когда во всём линейном порядке исток только один.
 Или, как случае одного линейного порядка с непересекающимися подграфами~\ref{fig:one_linext_notintersect}, общей части вообще нет.
 Это значит, что две эти части частично упорядоченного множества вообще не связаны с друг с другом, и с точки зрения эффектов в памяти не влияют друг на друга.
 Такое часто можно наблюдать с мало пересекающимися операциями с памятью.
@@ -1525,14 +1517,14 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
   Из выполнения кластеризованного условия корректности, следует, что $\forall C_i \in C \rightarrow \exists C_i^\pi \in S_i \mid C_i^\pi \subseteq \mathcal{M}$.
 
   Для каждого $C_i$ зафиксируем такой $C_i^\pi$, для которого выполнено~\ref{eq:verif-cluster}.
-  Для него выполняется свойство~\ref{eq:state_cluster_property}, что все вершины кластера достижимы обходом $BFSRev$ из стоков этого кластера.
+  Для него выполняется свойство~\ref{eq:state_cluster_property}, что все вершины кластера достижимы обходом bfs из истоков этого кластера.
 
   Таким образом, сформируем множество
 \begin{equation}
   visited = \{ \rho \in C_i^\pi \mid C_i^\pi \subseteq \mathcal{M},\ \forall C_i \in C \} \\
 \end{equation}
 
-  Для множество $visited$ верно, что $\forall \rho \in visited \rightarrow \rho \in \mathcal{M}$, а так как $\bigcup_{C_i \in C}{C_i} = P$, то $op(visited) = P$.
+  Для множество $visited$ верно, что $\forall \rho \in visited \rightarrow \rho \in \mathcal{M}$, а так как $\bigcup\limits_{C_i \in C}{C_i} = P$, то $op(visited) = P$.
   Следовательно верно второе условие корректности.
 \end{proof}
 
