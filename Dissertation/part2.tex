@@ -1338,6 +1338,19 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
 
 \subsection{Различные конфигурации графа состояний}\label{sec:ch2/stategraph-configs}
 
+Особенности построения и обхода графа состояний, которые включают в себя информацию о зависимости операций и модели памяти, позволяют оценить некоторые параметры частично упорядоченного множества.
+
+По построению, граф состояний явялется ацикличным направленным графом.
+Рассмотрим некоторый такой граф, представленный на рисунке~\ref{fig:general-sg}.
+
+\begin{figure}[htbp]
+        \centering
+        \input{Dissertation/images/general-sg.tex}
+        \caption{Граф.}
+        \label{fig:general-sg}
+\end{figure}
+
+
 Конфигурацией будем называть различные взаимные расположения вершин графа.
 
 Рассмотрим, какие различные конфигурации с точки зрения кластеров операций и состояний возможны в графе состояний.
@@ -1346,7 +1359,7 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
         \centering
         \input{Dissertation/images/bfs-subgraph.tex}
         \caption{Пример подграфа, из вершин множества $BFSRev(1, SG)$.}
-        \label{fig:one_linext_intersect}
+        \label{fig:sg_subgraph_from_leaf}
 \end{figure}
 
 

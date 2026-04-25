@@ -1,0 +1,70 @@
+\begin{tikzpicture}[
+    every node/.style={
+        circle,
+        draw,
+        minimum size=8mm,
+        inner sep=0pt,
+        font=\small
+    },
+    edge style/.style={
+        ->,
+        >=Stealth,
+        thick
+    }
+]
+
+% Верхний уровень: стоки
+\node (S1) {1};
+\node (S2) [right=0.5cm of S1] {2};
+\node (S3) [right=0.5cm of S2] {3};
+\node (S4) [right=0.5cm of S3] {4};
+\node (S7) [right=1cm of S4] {7};
+\node (S8) [right=0.5cm of S7] {8};
+\node (S9) [right=0.5cm of S8] {9};
+\node (S10) [right=0.5cm of S9] {10};
+
+% Уровень A
+\node (A1) [below=1.5cm of $(S1)!0.5!(S2)$] {11};
+\node (A2) [below=1.5cm of $(S3)!0.5!(S4)$] {12};
+\node (A4) [below=1.5cm of $(S7)!0.5!(S8)$] {14};
+\node (A5) [below=1.5cm of $(S9)!0.5!(S10)$] {15};
+
+% Уровень B
+\node (B1) [below=1.5cm of $(A1)!0.5!(A2)$] {16};
+\node (B2) [below=1.5cm of A4, xshift=-0.8cm] {17};
+\node (B3) [below=1.5cm of $(A4)!0.5!(A5)$] {18};
+
+% Уровень C
+\node (C1) [below=1.5cm of $(B1)!0.5!(B2)$] {19};
+\node (C2) [below=1.5cm of B3, xshift=1cm] {20};
+
+% Нижний уровень: истоки
+\node (I1) [below=1.5cm of C1] {21};
+\node (I2) [below=1.5cm of C2] {22};
+\node (I3) [right=0.8cm of C1] {23};
+
+% Рёбра (направление снизу вверх)
+\draw[edge style] (A1) -- (S1);
+\draw[edge style] (A1) -- (S2);
+\draw[edge style] (A2) -- (S3);
+\draw[edge style] (A2) -- (S4);
+\draw[edge style] (A4) -- (S7);
+\draw[edge style] (A4) -- (S8);
+\draw[edge style] (A5) -- (S9);
+\draw[edge style] (A5) -- (S10);
+
+\draw[edge style] (B1) -- (A1);
+\draw[edge style] (B1) -- (A2);
+\draw[edge style] (B2) -- (A4);
+\draw[edge style] (B3) -- (A4);
+\draw[edge style] (B3) -- (A5);
+
+\draw[edge style] (C1) -- (B1);
+\draw[edge style] (C1) -- (B2);
+\draw[edge style] (C2) -- (B3);
+
+\draw[edge style] (I1) -- (C1);
+\draw[edge style] (I2) -- (C2);
+\draw[edge style] (I3) -- (B3);
+
+\end{tikzpicture}
