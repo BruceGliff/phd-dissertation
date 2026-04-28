@@ -960,7 +960,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
 Всего существует 14 уникальных путей от каждой вершины для всех линейных порядков.
 
 \begin{definition}
-  \textbf{Графом состояний} SG(state graph) -- называется ориентированный граф, построенный по правилу~\ref{eq:sg_def}.
+  \textbf{Графом состояний} SG(state graph) -- называется ориентированный граф, построенный по правилу~\ref{eq:sg_def}.\fixme{proper refs}
 
 \begin{subequations}
 \label{eq:sg_def}
@@ -1037,7 +1037,7 @@ $\zeta = 40132$ & 40 & 401 & 40132 & 4013 & 4
   \label{eq:diff_order}
 \end{subequations}
 Из условия~\ref{eq:diff_order1} следует, что элементы $a,b \not \in D$. Из условия~\ref{eq:diff_order2} следует, что между элементами $a,b$ нет отношения порядка.
-А по построению графа состояний (см.~\ref{eq:def_suborder}~\ref{eq:sg_def}) приходим к противоречию: $\nexists a \in \rho, \nexists b \in \tau$.
+А по построению графа состояний (см.~\ref{eq:def_suborder}~\ref{eq:sg_def}) приходим к противоречию: $a \not \in \rho, b \not \in \tau$.
 
 \end{proof}
 
@@ -1300,7 +1300,7 @@ $\forall x \in U_i, \forall y \in U_j \rightarrow \nexists (x, y) \in E$.
 \begin{proof}[Доказательство свойства~\ref{eq:clusters_in_sg}]
 
 Для любого линейного порядка $\pi$ не существует ребра в графе состояний между путями, построенными из элементов разных компонент связности $U_i$ и $U_j$:
-$\forall x \in U_i, \forall y \in U_j, \forall \pi \in L_P \rightarrow \nexists (\rho_\pi(x), \rho_\pi(y)) \in E_{SG}$.
+$\forall x \in U_i, \forall y \in U_j, \forall \pi \in L_P \rightarrow (\rho_\pi(x), \rho_\pi(y)) \not \in E_{SG}$.
 
 Как следует из свойства~\ref{eq:clusters_in_equiv}, между любыми элементами из разных компонени связности нет ребра порядка и нет ребра зависимости:
 $\{x, y\} \not \in D \text{, } (x, y) \not \in E_{order} \text{ и } (y, x) \not \in E_{order}, \forall x \in U_i, \forall y \in U_j$, следовательно по построению графа состояний (см.~\ref{eq:def_suborder}~\ref{eq:sg_def}) $(\rho_\pi(x), \rho_\pi(y)) \not \in E_{SG}$.
