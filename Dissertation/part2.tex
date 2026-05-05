@@ -670,7 +670,7 @@ B \supseteq B^{|}
 \end{aligned}
 \end{equation}
 
-Изменим шаг рекурсии при построении нового линейного порядка, а именно — выбор минимального элемента.
+Изменим шаг рекурсии при построении нового линейного порядка, а именно -- выбор минимального элемента.
 Все минимальные элементы частично упорядоченного множества $P$ формируют \textbf{множество минимальных элементов} $min(P)$.
 Шаг рекурсии будет выглядеть следующим образом: $P^{*} = P \setminus min(P)$.
 
@@ -688,15 +688,15 @@ B \supseteq B^{|}
   $\pi$ -- текущий линейный порядок.
   $ctx$ -- контекст алгоритма обхода.
 \Function{Traverse}{$P$, $D$, $\pi$}
-\State $X : \forall x \in X \Rightarrow x \in min(P)$
+\State $X : \{ x \in min(P) \} $
 \If{$X = \emptyset, P \not = \emptyset$}
 \State return \Comment Найден цикл
 \EndIf
-\If{$\forall x \in X, y \in P \models \{x, y\} \not \in D$}
+\If{$\forall x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$}
 \State \Call{Process}{$ctx$, $\pi$, $X$} \Comment Обработка множества $X$
 \State \Call{Traverse}{$P \setminus X $, $D$, $\pi \stackrel{add}{\longleftarrow} X$, $ctx$}
 \EndIf
-\ForAll{$\forall x \in X, y \in P \mid \{x, y\} \in D$}
+\ForAll{$\forall x \in X, \forall y \in P \mid \{x, y\} \in D$}
 \State $D^{*} = D \setminus \{x, y\}$
 \State $P^{\rightarrow} = P \cup (x <_{p} y)$
 \State $P^{\leftarrow} = P \cup (y <_{p} x)$
@@ -707,7 +707,8 @@ B \supseteq B^{|}
 \end{algorithmic}
 \end{algorithm}
 
-На строке \textbf{6} алгоритма~\ref{alg:topo-dep} порядок элементов из множества минимальных $X$ не важен. Из условия $\forall x \in X, y \in P \models (x, y) \not \in D$ следует, что $\{xy, yx\} \in B^{|}$.
+На строке \textbf{6} алгоритма~\ref{alg:topo-dep} порядок элементов из множества минимальных $X$ не важен.
+Из условия $\forall x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$ следует, что $\{xy, yx\} \in B^{|}$.
 По формуле~\ref{eq:one_eq_class} любые перестановки элементов из $X$ будут входить в один класс эквивалентных перестановок.
 
 \subsubsection{Пример}
