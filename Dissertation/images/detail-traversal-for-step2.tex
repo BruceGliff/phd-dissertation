@@ -1,13 +1,15 @@
 \begin{tikzpicture}[
     node distance=1.5cm and 1cm,
-    stepnode/.style={rectangle, draw=black, dashed, thick, inner sep=5pt, rounded corners=5pt},
-    dag/.style={circle, draw=black, fill=white, inner sep=2pt, minimum size=8mm},
+    stepnode/.style={rectangle, draw=black, dashed, thick, inner
+    sep=5pt, rounded corners=5pt},
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt,
+    minimum size=8mm},
     arrow/.style={-stealth, thick},
     dep/.style={thick, dashed, draw=black!50},
     order/.style={-stealth, thick}
-]
-% Step 1
-\node (step1) at (0,7) [stepnode, label={Шаг 2}] {
+  ]
+  % Step 1
+  \node (step1) at (0,7) [stepnode, label={Шаг 2}] {
     \begin{tikzpicture}
       \node[dag] (0) {0};
       \node[dag, below left=1.0 and 0.5cm of 0] (4) {4};
@@ -23,10 +25,10 @@
       \draw[dep] (0) to[bend right] (2);
       \draw[dep] (2) -- (3);
     \end{tikzpicture}
-};
+  };
 
-% Step 2
-\node (step2) [on grid, stepnode, right=8.0cm of step1, label={Шаг 2.1}] {
+  % Step 2
+  \node (step2) [on grid, stepnode, right=8.0cm of step1, label={Шаг 2.1}] {
     \begin{tikzpicture}[on grid=false]
       \node[dag] (4) {4};
       \node[dag, right=1.0cm of 4] (1) {1};
@@ -38,40 +40,44 @@
 
       \draw[dep] (2) -- (3);
     \end{tikzpicture}
-};
+  };
 
-% Step 3
-\node (step3) [on grid, stepnode, below=4.0cm of step1, label={Шаг 3}] {
+  % Step 3
+  \node (step3) [on grid, stepnode, below=4.0cm of step1, label={Шаг 3}] {
     \begin{tikzpicture}[on grid=false]
       \node[dag] (3) {3};
       \node[dag, right=1.0cm of 3] (2) {2};
 
       \draw[order] (2) -- (3);
     \end{tikzpicture}
-};
-% Step 4
-\node (step4) [on grid, stepnode, below=2.0cm of step3, label={Шаг 4}] {
+  };
+  % Step 4
+  \node (step4) [on grid, stepnode, below=2.0cm of step3, label={Шаг 4}] {
     \begin{tikzpicture}[on grid=false]
       \node[dag] (3) {3};
       \node[dag, right=1.0cm of 3] (2) {2};
 
       \draw[order] (3) -- (2);
     \end{tikzpicture}
-};
-% Step 2.2
-\node (step5) [on grid, stepnode, below=5.0cm of step2, label={Шаг 2.2}] {
+  };
+  % Step 2.2
+  \node (step5) [on grid, stepnode, below=5.0cm of step2, label={Шаг 2.2}] {
     \begin{tikzpicture}[on grid=false]
       \node[dag] (3) {3};
       \node[dag, right=1.0cm of 3] (2) {2};
 
       \draw[dep] (3) -- (2);
     \end{tikzpicture}
-};
+  };
 
-% Transitions between steps
-\draw[arrow] (step1) -- (step2) node [midway,above,draw=none] {Убираем $min(P)$};
-\draw[arrow] (step2) -- (step5) node [midway,right,draw=none] {Убираем $min(P)$};
-\draw[arrow] (step5) -- (step3) node [midway,sloped,above,draw=none] {Направляем $2 \rightarrow 3$};
-\draw[arrow] (step5) -- (step4) node [midway,sloped,below,draw=none] {Направляем $3 \rightarrow 2$};
+  % Transitions between steps
+  \draw[arrow] (step1) -- (step2) node [midway,above,draw=none]
+  {Убираем $min(P)$};
+  \draw[arrow] (step2) -- (step5) node [midway,right,draw=none]
+  {Убираем $min(P)$};
+  \draw[arrow] (step5) -- (step3) node
+  [midway,sloped,above,draw=none] {Направляем $2 \rightarrow 3$};
+  \draw[arrow] (step5) -- (step4) node
+  [midway,sloped,below,draw=none] {Направляем $3 \rightarrow 2$};
 
 \end{tikzpicture}

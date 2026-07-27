@@ -2,16 +2,19 @@
 \graphicspath{{images/}{Synopsis/images/}}         % Пути к изображениям
 
 %%% Макет страницы %%%
-\geometry{a5paper, top=14mm, bottom=14mm, inner=18mm, outer=10mm, footskip=5mm, nomarginpar}%, showframe
+\geometry{a5paper, top=14mm, bottom=14mm, inner=18mm, outer=10mm,
+footskip=5mm, nomarginpar}%, showframe
 \setlength{\topskip}{0pt}   %размер дополнительного верхнего поля
 
 %%% Интервалы %%%
-%% Реализация средствами класса (на основе setspace) ближе к типографской классике.
+%% Реализация средствами класса (на основе setspace) ближе к
+% типографской классике.
 %% И правит сразу и в таблицах (если со звёздочкой)
 %\DoubleSpacing*     % Двойной интервал
 %\OnehalfSpacing*    % Полуторный интервал
 \SingleSpacing      % Одинарный интервал
-%\setSpacing{1.42}   % Полуторный интервал, подобный Ворду (возможно, стоит включать вместе с предыдущей строкой)
+%\setSpacing{1.42}   % Полуторный интервал, подобный Ворду (возможно,
+% стоит включать вместе с предыдущей строкой)
 
 %%% Выравнивание и переносы %%%
 %% http://tex.stackexchange.com/questions/241343/what-is-the-meaning-of-fussy-sloppy-emergencystretch-tolerance-hbadness
@@ -24,7 +27,8 @@
 %\raggedbottom
 %\sloppy                 % Избавляемся от переполнений
 \clubpenalty=10000      % Запрещаем разрыв страницы после первой строки абзаца
-\widowpenalty=10000     % Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000     % Запрещаем разрыв страницы после последней
+% строки абзаца
 
 %%% Колонтитулы %%%
 \makeevenhead{plain}{}{}{}
@@ -39,8 +43,8 @@
 
 %%% Подписи %%%
 \setfloatadjustment{table}{%
-    \setlength{\abovecaptionskip}{0pt}   % Отбивка над подписью
-    \setlength{\belowcaptionskip}{0pt}   % Отбивка под подписью
+  \setlength{\abovecaptionskip}{0pt}   % Отбивка над подписью
+  \setlength{\belowcaptionskip}{0pt}   % Отбивка под подписью
 }
 
 %%% Отступы у плавающих блоков %%%

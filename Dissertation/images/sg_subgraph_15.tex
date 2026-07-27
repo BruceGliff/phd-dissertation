@@ -1,51 +1,51 @@
 \begin{tikzpicture}[
     node distance=0.8cm and 1cm,
     every node/.style={
-        circle,
-        draw,
-        minimum size=8mm,
-        inner sep=0pt,
-        font=\small
+      circle,
+      draw,
+      minimum size=8mm,
+      inner sep=0pt,
+      font=\small
     },
     edge style/.style={
-        ->,
-        >=Stealth,
-        thick
+      ->,
+      >=Stealth,
+      thick
     }
-]
+  ]
 
-% Верхний уровень: стоки
-\node (N1) {1};
-\node (N2) [right=of N1] {2};
-\node (N3) [right=of N2] {3};
-\node (N4) [right=of N3] {4};
+  % Верхний уровень: стоки
+  \node (N1) {1};
+  \node (N2) [right=of N1] {2};
+  \node (N3) [right=of N2] {3};
+  \node (N4) [right=of N3] {4};
 
-% Уровень A
-\node (N7) [below=of $(N1)!0.5!(N2)$] {7};
-\node (N8) [below=of $(N3)!0.5!(N4)$] {8};
+  % Уровень A
+  \node (N7) [below=of $(N1)!0.5!(N2)$] {7};
+  \node (N8) [below=of $(N3)!0.5!(N4)$] {8};
 
-% Уровень B
-\node (N10) [below=of N7] {10};
-\node (N11) [below=of N8, xshift=-2cm] {11};
+  % Уровень B
+  \node (N10) [below=of N7] {10};
+  \node (N11) [below=of N8, xshift=-2cm] {11};
 
-% Уровень C
-\node (N13) [below=of $(N10)!0.5!(N11)$] {13};
+  % Уровень C
+  \node (N13) [below=of $(N10)!0.5!(N11)$] {13};
 
-% Нижний уровень: истоки
-\node (N15) [below=of N13] {15};
+  % Нижний уровень: истоки
+  \node (N15) [below=of N13] {15};
 
-% Рёбра (направление от истоков к стокам)
-\draw[edge style] (N15) -- (N13);
+  % Рёбра (направление от истоков к стокам)
+  \draw[edge style] (N15) -- (N13);
 
-\draw[edge style] (N13) -- (N10);
-\draw[edge style] (N13) -- (N11);
+  \draw[edge style] (N13) -- (N10);
+  \draw[edge style] (N13) -- (N11);
 
-\draw[edge style] (N10) -- (N7);
-\draw[edge style] (N11) -- (N8);
+  \draw[edge style] (N10) -- (N7);
+  \draw[edge style] (N11) -- (N8);
 
-\draw[edge style] (N7) -- (N1);
-\draw[edge style] (N7) -- (N2);
-\draw[edge style] (N8) -- (N3);
-\draw[edge style] (N8) -- (N4);
+  \draw[edge style] (N7) -- (N1);
+  \draw[edge style] (N7) -- (N2);
+  \draw[edge style] (N8) -- (N3);
+  \draw[edge style] (N8) -- (N4);
 
 \end{tikzpicture}

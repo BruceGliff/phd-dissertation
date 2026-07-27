@@ -23,11 +23,11 @@
 \overfullrule=0pt
 
 \def\setfallback#1#2{
-\expandafter\ifcsname#1\endcsname%
-\relax%
-\else%
-\expandafter\def\csname#1\endcsname{#2}%
-\fi%
+  \expandafter\ifcsname#1\endcsname%
+  \relax%
+  \else%
+  \expandafter\def\csname#1\endcsname{#2}%
+  \fi%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,15 +46,14 @@
 \setfallback{tocity}{г.~Москва}
 \setfallback{toaddress}{Кремлёвская~наб., д.~1/9, стр.~8}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \raggedright
 
 % Откомментируйте, чтобы нарисовать рамку вокруг на границе страницы
 % \input tikz.tex
-% \tikz[remember picture,overlay]{\draw (0,0) -- ++(\hsize,0) -- ++(0,-\vsize)-- ++(-\hsize,0) -- ++(0,\vsize);}
-
+% \tikz[remember picture,overlay]{\draw (0,0) -- ++(\hsize,0) --
+% ++(0,-\vsize)-- ++(-\hsize,0) -- ++(0,\vsize);}
 
 \hsize=\dimexpr (\pagewidth / 2 - \leftOffset - \rightOffset) \relax
 
@@ -69,15 +68,15 @@
 \vfill
 
 {
-        \leftskip \dimexpr (\pagewidth / 2 - \leftOffset) \relax
-        \hsize=\dimexpr (\pagewidth - \leftOffset - \rightOffset) \relax
-        {\myfontit Кому:}
-        \ifx\towhom\empty\else\towhom\break\fi
-        \toinstitution \par
-        {\myfontit Куда:}
-        \toaddress \break
-        \tocity \break
-        \toindex \par
+  \leftskip \dimexpr (\pagewidth / 2 - \leftOffset) \relax
+  \hsize=\dimexpr (\pagewidth - \leftOffset - \rightOffset) \relax
+  {\myfontit Кому:}
+  \ifx\towhom\empty\else\towhom\break\fi
+  \toinstitution \par
+  {\myfontit Куда:}
+  \toaddress \break
+  \tocity \break
+  \toindex \par
 }
 
 \postindex

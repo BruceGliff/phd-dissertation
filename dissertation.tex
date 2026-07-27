@@ -1,5 +1,7 @@
 %&preformat-disser
-\RequirePackage[l2tabu,orthodox]{nag} % Раскомментировав, можно в логе получать рекомендации относительно правильного использования пакетов и предупреждения об устаревших и нерекомендуемых пакетах
+\RequirePackage[l2tabu,orthodox]{nag} % Раскомментировав, можно в
+% логе получать рекомендации относительно правильного использования
+% пакетов и предупреждения об устаревших и нерекомендуемых пакетах
 % Формат А4, 14pt (ГОСТ Р 7.0.11-2011, 5.3.6)
 \documentclass[a4paper,14pt,oneside,openany]{memoir}
 
@@ -7,7 +9,8 @@
 \input{common/packages}         % Пакеты общие для диссертации и автореферата
 \synopsisfalse                      % Этот документ --- не автореферат
 \input{Dissertation/dispackages}    % Пакеты для диссертации
-\input{Dissertation/userpackages}   % Пакеты для специфических пользовательских задач
+\input{Dissertation/userpackages}   % Пакеты для специфических
+% пользовательских задач
 
 \input{Dissertation/setup}      % Упрощённые настройки шаблона
 
@@ -23,9 +26,10 @@
 % Здесь только проверка установленного ключа. Сама настройка выбора движка
 % размещена в common/setup.tex
 \ifnumequal{\value{bibliosel}}{0}{%
-    \input{biblio/predefined}   % Встроенная реализация с загрузкой файла через движок bibtex8
+  \input{biblio/predefined}   % Встроенная реализация с загрузкой
+  % файла через движок bibtex8
 }{
-    \input{biblio/biblatex}     % Реализация пакетом biblatex через движок biber
+  \input{biblio/biblatex}     % Реализация пакетом biblatex через движок biber
 }
 
 % Вывести информацию о выбранных опциях в лог сборки
@@ -47,14 +51,16 @@
 %\includeonly{Dissertation/part2}
 %\includeonly{Dissertation/contents,Dissertation/appendix,Dissertation/conclusion}
 %
-% Если все команды закомментированы, то документ будет выведен в PDF файл полностью
+% Если все команды закомментированы, то документ будет выведен в PDF
+% файл полностью
 
 \begin{document}
 %%% Переопределение именований типовых разделов
 % https://tex.stackexchange.com/a/156050
 \gappto\captionsrussian{\input{common/renames}} % for polyglossia and babel
 \input{common/renames}
-\gappto\captionsrussian{\input{Dissertation/renames}} % for polyglossia and babel
+\gappto\captionsrussian{\input{Dissertation/renames}} % for
+% polyglossia and babel
 \input{Dissertation/renames}
 
 %%% Структура диссертации (ГОСТ Р 7.0.11-2011, 4)
@@ -73,10 +79,12 @@
 \include{Dissertation/part4}           % Глава 4
 \include{Dissertation/part5}           % Глава 5
 \include{Dissertation/conclusion}      % Заключение
-\include{Dissertation/acronyms}        % Список сокращений и условных обозначений
+\include{Dissertation/acronyms}        % Список сокращений и условных
+% обозначений
 \include{Dissertation/dictionary}      % Словарь терминов
 \include{Dissertation/references}      % Список литературы
-%\include{Dissertation/lists}           % Списки таблиц и изображений (иллюстративный материал)
+%\include{Dissertation/lists}           % Списки таблиц и изображений
+% (иллюстративный материал)
 
 \setcounter{totalchapter}{\value{chapter}} % Подсчёт количества глав
 
@@ -85,7 +93,8 @@
 % Оформление заголовков приложений ближе к ГОСТ:
 \setlength{\midchapskip}{20pt}
 \renewcommand*{\afterchapternum}{\par\nobreak\vskip \midchapskip}
-\renewcommand\thechapter{\Asbuk{chapter}} % Чтобы приложения русскими буквами нумеровались
+\renewcommand\thechapter{\Asbuk{chapter}} % Чтобы приложения русскими
+% буквами нумеровались
 
 %\include{Dissertation/appendix}        % Приложения
 

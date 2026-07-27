@@ -1,80 +1,80 @@
 \begin{tikzpicture}[
     node distance=0.8cm and 1cm,
     every node/.style={
-        circle,
-        draw,
-        minimum size=8mm,
-        inner sep=0pt,
-        font=\small
+      circle,
+      draw,
+      minimum size=8mm,
+      inner sep=0pt,
+      font=\small
     },
     edge style/.style={
-        ->,
-        >=Stealth,
-        thick
+      ->,
+      >=Stealth,
+      thick
     }
-]
+  ]
 
-% Верхний уровень: стоки
-\node (N1) {1};
-\node (N2) [right=of N1] {2};
-\node (N3) [right=of N2] {3};
-\node (N4) [right=of N3] {4};
-\node (N5) [right=of N4] {5};
-\node (N6) [right=of N5] {6};
+  % Верхний уровень: стоки
+  \node (N1) {1};
+  \node (N2) [right=of N1] {2};
+  \node (N3) [right=of N2] {3};
+  \node (N4) [right=of N3] {4};
+  \node (N5) [right=of N4] {5};
+  \node (N6) [right=of N5] {6};
 
-% Уровень A
-\node (N7) [below=of $(N1)!0.5!(N2)$] {7};
-\node (N8) [below=of $(N3)!0.5!(N4)$] {8};
-\node (N9) [below=of $(N5)!0.5!(N6)$] {9};
+  % Уровень A
+  \node (N7) [below=of $(N1)!0.5!(N2)$] {7};
+  \node (N8) [below=of $(N3)!0.5!(N4)$] {8};
+  \node (N9) [below=of $(N5)!0.5!(N6)$] {9};
 
-% Уровень B
-\node (N10) [below=of N7] {10};
-\node (N11) [below=of N8, xshift=-2cm] {11};
-\node (N12) [below=of $(N8)!0.5!(N9)$] {12};
+  % Уровень B
+  \node (N10) [below=of N7] {10};
+  \node (N11) [below=of N8, xshift=-2cm] {11};
+  \node (N12) [below=of $(N8)!0.5!(N9)$] {12};
 
-% Уровень C
-\node (N13) [below=of $(N10)!0.5!(N11)$] {13};
-\node (N14) [below=of N12, xshift=1cm] {14};
+  % Уровень C
+  \node (N13) [below=of $(N10)!0.5!(N11)$] {13};
+  \node (N14) [below=of N12, xshift=1cm] {14};
 
-% Нижний уровень: истоки
-\node (N15) [below=of N13] {15};
-\node (N16) [below=of N14] {16};
-\node (N17) [below=of N12, xshift=-1.5cm] {17};
+  % Нижний уровень: истоки
+  \node (N15) [below=of N13] {15};
+  \node (N16) [below=of N14] {16};
+  \node (N17) [below=of N12, xshift=-1.5cm] {17};
 
-% Рёбра (направление от истоков к стокам)
-\draw[edge style] (N15) -- (N13);
-\draw[edge style] (N16) -- (N14);
-\draw[edge style] (N17) -- (N12);
+  % Рёбра (направление от истоков к стокам)
+  \draw[edge style] (N15) -- (N13);
+  \draw[edge style] (N16) -- (N14);
+  \draw[edge style] (N17) -- (N12);
 
-\draw[edge style] (N13) -- (N10);
-\draw[edge style] (N13) -- (N11);
-\draw[edge style] (N14) -- (N12);
+  \draw[edge style] (N13) -- (N10);
+  \draw[edge style] (N13) -- (N11);
+  \draw[edge style] (N14) -- (N12);
 
-\draw[edge style] (N10) -- (N7);
-\draw[edge style] (N11) -- (N8);
-\draw[edge style] (N12) -- (N8);
-\draw[edge style] (N12) -- (N9);
+  \draw[edge style] (N10) -- (N7);
+  \draw[edge style] (N11) -- (N8);
+  \draw[edge style] (N12) -- (N8);
+  \draw[edge style] (N12) -- (N9);
 
-\draw[edge style] (N7) -- (N1);
-\draw[edge style] (N7) -- (N2);
-\draw[edge style] (N8) -- (N3);
-\draw[edge style] (N8) -- (N4);
-\draw[edge style] (N9) -- (N5);
-\draw[edge style] (N9) -- (N6);
+  \draw[edge style] (N7) -- (N1);
+  \draw[edge style] (N7) -- (N2);
+  \draw[edge style] (N8) -- (N3);
+  \draw[edge style] (N8) -- (N4);
+  \draw[edge style] (N9) -- (N5);
+  \draw[edge style] (N9) -- (N6);
 
-\coordinate (t1_1) at ([xshift=-10mm, yshift=5mm] N1);
-\coordinate (t1_2) at ([yshift=-14mm] N15);
-\coordinate (t1_3) at ([xshift=10mm, yshift=5mm] N4);
-\draw[cyan, line width=1.5pt] (t1_1) -- (t1_2) -- (t1_3) -- cycle;
+  \coordinate (t1_1) at ([xshift=-10mm, yshift=5mm] N1);
+  \coordinate (t1_2) at ([yshift=-14mm] N15);
+  \coordinate (t1_3) at ([xshift=10mm, yshift=5mm] N4);
+  \draw[cyan, line width=1.5pt] (t1_1) -- (t1_2) -- (t1_3) -- cycle;
 
-\coordinate (t2_1) at ([xshift=-10mm, yshift=6mm] N3);
-\coordinate (t2_2) at ([yshift=-14mm] N17);
-\coordinate (t2_3) at ([xshift=14mm, yshift=6mm] N6);
-\draw[magenta!70, line width=1.5pt] (t2_1) -- (t2_2) -- (t2_3) -- cycle;
+  \coordinate (t2_1) at ([xshift=-10mm, yshift=6mm] N3);
+  \coordinate (t2_2) at ([yshift=-14mm] N17);
+  \coordinate (t2_3) at ([xshift=14mm, yshift=6mm] N6);
+  \draw[magenta!70, line width=1.5pt] (t2_1) -- (t2_2) -- (t2_3) -- cycle;
 
-\coordinate (t3_1) at ([xshift=-10mm, yshift=5.5mm] N3);
-\coordinate (t3_2) at ([xshift=2mm, yshift=-12mm] N16);
-\coordinate (t3_3) at ([xshift=8mm, yshift=5.5mm] N6);
-\draw[magenta!70, line width=1.5pt] (t3_1) -- (t3_2) -- (t3_3) -- cycle;
+  \coordinate (t3_1) at ([xshift=-10mm, yshift=5.5mm] N3);
+  \coordinate (t3_2) at ([xshift=2mm, yshift=-12mm] N16);
+  \coordinate (t3_3) at ([xshift=8mm, yshift=5.5mm] N6);
+  \draw[magenta!70, line width=1.5pt] (t3_1) -- (t3_2) -- (t3_3) -- cycle;
 
 \end{tikzpicture}

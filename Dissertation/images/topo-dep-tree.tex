@@ -1,42 +1,42 @@
 \begin{tikzpicture} [
-  edge from parent/.style={draw,-stealth,thick},
-  nd/.style={thick, draw=black},
-  num/.style={left},
-  level distance=2cm,
-  level 1/.style={sibling distance=4cm},
-  level 2/.style={sibling distance=2cm},
-  level 3/.style={sibling distance=2cm}
-]
+    edge from parent/.style={draw,-stealth,thick},
+    nd/.style={thick, draw=black},
+    num/.style={left},
+    level distance=2cm,
+    level 1/.style={sibling distance=4cm},
+    level 2/.style={sibling distance=2cm},
+    level 3/.style={sibling distance=2cm}
+  ]
   \node[nd] (0) {root} [grow'=right]
   child { node[nd] (6) {\textbf{$4 \rightarrow 0$}}
-          child { node[nd] (10) {\textbf{$2 \rightarrow 0$}}
-                  node[num] at (10.west) {10}
-          }
-          child { node[nd] (7) {\textbf{$0 \rightarrow 2$}}
-                  child { node[nd] (9) {\textbf{$3 \rightarrow 2$}}
-                          node[num] at (9.west) {9}
-                  }
-                  child { node[nd] (8) {\textbf{$2 \rightarrow 3$}}
-                          node[num] at (8.west) {8}
-                  }
-                  node[num] at (7.west) {7}
-          }
-          node[num] at (6.west) {6}
+    child { node[nd] (10) {\textbf{$2 \rightarrow 0$}}
+      node[num] at (10.west) {10}
+    }
+    child { node[nd] (7) {\textbf{$0 \rightarrow 2$}}
+      child { node[nd] (9) {\textbf{$3 \rightarrow 2$}}
+        node[num] at (9.west) {9}
+      }
+      child { node[nd] (8) {\textbf{$2 \rightarrow 3$}}
+        node[num] at (8.west) {8}
+      }
+      node[num] at (7.west) {7}
+    }
+    node[num] at (6.west) {6}
   }
   child { node[nd] (1) {\textbf{$0 \rightarrow 4$}}
-          child { node[nd] (5) {\textbf{$2 \rightarrow 0$}}
-                  node[num] at (5.west) {5}
-          }
-          child { node[nd] (2) {\textbf{$0 \rightarrow 2$}}
-                  child { node[nd] (4) {\textbf{$3 \rightarrow 2$}}
-                          node[num] at (4.west) {4}
-                  }
-                  child { node[nd] (3) {\textbf{$2 \rightarrow 3$}}
-                          node[num] at (3.west) {3}
-                  }
-                  node[num] at (2.west) {2}
-          }
-          node[num] at (1.west) {1}
+    child { node[nd] (5) {\textbf{$2 \rightarrow 0$}}
+      node[num] at (5.west) {5}
+    }
+    child { node[nd] (2) {\textbf{$0 \rightarrow 2$}}
+      child { node[nd] (4) {\textbf{$3 \rightarrow 2$}}
+        node[num] at (4.west) {4}
+      }
+      child { node[nd] (3) {\textbf{$2 \rightarrow 3$}}
+        node[num] at (3.west) {3}
+      }
+      node[num] at (2.west) {2}
+    }
+    node[num] at (1.west) {1}
   };
   \node[num] at (0.west) {0};
 \end{tikzpicture}

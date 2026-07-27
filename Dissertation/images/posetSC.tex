@@ -2,19 +2,19 @@
     node distance=1.0cm,
     >=Stealth,
     every node/.style={rectangle, draw, minimum size=8mm}
-]
+  ]
 
-% Define nodes
-\node (Rx) {$\text{R}_x$};
-\node[below=of Rx] (RWMx) {$\text{RWM}_x$};
-\node[below=of RWMx] (Wx) {$\text{W}_x$};
+  % Define nodes
+  \node (Rx) {$\text{R}_x$};
+  \node[below=of Rx] (RWMx) {$\text{RWM}_x$};
+  \node[below=of RWMx] (Wx) {$\text{W}_x$};
 
-% Red arrows (solid) - on the right side
-\draw[red, thick, ->] (Rx) -- (RWMx);
-\draw[red, thick, ->] (RWMx) -- (Wx);
+  % Red arrows (solid) - on the right side
+  \draw[red, thick, ->] (Rx) -- (RWMx);
+  \draw[red, thick, ->] (RWMx) -- (Wx);
 
-% Black dashed arrows - on the left side
-\draw[black, dashed, ->] (Rx) to[bend right] (RWMx);
-\draw[black, dashed, ->] (RWMx) to[bend right] (Wx);
+  % Black dashed arrows - on the left side
+  \draw[black, dashed, ->] (Rx) to[bend right] (RWMx);
+  \draw[black, dashed, ->] (RWMx) to[bend right] (Wx);
 
 \end{tikzpicture}
