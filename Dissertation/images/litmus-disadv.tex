@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+    node distance=1.0cm,
+    >=Stealth,
+    every node/.style={rectangle, draw, minimum size=8mm}
+  ]
+
+  % Define nodes
+  \node (A) {Синхронизация старта};
+  \node[below left=of A] (B1) {Тест на ядре 1};
+  \node[below =of A] (B) {\dots};
+  \node[below right=of A] (B2) {Тест на ядре N};
+  \node[below =of B] (C) {Синхронизация теста};
+
+  \node[below left=of C] (D1) {Продолжение на ядре 1};
+  \node[below =of C] (D) {\dots};
+  \node[below right=of C] (D2) {Продолжение на ядре N};
+  \node[below =of D] (E) {Синхронизация теста};
+
+  \node[draw=none, below =of E] (F) {\dots};
+
+  \draw[thick, ->] (A) -- (B1);
+  \draw[thick, ->] (A) -- (B2);
+  \draw[thick, ->] (A) -- (B);
+  \draw[thick, ->] (B1) -- (C);
+  \draw[thick, ->] (B) -- (C);
+  \draw[thick, ->] (B2) -- (C);
+
+  \draw[thick, ->] (C) -- (D1);
+  \draw[thick, ->] (C) -- (D2);
+  \draw[thick, ->] (C) -- (D);
+  \draw[thick, ->] (D1) -- (E);
+  \draw[thick, ->] (D) -- (E);
+  \draw[thick, ->] (D2) -- (E);
+
+  \draw[thick, ->] (E) -- (F);
+
+\end{tikzpicture}
