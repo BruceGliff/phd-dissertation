@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+    % Define styles for boxes and arrows
+    box/.style={draw, rectangle, minimum width=2.5cm, minimum
+    height=1cm, align=center, font=\sffamily},
+    bluebox/.style={draw, rectangle, minimum width=13cm, minimum
+      height=1cm, align=center, font=\sffamily, draw=cyan!80!blue,
+    text=cyan!80!blue},
+    arrow/.style={-{Stealth[length=3mm]}, cyan!80!blue, thick}
+  ]
+
+  % --- Nodes ---
+  % Processors and Caches (Top row)
+  \node[box] (p1) {Processor};
+  \node[box, below=0.8cm of p1] (c1) {Cache};
+
+  \node[box, right=1.5cm of p1] (p2) {Processor};
+  \node[box, below=0.8cm of p2] (c2) {Cache};
+
+  % Dots between the second and last processor
+  \node[right=1cm of p2, font=\sffamily] (dots1) {\dots};
+  \node[below=0.8cm of dots1, font=\sffamily] (dots2) {\dots};
+
+  \node[box, right=1cm of dots1] (p3) {Processor};
+  \node[box, below=0.8cm of p3] (c3) {Cache};
+
+  % Interconnection Network
+  \node[bluebox, below=1cm of c1, yshift=-0.5cm, xshift=5cm] (net)
+  {Interconnection Network};
+
+  % Memory and I/O (Bottom row)
+  \node[box, below=1cm of net] (mem) {Memory};
+  \node[box, right=3cm of mem] (io) {I/O};
+
+  % --- Arrows ---
+  % Processor to Cache (Top vertical arrows)
+  \draw[arrow] (p1) -- (c1);
+  \draw[arrow] (p2) -- (c2);
+  \draw[arrow] (p3) -- (c3);
+
+  % Cache to Network (Downward vertical arrows)
+  % We adjust positions to land nicely inside the network box
+  \draw[arrow] (c1.south) -- (c1.south |- net.north);
+  \draw[arrow] (c2.south) -- (c2.south |- net.north);
+  \draw[arrow] (c3.south) -- (c3.south |- net.north);
+
+  % Network to Memory and I/O (Downward arrows)
+  \draw[arrow] (mem.north) -- (mem.north |- net.south);
+  \draw[arrow] (io.north) -- (io.north |- net.south);
+
+\end{tikzpicture}
