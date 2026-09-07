@@ -551,43 +551,55 @@ $Q_{\infty} \approx 0.2888$\fixme{q-Pochhammer symbol}.
 шаге выбирают элементы из множества минимальных.
 
 \section{Асимптотика алгоритма построения всех линейных порядков
-топологической сортировкой}\label{sec:ch2/topoalg-comp}
+топологической сортировкой}
+\label{sec:ch2/topoalg-comp}
 
-Рассмотрим $N$ шаг рекурсии в алгоритме ~\ref{alg:topo}, где $N = |P|$.
-Вычислим сколько операций $C_N$ занимает вычисление одного шага рекурсии.
-Вычисление минимальных элементов требует $|P|$ операций, а одна
-итерация цикла занимает $C_{N-1}$ операций.
-Вместе с формулой~\cref{eq:num-of-min} Получаем рукурсивную формулу
-вычисления количества операций на $N$-ом шаге рекурсии:
+Рассмотрим $N$-й шаг рекурсии в алгоритме~\ref{alg:topo}, где $N =
+|P|$. Оценим количество операций $C_N$, затрачиваемых на выполнение
+одного шага рекурсии. Вычисление множества минимальных элементов
+требует $|P|$ операций, а одна итерация цикла (для каждого
+минимального элемента) занимает $C_{N-1}$ операций. С учётом
+формулы~\eqref{eq:num-of-min} для ожидаемого количества минимальных
+элементов получаем рекуррентное соотношение для вычисления количества
+операций на $N$-м шаге рекурсии:
+
 \begin{equation}
-  \begin{multlined}
-    \label{eq:topo-comp}
-    C_N = |P| + \mathbb{E}(|min(G)|)C_{N-1} = N +
-    \frac{1-q^N}{1-q}C_{N-1} = \dots = \\
-    = \sum_{k=1}^{N}{k\prod_{l=1}^{N-k}{\frac{1-q^{k+l}}{1-q}}}
-  \end{multlined}
+  \label{eq:topo-comp}
+  \begin{aligned}
+    C_N &= N + \mathbb{E}(|\min(G)|) \cdot C_{N-1} \\
+    &= N + \frac{1-q^N}{1-q} \cdot C_{N-1} \\
+    &= \sum_{k=1}^{N} k \prod_{l=1}^{N-k} \frac{1-q^{k+l}}{1-q}.
+  \end{aligned}
 \end{equation}
 
-Оценим некоторые пределы.
+Оценим поведение $C_N$ в предельных случаях.
+
 \begin{subequations}
   \label{eq:topo-comp-lims}
   \begin{align}
-    q & \rightarrow 0,\ C_N \approx \frac{N(N-1)}{2}
+    q &\rightarrow 0,\quad C_N \approx \frac{N(N-1)}{2};
     \label{eq:topo-comp-lims-p1} \\
-    q & = 1 - \varepsilon,\ \varepsilon \rightarrow 0, \ C_N \approx
-    N! \sum_{k=1}^{N}{\frac{1}{(k-1)!}} \rightarrow eN!, \text{ при }
-    N \rightarrow \infty \label{eq:topo-comp-lims-p0} \\
-    q & = \frac{1}{2},\ C_N = \sum_{k=1}^{N}{k
-    2^{N-k}\prod_{j=k+1}^{N}{1-2^{-j}}} = \nonumber \\
-    & = \sum_{k=1}^{N}{k 2^{N-k} \frac{Q_N}{Q_k}} \approx \nonumber \\
-    & \approx Q_{\infty}\sum_{m=0}^{N-1}\frac{2^m}{Q_{N-m}} \approx \nonumber \\
-    & \lgroup Q_{N-m} \approx Q_{\infty}, \text{ при } m \ll N
-    \rgroup \nonumber \\
-    & \approx \sum_{m=0}^{N-1}{(N-m)2^m} = 2^{N+1} - N - 2
+    q &= 1 - \varepsilon,\quad \varepsilon \rightarrow 0,\quad C_N
+    \approx N! \sum_{k=1}^{N} \frac{1}{(k-1)!} \rightarrow e \cdot
+    N!, \quad \text{при } N \rightarrow \infty; \label{eq:topo-comp-lims-p0} \\
+    q &= \frac{1}{2},\quad C_N = \sum_{k=1}^{N} k \cdot 2^{N-k}
+    \prod_{j=k+1}^{N} \left(1 - 2^{-j}\right) \nonumber \\
+    &= \sum_{k=1}^{N} k \cdot 2^{N-k} \frac{Q_N}{Q_k} \nonumber \\
+    &\approx Q_{\infty} \sum_{m=0}^{N-1} \frac{2^m}{Q_{N-m}} \nonumber \\
+    &\approx \sum_{m=0}^{N-1} (N-m) \cdot 2^m = 2^{N+1} - N - 2,
     \label{eq:topo-comp-lims-p12}
   \end{align}
 \end{subequations}
-\fixme{fix referces}
+где $Q_k = \prod_{j=1}^{k} (1 - 2^{-j})$, а приближение $Q_{N-m}
+\approx Q_{\infty}$ справедливо при $m \ll N$, и $Q_{\infty} \approx 0.2888$.
+
+Полученные оценки демонстрируют, что сложность алгоритма полного
+перебора всех линейных порядков варьируется от полиномиальной
+($O(N^2)$) для полностью упорядоченных множеств до факториальной
+($O(N!)$) для множеств без рёбер. В практически значимом случае $p =
+\frac{1}{2}$ ($q = \frac{1}{2}$) сложность составляет $O(2^N)$, что
+подтверждает экспоненциальный рост вычислительных затрат с
+увеличением числа операций в программе.
 
 \section{Верификация результата исполнения многопоточной программы по
 линейным порядкам}\label{sec:ch2/format}
