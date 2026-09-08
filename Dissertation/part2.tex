@@ -467,13 +467,13 @@ $\tau$. Чтобы перестановка $\pi$ была корректной 
     p &= 1,\quad \mathbb{E}(|L|) = 1; \label{eq:linext-count-lims-p1} \\
     p &= 0,\quad \mathbb{E}(|L|) = \sum_{\pi}{1^{\text{inv}(\pi)}} =
     n!; \label{eq:linext-count-lims-p0} \\
-    p &= \frac{1}{2},\quad \mathbb{E}(|L|) = 2^n \prod_{k=1}^{n}
-    \left(1 - \frac{1}{2^k}\right) \rightarrow 0.29 \cdot 2^n, \quad
+    p &= \frac{1}{2},\quad \mathbb{E}(|L|) = Q_n \cdot 2^n  \rightarrow
+    Q_{\inf} \cdot 2^n, \quad
     \text{при } n \rightarrow \infty. \label{eq:linext-count-lims-p12}
   \end{align}
 \end{subequations}
 Здесь $Q_n = \prod_{k=1}^{n} \left(1 - \frac{1}{2^k}\right)$, причём
-$Q_{\infty} \approx 0.2888$\fixme{q-Pochhammer symbol}.
+$Q_{\infty} \approx 0.2888$~\cite{oeis_A048651}.
 Случай \eqref{eq:linext-count-lims-p1} соответствует единственному
 допустимому линейному порядку, по которому строился DAG.
 
