@@ -674,7 +674,6 @@ $\min(P) = \{1, 4\}$ не имеют зависимых операций, поэ
 $0~\rightarrow~1~\rightarrow~4$.
 
 \subsection{TSOTool}
-\fixme{TSOtool, TSOTool}
 
 Преимущество обхода частично упорядоченного множества с учётом
 зависимости~\ref{alg:topo-dep} наглядно видно на тестовых сценариях
@@ -691,7 +690,9 @@ $P^{\rightarrow}$, либо $P^{\leftarrow}$).
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[scale=0.35]{ManovitExp.png}
+  \centerfloat{
+    \input{Dissertation/images/tsotool-plot.tex}
+  }
   \caption{График времени построения одного линейного порядка от
   количества элементов множества. $p_{P} = 0.001$.}
   \label{fig:manovit-exp}
