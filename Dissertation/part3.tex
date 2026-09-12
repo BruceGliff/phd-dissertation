@@ -161,17 +161,18 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
     \Function{Traverse}{$P$, $B^{|}$, $B^{|}_{parent}$,
     $B^{|}_{grparent}$, $\pi$, $y$, $ctx$}
     \If{$P = \emptyset$}
-    \State $L(P) = \pi \cup L(P)$ \Comment{Полностью построили линейный порядок}
+    \State $L(P) \gets \pi \cup L(P)$ \Comment{Полностью построили
+    линейный порядок}
     \EndIf
-    \State $B^{|}_{y} = \emptyset$
-    \ForAll{$\forall x \in \min(P) : \{xy, yx\} \not \in
+    \State $B^{|}_{y} \gets \emptyset$
+    \ForAll{$\forall x \in \min(P) \mid \{xy, yx\} \not \in
     B^{|}_{grparent}$} \label{alg:line:l5}
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
     \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$, $B^{|}_{y}$,
     $B^{|}_{parent}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
-    \State $B^{|}_{y} = \{xy, yx\} \cup B^{|}_{y}$ \label{alg:line:l9}
+    \State $B^{|}_{y} \gets \{xy, yx\} \cup B^{|}_{y}$ \label{alg:line:l9}
     \EndIf
     \EndFor
     \EndFunction
