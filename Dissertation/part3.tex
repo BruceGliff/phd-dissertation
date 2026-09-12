@@ -150,29 +150,29 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
   \caption{Обход частично упорядоченного множества с учётом независимости}
   \label{alg:topo-indep}
   \begin{algorithmic}[1]
-    \Require
-    $P$ — частично упорядоченное множество.
-    $B^{|}$ — разбиение из независимых элементов.
-    $\pi$ — текущий линейный порядок.
-    $B^{|}_{parent}$ — разбиение с предыдущего шага рекурсии.
-    $B^{|}_{grparent}$ — разбиение с предпредыдущего шага рекурсии.
-    $y$ — вершина, обработанная на предыдущем шаге рекурсии.
-    $ctx$ — контекст алгоритма обхода.
-    \Function{Traverse}{$P$, $B^{|}$, $B^{|}_{parent}$,
-    $B^{|}_{grparent}$, $\pi$, $y$, $ctx$}
+    \Require $P$ -- частично упорядоченное множество.
+    \Require $B^{|}$ -- разбиение из независимых элементов.
+    \Require $\mathcal{B} = \{B_n\}$, где $B_n$ -- множество из
+    разбиений на $n$-ом шаге рекурсии. $\mathcal{B}(n) = B_n$
+    \Require $\pi$ — текущий линейный порядок.
+    \Require $y$ — вершина, обработанная на предыдущем шаге рекурсии.
+    \Require $ctx$ — контекст алгоритма обхода.
+    \Function{Traverse}{$P$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
     \If{$P = \emptyset$}
     \State $L(P) \gets \pi \cup L(P)$ \Comment{Полностью построили
     линейный порядок}
     \EndIf
-    \State $B^{|}_{y} \gets \emptyset$
+    \State $n \gets |\pi|$
+    \State $\mathcal{B}(n) \gets \emptyset$
     \ForAll{$\forall x \in \min(P) \mid \{xy, yx\} \not \in
-    B^{|}_{grparent}$} \label{alg:line:l5}
+    \mathcal{B}(n-2)$} \label{alg:line:l5}
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
-    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$, $B^{|}_{y}$,
-    $B^{|}_{parent}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
+    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$,
+    $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
-    \State $B^{|}_{y} \gets \{xy, yx\} \cup B^{|}_{y}$ \label{alg:line:l9}
+    \State $\mathcal{B}(n-2) \gets \{xy, yx\} \cup \mathcal{B}(n-2)$
+    \label{alg:line:l9}
     \EndIf
     \EndFor
     \EndFunction
@@ -263,39 +263,38 @@ B^{|})}{=} 120$. Таким образом, $012 \stackrel{Eq(\pi, B)}{=} 120$,
   независимых последовательностей операций}
   \label{alg:topo-indep-lookup}
   \begin{algorithmic}[1]
-    \Require
-    $P$ — частично упорядоченное множество.
-    $B^{|}$ — разбиение из независимых элементов.
-    $\pi$ — текущий линейный порядок.
-    $B^{|}_{parent}$ — разбиение с предыдущего шага рекурсии.
-    $B^{|}_{grparent}$ — разбиение с предпредыдущего шага рекурсии.
-    $y$ — вершина, обработанная на предыдущем шаге рекурсии.
-    $ctx$ — контекст алгоритма обхода.
-    \Function{Traverse}{$P$, $B^{|}$, $B^{|}_{parent}$,
-    $B^{|}_{grparent}$, $\pi$, $y$, $ctx$}
+    \Require $P$ -- частично упорядоченное множество.
+    \Require $B^{|}$ -- разбиение из независимых элементов.
+    \Require $\mathcal{B} = \{B_n\}$, где $B_n$ -- множество из
+    разбиений на $n$-ом шаге рекурсии. $\mathcal{B}(n) = B_n$
+    \Require $\pi$ — текущий линейный порядок.
+    \Require $y$ — вершина, обработанная на предыдущем шаге рекурсии.
+    \Require $ctx$ — контекст алгоритма обхода.
+    \Function{Traverse}{$P$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
     \If{$P = \emptyset$}
     \State $L(P) \gets \pi \cup L(P)$ \Comment{Полностью построили
     линейный порядок}
     \EndIf
-    \State $B^{|}_{y} \gets \emptyset$
-    \State $B^{|}_{parent} \gets B^{|}_{parent} \cup \{\{xz,
+    \State $\mathcal{B}(n) \gets \emptyset$
+    \State $\mathcal{B}(n-1) \gets \mathcal{B}(n-1) \cup \{\{xz,
       zx\} \in B^{|} \mid \forall z \in P,\ \forall x \mid \{xy, yx\}
-    \in B^{|}_{grparent}\}$
+    \in \mathcal{B}(n-2)\}$
     \ForAll{$\forall x \in \min(P) : \{xy, yx\} \not \in
-    B^{|}_{grparent}$}\label{alg:line:traverse}
+    \mathcal{B}(n-2)$}\label{alg:line:traverse}
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
-    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$, $B^{|}_{y}$,
-    $B^{|}_{parent}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
+    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$,
+    $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
-    \State $B^{|}_{y} \gets \{xy, yx\} \cup B^{|}_{y}$
+    \State $\mathcal{B}(n-2) \gets \{xy, yx\} \cup \mathcal{B}(n-2)$
     \EndIf
     \EndFor
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
 
-Обновление множества $B^{|}_{parent}$ позволяет не терять информацию
+Обновление множества разбиений с предыдущего шага рекурсии
+$\mathcal{B}(n-1) = B_{n-1}$ позволяет не терять информацию
 при отбрасывании уже обработанных элементов на
 строке~\ref{alg:line:traverse}. Покажем, что данный обход реализует
 свойство, сформулированное в лемме~\ref{lm:n-reorder}.
@@ -317,15 +316,15 @@ B^{|})}{=} 120$. Таким образом, $012 \stackrel{Eq(\pi, B)}{=} 120$,
   Пусть уже построен подпорядок $\pi y$ на шаге рекурсии $n$.
   Следующими элементами в ней могут быть $x$ и $\dot{y} \in
   \dot{\mathrm{Y}}^{\min}$. Порядок $\pi y x$ не будет рассмотрен
-  из-за того, что $\{xy, yx\} \in B^{|}_{grparent}$, но при этом
-  $B^{|}_{parent} = \{x\dot{y}, \dot{y}x\} \mid \dot{y} \in
-  \dot{\mathrm{Y}}^{\min} = B^{|}_{grparent}$ со следующего шага.
+  из-за того, что $\{xy, yx\} \in B_{n-2}$, но при этом
+  $B_{n-1} = \{x\dot{y}, \dot{y}x\} \mid \dot{y} \in
+  \dot{\mathrm{Y}}^{\min} = B_{(n+1) - 2}$.
 
   Рассмотрим следующий шаг рекурсии $n+1$, на котором уже построен
   подпорядок $\pi y \dot{y}$. Следующими элементами в ней могут быть
   $x$ и $\ddot{y} \in \ddot{\mathrm{Y}}^{\min}$. Порядок $\pi y
   \dot{y}x$ не будет рассмотрен из-за того, что $\{x\dot{y},
-  \dot{y}x\} \in B^{|}_{grparent}$. Продолжим рассуждения, пока из
+  \dot{y}x\} \in B_{(n+1) - 2}$. Продолжим рассуждения, пока из
   минимальных элементов не останется только $x$. Тогда порядок $\pi
   y\dot{y}\ddot{y}\dots x = \pi \mathrm{Y} x$ не будет рассмотрен.
   Что и требовалось доказать.
