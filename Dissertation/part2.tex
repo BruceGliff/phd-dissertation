@@ -630,16 +630,17 @@ $Q_{\infty} \approx 0.2888$~\cite{oeis_A048651}.
   \caption{Верификация результата исполнения программы по линейному порядку}
   \label{alg:verif-linext}
   \begin{algorithmic}[1]
+    \Require $ctx$ — контекст алгоритма обхода.
     \Require $\pi$ — линейный подпорядок операций.
     \Require $x$ — текущая проверяемая операция.
-    \Require $ctx$ — контекст алгоритма обхода.
+    \Ensure Результат обработки элементов.
     \Function{Process}{$ctx$, $\pi$, $x$}
     \State $trace \gets ctx.\text{trace}$ \Comment{Получили состояние
     программы.}
     \If{$reg_{\pi}(x) \in trace$}
-    \State \Return $\text{Next}$ \Comment{Продолжаем обход в глубину.}
+    \State \Return Next \Comment{Продолжаем обход в глубину.}
     \Else
-    \State \Return $\text{Breadth}$ \Comment{Прерываем текущую ветвь обхода.}
+    \State \Return Breadth \Comment{Прерываем текущую ветвь обхода.}
     \EndIf
     \EndFunction
   \end{algorithmic}
