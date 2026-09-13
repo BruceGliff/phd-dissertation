@@ -1,0 +1,61 @@
+\begin{tikzpicture}[
+    node distance=1.5cm and 1cm,
+    dag/.style={circle, draw=black, fill=white, inner sep=2pt,
+    minimum size=5mm, align=center},
+    order/.style={stealth-, thick},
+    tr/.style={line width=1.pt},
+  ]
+
+  \node[dag] (3) {$R_y^0$};
+  \node[dag, right=0.5cm of 3] (4) {$R_x^1$};
+  \node[dag, right=0.1cm of 4] (5) {$R_y^1$};
+  \node[dag, right=0.5cm of 5] (6) {$R_x^0$};
+
+  \node[dag, below=0.2cm of 3] (8) {$R_x^1$};
+
+  \node[dag, below=0.2cm of 6] (10) {$R_y^1$};
+
+  \draw[order] (3) -- (8);
+  \draw[order] (6) -- (10);
+
+  \coordinate (r1) at ($(3) + (0.7,0.7)$);
+  \coordinate (l1) at ($(r1) - (1.8, 0)$);
+  \coordinate (u1) at ($(r1) + (0,-7.0)$);
+  \draw[tr, magenta!70] (l1) -- (u1) -- (r1) -- cycle;
+
+  \coordinate (u2) at ($(4)!0.5!(5) + (0, -6.3)$);
+  \coordinate (l2) at ($(4)!0.5!(5) - (1.3, -0.7)$);
+  \coordinate (r2) at ($(4)!0.5!(5) + (1.3, +0.7)$);
+  \draw[tr, magenta!70] (l2) -- (u2) -- (r2) -- cycle;
+
+  \coordinate (l3) at ($(6) + (-0.7,0.7)$);
+  \coordinate (r3) at ($(l3) - (-1.8, 0)$);
+  \coordinate (u3) at ($(l3) + (0,-7.0)$);
+  \draw[tr, magenta!70] (l3) -- (u3) -- (r3) -- cycle;
+
+  \node[dag, right=1cm of 6] (30) {$R_a^0$};
+  \node[dag, right=0.5cm of 30] (40) {$R_a^1$};
+  \node[dag, right=0.7cm of 40] (50) {$R_b^1$};
+  \node[dag, right=0.5cm of 50] (60) {$R_b^0$};
+
+  \coordinate (r1) at ($(30) + (0.7,0.7)$);
+  \coordinate (l1) at ($(r1) - (1.5, 0)$);
+  \coordinate (u1) at ($(r1) + (0,-6.3)$);
+  \draw[tr, red!84] (l1) -- (u1) -- (r1) -- cycle;
+
+  \coordinate (l3) at ($(40) + (-0.7,0.7)$);
+  \coordinate (r3) at ($(l3) - (-1.5, 0)$);
+  \coordinate (u3) at ($(l3) + (0,-6.3)$);
+  \draw[tr, red!84] (l3) -- (u3) -- (r3) -- cycle;
+
+  \coordinate (r1) at ($(50) + (0.7,0.7)$);
+  \coordinate (l1) at ($(r1) - (1.5, 0)$);
+  \coordinate (u1) at ($(r1) + (0,-6.3)$);
+  \draw[tr, blue!58] (l1) -- (u1) -- (r1) -- cycle;
+
+  \coordinate (l3) at ($(60) + (-0.7,0.7)$);
+  \coordinate (r3) at ($(l3) - (-1.5, 0)$);
+  \coordinate (u3) at ($(l3) + (0,-6.3)$);
+  \draw[tr, blue!58] (l3) -- (u3) -- (r3) -- cycle;
+
+\end{tikzpicture}
