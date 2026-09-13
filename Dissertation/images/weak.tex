@@ -2,17 +2,17 @@
 \begin{tikzpicture}[
     node distance=1.5cm and 1cm,
     dag/.style={circle, draw=black, fill=white, inner sep=2pt,
-    minimum size=20mm, align=center},
+    minimum size=5mm, align=center},
     order/.style={stealth-, thick},
   ]
   \node[dag] (1) {$W_x$};
-  \node[dag, right=1.0cm of 1] (2) {$R_x$\\EAX=0};
+  \node[dag, right=1.0cm of 1] (2) {$R_x^0$};
   \node[dag, right=1.0cm of 2] (3) {$W_y$};
-  \node[dag, right=1.0cm of 3] (4) {$R_y$\\EAX=0};
+  \node[dag, right=1.0cm of 3] (4) {$R_y^0$};
 
-  \node[dag, below=1.0cm of 1] (5) {$R_x$\\EAX=1};
+  \node[dag, below=1.0cm of 1] (5) {$R_x^1$};
   \node[dag, below=1.0cm of 2] (6) {$W_x$};
-  \node[dag, below=1.0cm of 3] (7) {$R_y$\\EAX=1};
+  \node[dag, below=1.0cm of 3] (7) {$R_y^1$};
   \node[dag, below=1.0cm of 4] (8) {$W_y$};
 
   \draw[order] (1) -- (5);
