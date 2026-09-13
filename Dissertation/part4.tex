@@ -539,55 +539,55 @@ TSO-модели рис.~\ref{fig:litmus-tso-program-graph}. Красное на
 порядков подмножества). Данный пример демонстрирует существенное
 преимущество графа состояний над линейными порядками.
 
-\section{Кластеризация графа состояний}\label{sec:ch4/stategraph-cluster}
+\section{Кластеризация графа состояний}
+\label{sec:ch4/stategraph-cluster}
 
-Представление всех порядков операций с памятью в виде графа
-состояний открывает новые возможности анализа конфигурации частично
+Представление всех порядков операций с памятью в виде графа состояний
+открывает новые возможности анализа конфигурации частично
 упорядоченного множества.
 
-Рассмотрим граф $G_{unorder}$~\ref{eq:unorder_set}, построенный из
-смешанного графа \\
-$G(V, E_{order}, E_{dep})$~\ref{eq:gset}, путём замены
-ориентированных рёбер порядка $E_{order}$ на неориентированные рёбра.
+Рассмотрим граф $G_{unorder}$, построенный из
+смешанного графа $G(V, E_{order}, E_{dep})$ (см. формулу~\ref{eq:gset}) путём
+замены ориентированных рёбер порядка $E_{order}$ на неориентированные рёбра:
 
 \begin{equation}
   \label{eq:unorder_set}
   \begin{aligned}
     &G_{unorder} = (V, E), \\
-    &V \text{ -- то же множество вершин из смешанного графа} \\
+    &V \text{ — то же множество вершин, что и в смешанном графе,} \\
     &E = E_{dep} \bigcup \{\{x, y\} \mid \{x, y\} \in E_{order}
-    \text{ или } \{y, x\} \in E_{order}\}
+    \text{ или } \{y, x\} \in E_{order}\}.
   \end{aligned}
 \end{equation}
 
 В таком графе можно выделить компоненты связности~\cite{graph-theory}.
 
-Пусть $G(U_i)$ -- это $i$-ая компонента связности графа $G$.
-Тогда любые две различные компоненты связности $U_i$ и $U_j$
-обладают свойствами~\ref{eq:clusters_properties}.
+Пусть $G(U_i)$ — это $i$-я компонента связности графа $G$. Тогда
+любые две различные компоненты связности $U_i$ и $U_j$ обладают
+свойствами~\ref{eq:clusters_properties}:
 
 \begin{subequations}
   \label{eq:clusters_properties}
   \begin{align}
-    \forall x \in U_i, \forall y \in U_j &\rightarrow \{xy, yx\}
-    \in B^{|} \label{eq:clusters_in_equiv} \\
+    \forall x \in U_i, \forall y \in U_j &\rightarrow \{xy, yx\} \in
+    B^{|}; \label{eq:clusters_in_equiv} \\
     \forall x \in U_i, \forall y \in U_j, \forall \pi \in L_P
-    &\rightarrow (\rho_\pi(x), \rho_\pi(y)) \not \in E_{SG}
+    &\rightarrow (\rho_\pi(x), \rho_\pi(y)) \not \in E_{SG}.
     \label{eq:clusters_in_sg}
   \end{align}
 \end{subequations}
 
 \begin{proof}[Доказательство свойства~\ref{eq:clusters_in_equiv}]
-
   Для любых двух компонент связности $U_i$ и $U_j$ не существует
-  ребра между элементами множества $U_i$ и $U_j$:
-  $\forall x \in U_i, \forall y \in U_j \rightarrow (x, y) \not \in E$.
+  ребра между элементами множеств $U_i$ и $U_j$: $\forall x \in U_i,
+  \forall y \in U_j \rightarrow (x, y) \not \in E$.
 
-  Тогда между элементами $x, y$ нет ребра порядка: $(x, y) \not \in
-  E_{order} \text{ и } (y, x) \not \in E_{order}$, следовательно
-  существуют подпорядки $xy$, $yx$ частично упорядоченного множества $P$.
-  И между элементами $x, y$ нет ребра зависимости: $\{x, y\} \not
-  \in D$, следовательно $\{xy, yx\} \in B^{|}$, по определению~\ref{def:dep}.
+  Тогда между элементами $x$ и $y$ нет ребра порядка: $(x, y) \not
+  \in E_{order}$ и $(y, x) \not \in E_{order}$, следовательно,
+  существуют подпорядки $xy$ и $yx$ частично упорядоченного множества
+  $P$. Кроме того, между элементами $x$ и $y$ нет ребра зависимости:
+  $\{x, y\} \not \in D$, следовательно, $\{xy, yx\} \in B^{|}$ по
+  определению~\ref{def:dep}.
 
   Таким образом, два линейных порядка принадлежат одному классу
   эквивалентности, если они отличаются лишь взаимным расположением
@@ -595,55 +595,52 @@ $G(V, E_{order}, E_{dep})$~\ref{eq:gset}, путём замены
 \end{proof}
 
 \begin{proof}[Доказательство свойства~\ref{eq:clusters_in_sg}]
-
   Для любого линейного порядка $\pi$ не существует ребра в графе
-  состояний между путями, построенными из элементов разных
-  компонент связности $U_i$ и $U_j$:
-  $\forall x \in U_i, \forall y \in U_j, \forall \pi \in L_P
-  \rightarrow (\rho_\pi(x), \rho_\pi(y)) \not \in E_{SG}$.
+  состояний между путями, построенными из элементов разных компонент
+  связности $U_i$ и $U_j$: $\forall x \in U_i, \forall y \in U_j,
+  \forall \pi \in L_P \rightarrow (\rho_\pi(x), \rho_\pi(y)) \not \in E_{SG}$.
 
   Как следует из свойства~\ref{eq:clusters_in_equiv}, между любыми
   элементами из разных компонент связности нет ребра порядка и нет
-  ребра зависимости:
-  $\{x, y\} \not \in D \text{, } (x, y) \not \in E_{order} \text{ и
-  } (y, x) \not \in E_{order}, \forall x \in U_i, \forall y \in
-  U_j$, следовательно по построению графа состояний
-  (см.~\ref{eq:def_suborder}~\ref{eq:sg_def}) $(\rho_\pi(x),
+  ребра зависимости: $\{x, y\} \not \in D$, $(x, y) \not \in
+  E_{order}$ и $(y, x) \not \in E_{order}$ для всех $x \in U_i$, $y
+  \in U_j$. Следовательно, по построению графа состояний
+  (см. формулы~\ref{eq:def_suborder},~\ref{eq:sg_def}) $(\rho_\pi(x),
   \rho_\pi(y)) \not \in E_{SG}$.
 
-  Следовательно, в графе состояний не существует подграфа,
-  состоящего из элементов, принадлежащих разным компонентам связности.
-
+  Следовательно, в графе состояний не существует подграфа, состоящего
+  из элементов, принадлежащих разным компонентам связности.
 \end{proof}
 
 \begin{definition}
-  \textbf{Кластером операций $C_{i}$} называется множество вершин
-  из $i$-й компоненты связности $U_i$ графа $G_{unorder}$.
-  $C_{i} = V(U_i)$
+  \textbf{Кластером операций $C_{i}$} называется множество вершин из
+  $i$-й компоненты связности $U_i$ графа $G_{unorder}$:
+  \begin{equation}
+    C_{i} = V(U_i)
+    \label{def:set_cluster}
+  \end{equation}
 \end{definition}
 
 \begin{definition}
   Вершины графа состояний для одного линейного порядка $\pi$,
   состоящие только из операций с памятью, принадлежащих одному
-  кластеру операций, будем называть \textbf{кластером состояний
-  $C_{i}^{\pi}$}.
-
-  $\forall \pi\ \exists C_{i}^{\pi} = \{ \rho_{\pi}(x) \mid x \in C_{i}\}$
-  \label{def:st_cluster}
+  кластеру операций, будем называть \textbf{кластером состояний $C_{i}^{\pi}$}:
+  \begin{equation}
+    \forall \pi\ \exists C_{i}^{\pi} = \{ \rho_{\pi}(x) \mid x \in C_{i}\}.
+    \label{def:st_cluster}
+  \end{equation}
 \end{definition}
 
 Стоит отметить, что любая вершина, достижимая из вершины $x$,
-принадлежащей кластеру сотояний $C_i^\pi$, так же принадлежит
-$C_i^\pi$ (см. формулу~\ref{eq:state_cluster_property}).
+принадлежащей кластеру состояний $C_i^\pi$, также принадлежит
+$C_i^\pi$ (см. формулу~\ref{eq:state_cluster_property}):
 \begin{equation}
   \label{eq:state_cluster_property}
-  \begin{aligned}
-    \forall C_i^\pi\ \forall s \in C_i^\pi \rightarrow
-    \text{bfs}(s) \subseteq C_i^\pi
-  \end{aligned}
+  \forall C_i^\pi\ \forall s \in C_i^\pi \rightarrow \text{bfs}(s)
+  \subseteq C_i^\pi.
 \end{equation}
-То есть все вершины кластера состояний достижимы алгоритмом обхода
-в ширину bfs из истоков, принадлежащих этому кластеру.
+То есть все вершины кластера состояний достижимы алгоритмом обхода в
+ширину bfs из истоков, принадлежащих этому кластеру.
 
 \subsection{Различные конфигурации графа
 состояний}\label{sec:ch4/stategraph-configs}
