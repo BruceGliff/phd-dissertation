@@ -3,7 +3,7 @@
     dag/.style={circle, draw=black, fill=white, inner sep=2pt,
     minimum size=5mm, align=center},
     order/.style={stealth-, thick},
-    tr/.style={line width=1.pt},
+    tr/.style={line width=2.5pt},
   ]
 
   \node[dag] (3) {$R_y^0$};
@@ -41,21 +41,21 @@
   \coordinate (r1) at ($(30) + (0.7,0.7)$);
   \coordinate (l1) at ($(r1) - (1.5, 0)$);
   \coordinate (u1) at ($(r1) + (0,-6.3)$);
-  \draw[tr, red!84] (l1) -- (u1) -- (r1) -- cycle;
+  \draw[tr, orange] (l1) -- (u1) -- (r1) -- cycle;
 
   \coordinate (l3) at ($(40) + (-0.7,0.7)$);
   \coordinate (r3) at ($(l3) - (-1.5, 0)$);
   \coordinate (u3) at ($(l3) + (0,-6.3)$);
-  \draw[tr, red!84] (l3) -- (u3) -- (r3) -- cycle;
+  \draw[tr, orange] (l3) -- (u3) -- (r3) -- cycle;
 
   \coordinate (r1) at ($(50) + (0.7,0.7)$);
   \coordinate (l1) at ($(r1) - (1.5, 0)$);
   \coordinate (u1) at ($(r1) + (0,-6.3)$);
-  \draw[tr, blue!58] (l1) -- (u1) -- (r1) -- cycle;
+  \draw[tr, cyan!70] (l1) -- (u1) -- (r1) -- cycle;
 
   \coordinate (l3) at ($(60) + (-0.7,0.7)$);
   \coordinate (r3) at ($(l3) - (-1.5, 0)$);
   \coordinate (u3) at ($(l3) + (0,-6.3)$);
-  \draw[tr, blue!58] (l3) -- (u3) -- (r3) -- cycle;
+  \draw[tr, cyan!70] (l3) -- (u3) -- (r3) -- cycle;
 
 \end{tikzpicture}

@@ -1,12 +1,12 @@
 % This file was created with tikzplotlib v0.10.1.post13.
 \begin{tikzpicture}
 
-  \definecolor{crimson2554141}{RGB}{255,41,41}
+  \definecolor{crimson2554141}{named}{orange}
   \definecolor{darkgrey176}{RGB}{176,176,176}
   \definecolor{grey}{RGB}{128,128,128}
   \definecolor{lightgrey204}{RGB}{204,204,204}
-  \definecolor{mediumslateblue107107255}{RGB}{107,107,255}
-  \definecolor{violet25577255}{RGB}{255,77,255}
+  \definecolor{mediumslateblue107107255}{named}{cyan}
+  \definecolor{violet25577255}{named}{magenta}
 
   \begin{axis}[
       height=0.4\textheight,
@@ -18,33 +18,32 @@
       opacity=1, draw=lightgrey204},
       tick align=outside,
       tick pos=left,
-      title={Classifier probabilities: cl1 strong, cl1 weak, cl2 weak},
       width=0.95\textwidth,
       x grid style={darkgrey176},
       xmin=-0.79, xmax=7.79,
       xtick style={color=black},
       xtick={0,1,2,3.5,4.5,6,7},
       xticklabels={
-        {\(\displaystyle R_x^1, R_y^1\)},
-        {\(\displaystyle R_x^0, R_y^1\)},
-        {\(\displaystyle R_x^1, R_y^0\)},
-        \(\displaystyle R_a^0\),
-        \(\displaystyle R_a^1\),
-        \(\displaystyle R_b^0\),
-        \(\displaystyle R_b^1\)
+        \(\displaystyle C_0^{\alpha}\),
+        \(\displaystyle C_0^{\beta}\),
+        \(\displaystyle C_0^{\chi}\),
+        \(\displaystyle C_1^{\delta}\),
+        \(\displaystyle C_1^{\gamma}\),
+        \(\displaystyle C_2^{\delta}\),
+        \(\displaystyle C_2^{\gamma}\)
       },
       y grid style={darkgrey176},
       ylabel style={text width=10cm, align=center},
-      ylabel={Probability},
+      ylabel={Распределение маркированных кастеров состояний},
       ymajorgrids,
       ymin=0, ymax=0.75,
       ytick style={color=black}
     ]
-    \draw[draw=black,fill=violet25577255,line width=0.24pt] (axis
+    \draw[draw=black,fill=violet25577255!70,line width=0.24pt] (axis
     cs:-0.4,0) rectangle (axis cs:0.4,0.333333333333333);
-    \draw[draw=black,fill=violet25577255,line width=0.24pt] (axis
+    \draw[draw=black,fill=violet25577255!70,line width=0.24pt] (axis
     cs:0.6,0) rectangle (axis cs:1.4,0.333333333333333);
-    \draw[draw=black,fill=violet25577255,line width=0.24pt] (axis
+    \draw[draw=black,fill=violet25577255!70,line width=0.24pt] (axis
     cs:1.6,0) rectangle (axis cs:2.4,0.333333333333333);
     \draw[draw=black,fill=crimson2554141,line width=0.24pt] (axis
     cs:3.1,0) rectangle (axis cs:3.9,0.4);
@@ -56,12 +55,12 @@
     (axis cs:6.6,0) rectangle (axis cs:7.4,0.6);
     \addplot [line width=0.32pt, grey, dashed, forget plot]
     table {%
-      2.75 -2.77555756156289e-17
+      2.75 0
       2.75 0.75
     };
     \addplot [line width=0.32pt, grey, dashed, forget plot]
     table {%
-      5.25 -2.77555756156289e-17
+      5.25 0
       5.25 0.75
     };
     \draw (axis cs:0,0.343333333333333) node[
@@ -111,19 +110,19 @@
       anchor=north,
       text=black,
       rotate=0.0
-    ]{\bfseries cl1 strong};
+    ]{\bfseries $C_0$};
     \draw (axis cs:4,-0.09) node[
       scale=0.55,
       anchor=north,
       text=black,
       rotate=0.0
-    ]{\bfseries cl1 weak};
+    ]{\bfseries $C_1$};
     \draw (axis cs:6.5,-0.09) node[
       scale=0.55,
       anchor=north,
       text=black,
       rotate=0.0
-    ]{\bfseries cl2 weak};
+    ]{\bfseries $C_2$};
   \end{axis}
 
 \end{tikzpicture}
