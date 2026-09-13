@@ -363,22 +363,15 @@ $reg_{\alpha}(x) \equiv reg(\rho_{\alpha}(x))$. Так как никакая
 
 \subsection{Пример}\label{sec:ch4/example}
 
-\fixme{this already has been printed. ~\ref{lst:litmus-ex}}
-
-Рассмотрим подробнее использование графа состояний на примере
-литмус-теста~\ref{lst:litmus-ex}.
-
-\begin{minipage}[ht]{\textwidth}
-  \centering
-  \lstinputlisting[caption={Пример литмуса},
-  label={lst:litmus-ex-copy}, captionpos=b]{src/litmus-example.txt}
-\end{minipage}
-
-Обозначим:
-$\text{W}_y = \texttt{MOV [y],\$1}$,
+Наиболее простым и показательным тестом, демонстрирующим эффекты модели памяти,
+является демонстрация эффекта наличия буфера записи. Такой тест
+состоит из операций чтения и записи в двух потоках.
+В одном потоке операции: $\text{W}_y = \texttt{MOV [y],\$1}$,
 $\text{R}_x = \texttt{MOV EAX,[x]}$,
-$\text{W}_x = \texttt{MOV [x],\$1}$,
-$\text{R}_y = \texttt{MOV EAX,[y]}$,
+в другом -- симметричные: $\text{W}_x = \texttt{MOV [x],\$1}$,
+$\text{R}_y = \texttt{MOV EAX,[y]}$
+(см. листинг~\ref{lst:litmus-ex} на стр.~\pageref{lst:litmus-ex}).
+Рассмотрим подробнее использование графа состояний на данном примере.
 
 \begin{figure}[ht]
   \begin{subfigure}[b]{0.5\textwidth}
@@ -394,7 +387,7 @@ $\text{R}_y = \texttt{MOV EAX,[y]}$,
     \label{fig:litmus-tso-program-graph}
   \end{subfigure}
   \caption{Частично упорядоченные множества для
-  литмус-теста~\ref{lst:litmus-ex}}
+  литмус-теста на листинге~\ref{lst:litmus-ex}}
   \label{fig:litmus-program-graph}
 \end{figure}
 
@@ -438,7 +431,8 @@ $R$ в памяти может быть наблюдаем в другом по�
   \centerfloat{
     \input{Dissertation/images/sc.tex}
   }
-  \caption{Граф состояний теста~\ref{lst:litmus-ex} для SC-модели памяти.}
+  \caption{Граф состояний теста на листинге~\ref{lst:litmus-ex} для
+  SC-модели памяти.}
   \label{fig:sg-litmus-sc}
 \end{figure}
 
@@ -476,7 +470,8 @@ $R$ в памяти может быть наблюдаем в другом по�
   \centerfloat{
     \input{Dissertation/images/weak.tex}
   }
-  \caption{Граф состояний теста~\ref{lst:litmus-ex} для TSO-модели памяти.}
+  \caption{Граф состояний теста на листинге~\ref{lst:litmus-ex} для
+  TSO-модели памяти.}
   \label{fig:sg-litmus-tso}
 \end{figure}
 
