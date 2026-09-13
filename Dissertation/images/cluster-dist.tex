@@ -50,19 +50,20 @@
     area legend, forget plot] coordinates {(1.6,0) (2.4,0)
     (2.4,0.333333333333333) (1.6,0.333333333333333)};
 
-    % --- B: mediumslateblue107107255 ---
-    \addplot[draw=black, fill=mediumslateblue107107255, line width=0.24pt,
-    area legend] coordinates {(5.6,0) (6.4,0) (6.4,0.4) (5.6,0.4)};
-    \addplot[draw=black, fill=mediumslateblue107107255, line width=0.24pt,
-    area legend, forget plot] coordinates {(6.6,0) (7.4,0) (7.4,0.6) (6.6,0.6)};
-
     % --- C: crimson2554141 ---
     \addplot[draw=black, fill=crimson2554141, line width=0.24pt,
     area legend] coordinates {(3.1,0) (3.9,0) (3.9,0.4) (3.1,0.4)};
     \addplot[draw=black, fill=crimson2554141, line width=0.24pt,
     area legend, forget plot] coordinates {(4.1,0) (4.9,0) (4.9,0.6) (4.1,0.6)};
 
-    \legend{A, B, C}
+    % --- B: mediumslateblue107107255 ---
+    \addplot[draw=black, fill=mediumslateblue107107255, line width=0.24pt,
+    area legend] coordinates {(5.6,0) (6.4,0) (6.4,0.4) (5.6,0.4)};
+    \addplot[draw=black, fill=mediumslateblue107107255, line width=0.24pt,
+    area legend, forget plot] coordinates {(6.6,0) (7.4,0) (7.4,0.6) (6.6,0.6)};
+
+    \legend{Кластер операций $C_0$, Кластер операций $C_1$, Кластер
+    операций $C_2$}
 
     \addplot [line width=0.32pt, grey, dashed, forget plot]
     table {%
