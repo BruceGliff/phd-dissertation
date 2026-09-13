@@ -18,44 +18,67 @@
   \draw[order] (3) -- (8);
   \draw[order] (6) -- (10);
 
-  \coordinate (r1) at ($(3) + (0.7,0.7)$);
-  \coordinate (l1) at ($(r1) - (1.8, 0)$);
-  \coordinate (u1) at ($(r1) + (0,-7.0)$);
-  \draw[tr, magenta!70] (l1) -- (u1) -- (r1) -- cycle;
+  \coordinate (r) at ($(3) + (0.7,0.7)$);
+  \coordinate (l) at ($(r) - (1.8, 0)$);
+  \coordinate (u) at ($(r) + (0,-7.0)$);
+  \coordinate (rm) at ($(r)!0.5!(u)$);
+  \coordinate (lm) at ($(l)!0.25!(u)$);
+  \draw[tr, magenta!70] (l) -- (lm) to[out=-73, in=122,
+  looseness=1.3] (rm) -- (r) -- cycle;
 
-  \coordinate (u2) at ($(4)!0.5!(5) + (0, -6.3)$);
-  \coordinate (l2) at ($(4)!0.5!(5) - (1.3, -0.7)$);
-  \coordinate (r2) at ($(4)!0.5!(5) + (1.3, +0.7)$);
-  \draw[tr, magenta!70] (l2) -- (u2) -- (r2) -- cycle;
+  \coordinate (c) at ($(4)!0.5!(5)$);
+  \coordinate (u) at ($(c) + (0, -6.3)$);
+  \coordinate (l) at ($(c) - (1.3, -0.7)$);
+  \coordinate (r) at ($(c) + (1.3, +0.7)$);
+  \coordinate (rm) at ($(r)!0.25!(u)$);
+  \coordinate (um) at ($(c)!0.5!(u)$);
+  \coordinate (lm) at ($(l)!0.25!(u)$);
+  \draw[tr, magenta!70] (l) -- (lm) to[out=282, in=103,
+  looseness=1.6] (um) to[out=77, in=258, looseness=1.6] (rm) -- (r) -- cycle;
 
-  \coordinate (l3) at ($(6) + (-0.7,0.7)$);
-  \coordinate (r3) at ($(l3) - (-1.8, 0)$);
-  \coordinate (u3) at ($(l3) + (0,-7.0)$);
-  \draw[tr, magenta!70] (l3) -- (u3) -- (r3) -- cycle;
+  \coordinate (l) at ($(6) + (-0.7,0.7)$);
+  \coordinate (r) at ($(l) - (-1.8, 0)$);
+  \coordinate (u) at ($(l) + (0,-7.0)$);
+  \coordinate (rm) at ($(r)!0.25!(u)$);
+  \coordinate (lm) at ($(l)!0.5!(u)$);
+  \draw[tr, magenta!70] (l) -- (lm) to[out=58, in=253, looseness=1.3]
+  (rm) -- (r) -- cycle;
 
   \node[dag, right=1cm of 6] (30) {$R_a^0$};
   \node[dag, right=0.5cm of 30] (40) {$R_a^1$};
-  \node[dag, right=0.7cm of 40] (50) {$R_b^1$};
-  \node[dag, right=0.5cm of 50] (60) {$R_b^0$};
+  \node[dag, right=0.7cm of 40] (50) {$R_b^0$};
+  \node[dag, right=0.5cm of 50] (60) {$R_b^1$};
 
-  \coordinate (r1) at ($(30) + (0.7,0.7)$);
-  \coordinate (l1) at ($(r1) - (1.5, 0)$);
-  \coordinate (u1) at ($(r1) + (0,-6.3)$);
-  \draw[tr, orange] (l1) -- (u1) -- (r1) -- cycle;
+  \coordinate (r) at ($(30) + (0.7,0.7)$);
+  \coordinate (l) at ($(r) - (1.5, 0)$);
+  \coordinate (u) at ($(r) + (0,-6.3)$);
+  \coordinate (rm) at ($(r)!0.5!(u)$);
+  \coordinate (lm) at ($(l)!0.25!(u)$);
+  \draw[tr, orange] (l) -- (lm) to[out=-73, in=122, looseness=1.3]
+  (rm) -- (r) -- cycle;
 
-  \coordinate (l3) at ($(40) + (-0.7,0.7)$);
-  \coordinate (r3) at ($(l3) - (-1.5, 0)$);
-  \coordinate (u3) at ($(l3) + (0,-6.3)$);
-  \draw[tr, orange] (l3) -- (u3) -- (r3) -- cycle;
+  \coordinate (l) at ($(40) + (-0.7,0.7)$);
+  \coordinate (r) at ($(l) - (-1.5, 0)$);
+  \coordinate (u) at ($(l) + (0,-6.3)$);
+  \coordinate (rm) at ($(r)!0.25!(u)$);
+  \coordinate (lm) at ($(l)!0.5!(u)$);
+  \draw[tr, orange] (l) -- (lm) to[out=58, in=253, looseness=1.3]
+  (rm) -- (r) -- cycle;
 
-  \coordinate (r1) at ($(50) + (0.7,0.7)$);
-  \coordinate (l1) at ($(r1) - (1.5, 0)$);
-  \coordinate (u1) at ($(r1) + (0,-6.3)$);
-  \draw[tr, cyan!70] (l1) -- (u1) -- (r1) -- cycle;
+  \coordinate (r) at ($(50) + (0.7,0.7)$);
+  \coordinate (l) at ($(r) - (1.5, 0)$);
+  \coordinate (u) at ($(r) + (0,-6.3)$);
+  \coordinate (rm) at ($(r)!0.5!(u)$);
+  \coordinate (lm) at ($(l)!0.25!(u)$);
+  \draw[tr, cyan!70] (l) -- (lm) to[out=-73, in=122, looseness=1.3]
+  (rm) -- (r) -- cycle;
 
-  \coordinate (l3) at ($(60) + (-0.7,0.7)$);
-  \coordinate (r3) at ($(l3) - (-1.5, 0)$);
-  \coordinate (u3) at ($(l3) + (0,-6.3)$);
-  \draw[tr, cyan!70] (l3) -- (u3) -- (r3) -- cycle;
+  \coordinate (l) at ($(60) + (-0.7,0.7)$);
+  \coordinate (r) at ($(l) - (-1.5, 0)$);
+  \coordinate (u) at ($(l) + (0,-6.3)$);
+  \coordinate (rm) at ($(r)!0.25!(u)$);
+  \coordinate (lm) at ($(l)!0.5!(u)$);
+  \draw[tr, cyan!70] (l) -- (lm) to[out=58, in=253, looseness=1.3]
+  (rm) -- (r) -- cycle;
 
 \end{tikzpicture}
