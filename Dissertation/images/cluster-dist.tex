@@ -10,12 +10,11 @@
 
   \begin{axis}[
       height=0.4\textheight,
-      legend cell align=right,
       legend cell align={left},
       legend pos=north west,
-      legend style={  at={(1,1.03)},  anchor=south east},
-      legend style={fill opacity=0.95, draw opacity=1, text
-      opacity=1, draw=lightgrey204},
+      legend style={at={(1,1.03)}, anchor=south east,
+        fill opacity=0.95, draw opacity=1, text opacity=1,
+      draw=lightgrey204},
       tick align=outside,
       tick pos=left,
       width=0.95\textwidth,
@@ -39,20 +38,32 @@
       ymin=0, ymax=0.75,
       ytick style={color=black}
     ]
-    \draw[draw=black,fill=violet25577255!70,line width=0.24pt] (axis
-    cs:-0.4,0) rectangle (axis cs:0.4,0.333333333333333);
-    \draw[draw=black,fill=violet25577255!70,line width=0.24pt] (axis
-    cs:0.6,0) rectangle (axis cs:1.4,0.333333333333333);
-    \draw[draw=black,fill=violet25577255!70,line width=0.24pt] (axis
-    cs:1.6,0) rectangle (axis cs:2.4,0.333333333333333);
-    \draw[draw=black,fill=crimson2554141,line width=0.24pt] (axis
-    cs:3.1,0) rectangle (axis cs:3.9,0.4);
-    \draw[draw=black,fill=crimson2554141,line width=0.24pt] (axis
-    cs:4.1,0) rectangle (axis cs:4.9,0.6);
-    \draw[draw=black,fill=mediumslateblue107107255,line width=0.24pt]
-    (axis cs:5.6,0) rectangle (axis cs:6.4,0.4);
-    \draw[draw=black,fill=mediumslateblue107107255,line width=0.24pt]
-    (axis cs:6.6,0) rectangle (axis cs:7.4,0.6);
+
+    % --- A: violet25577255 ---
+    \addplot[draw=black, fill=violet25577255!70, line width=0.24pt,
+    area legend] coordinates {(-0.4,0) (0.4,0)
+    (0.4,0.333333333333333) (-0.4,0.333333333333333)};
+    \addplot[draw=black, fill=violet25577255!70, line width=0.24pt,
+    area legend, forget plot] coordinates {(0.6,0) (1.4,0)
+    (1.4,0.333333333333333) (0.6,0.333333333333333)};
+    \addplot[draw=black, fill=violet25577255!70, line width=0.24pt,
+    area legend, forget plot] coordinates {(1.6,0) (2.4,0)
+    (2.4,0.333333333333333) (1.6,0.333333333333333)};
+
+    % --- B: mediumslateblue107107255 ---
+    \addplot[draw=black, fill=mediumslateblue107107255, line width=0.24pt,
+    area legend] coordinates {(5.6,0) (6.4,0) (6.4,0.4) (5.6,0.4)};
+    \addplot[draw=black, fill=mediumslateblue107107255, line width=0.24pt,
+    area legend, forget plot] coordinates {(6.6,0) (7.4,0) (7.4,0.6) (6.6,0.6)};
+
+    % --- C: crimson2554141 ---
+    \addplot[draw=black, fill=crimson2554141, line width=0.24pt,
+    area legend] coordinates {(3.1,0) (3.9,0) (3.9,0.4) (3.1,0.4)};
+    \addplot[draw=black, fill=crimson2554141, line width=0.24pt,
+    area legend, forget plot] coordinates {(4.1,0) (4.9,0) (4.9,0.6) (4.1,0.6)};
+
+    \legend{A, B, C}
+
     \addplot [line width=0.32pt, grey, dashed, forget plot]
     table {%
       2.75 0
@@ -63,66 +74,28 @@
       5.25 0
       5.25 0.75
     };
-    \draw (axis cs:0,0.343333333333333) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.33};
-    \draw (axis cs:1,0.343333333333333) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.33};
-    \draw (axis cs:2,0.343333333333333) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.33};
-    \draw (axis cs:3.5,0.41) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.40};
-    \draw (axis cs:4.5,0.61) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.60};
-    \draw (axis cs:6,0.41) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.40};
-    \draw (axis cs:7,0.61) node[
-      scale=0.45,
-      anchor=south,
-      text=black,
-      rotate=0.0
-    ]{0.60};
-    \draw (axis cs:1,-0.09) node[
-      scale=0.55,
-      anchor=north,
-      text=black,
-      rotate=0.0
-    ]{\bfseries $C_0$};
-    \draw (axis cs:4,-0.09) node[
-      scale=0.55,
-      anchor=north,
-      text=black,
-      rotate=0.0
-    ]{\bfseries $C_1$};
-    \draw (axis cs:6.5,-0.09) node[
-      scale=0.55,
-      anchor=north,
-      text=black,
-      rotate=0.0
-    ]{\bfseries $C_2$};
+
+    \draw (axis cs:0,0.343333333333333) node[scale=0.45,
+    anchor=south, text=black, rotate=0.0]{0.33};
+    \draw (axis cs:1,0.343333333333333) node[scale=0.45,
+    anchor=south, text=black, rotate=0.0]{0.33};
+    \draw (axis cs:2,0.343333333333333) node[scale=0.45,
+    anchor=south, text=black, rotate=0.0]{0.33};
+    \draw (axis cs:3.5,0.41) node[scale=0.45, anchor=south,
+    text=black, rotate=0.0]{0.40};
+    \draw (axis cs:4.5,0.61) node[scale=0.45, anchor=south,
+    text=black, rotate=0.0]{0.60};
+    \draw (axis cs:6,0.41) node[scale=0.45, anchor=south, text=black,
+    rotate=0.0]{0.40};
+    \draw (axis cs:7,0.61) node[scale=0.45, anchor=south, text=black,
+    rotate=0.0]{0.60};
+
+    \draw (axis cs:1,-0.09) node[scale=0.55, anchor=north,
+    text=black, rotate=0.0]{\bfseries $C_0$};
+    \draw (axis cs:4,-0.09) node[scale=0.55, anchor=north,
+    text=black, rotate=0.0]{\bfseries $C_1$};
+    \draw (axis cs:6.5,-0.09) node[scale=0.55, anchor=north,
+    text=black, rotate=0.0]{\bfseries $C_2$};
   \end{axis}
 
 \end{tikzpicture}
