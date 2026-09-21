@@ -1,5 +1,14 @@
+\definecolor{Indigo}{HTML}{44548F}
+\definecolor{IndigoPale}{HTML}{6976a5}
+\definecolor{DeepTeal}{HTML}{2E7E8A}
+\definecolor{DeepTealPale}{HTML}{5898a1}
+\definecolor{MossGreen}{HTML}{7C9A5B}
+\definecolor{MossGreenPale}{HTML}{96ae7c}
+\definecolor{Olive}{HTML}{B3A24C}
+\definecolor{OlivePale}{HTML}{c2b570}
+
 \begin{tikzpicture}[
-    node distance=1.0cm and 1.2cm,
+    node distance=1.0cm and 1.0cm,
     box/.style={
       rectangle,
       draw,
@@ -11,30 +20,46 @@
     edge/.style={->, very thick, >={Latex[length=2.5mm]}}
   ]
 
-  % --- Top node ---
-  \node[box] (Node44) {$R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$};
+  \node[box, path picture={{\shade[left color=IndigoPale, right
+        color=DeepTealPale] ($(path picture bounding box.north
+        west)!0.0000!(path picture bounding box.north east)$) rectangle
+        ($(path picture bounding box.south west)!0.3333!(path picture
+        bounding box.south east)$); \shade[left color=DeepTealPale, right
+        color=MossGreenPale] ($(path picture bounding box.north
+        west)!0.3333!(path picture bounding box.north east)$) rectangle
+        ($(path picture bounding box.south west)!0.6667!(path picture
+        bounding box.south east)$); \shade[left color=MossGreenPale, right
+        color=OlivePale] ($(path picture bounding box.north
+        west)!0.6667!(path picture bounding box.north east)$) rectangle
+        ($(path picture bounding box.south west)!1.0000!(path picture
+  bounding box.south east)$);}}]  (Node44)
+  {$R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$};
 
-  % --- Middle row: three nodes below Node44 ---
-  \node[box, below left=of Node44]  (Node45)
+  \node[box, below=of Node44, fill={IndigoPale}]  (Node45)
   {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
-  \node[box, below=of Node44]       (Node47)
+
+  \node[box, right=of Node45, fill={DeepTealPale}]  (Node47)
   {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
-  \node[box, below right=of Node44] (Node49)
+
+  \node[box, left=of Node45, path picture={{\shade[left
+        color=MossGreenPale, right color=OlivePale] ($(path picture
+          bounding box.north west)!0.0000!(path picture bounding box.north
+        east)$) rectangle ($(path picture bounding box.south
+  west)!1.0000!(path picture bounding box.south east)$);}}]  (Node49)
   {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
 
-  % --- Bottom row: children of each middle node ---
-  \node[box, below=of Node45] (Node46)
+  \node[box, below=of Node45, fill={IndigoPale}]  (Node46)
   {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
-  \node[box, below=of Node47] (Node48)
+
+  \node[box, below=of Node47, fill={DeepTealPale}]  (Node48)
   {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
-  \node[box, below=of Node49] (Node50)
+
+  \node[box, below=of Node49, fill={MossGreenPale}]  (Node50)
   {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
 
-  % --- Node51: to the right of Node50, same vertical level ---
-  \node[box, right=of Node50] (Node51)
+  \node[box, left=of Node50, fill={OlivePale}]  (Node51)
   {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
 
-  % --- Edges ---
   \draw[edge] (Node45) -- (Node44);
   \draw[edge] (Node47) -- (Node44);
   \draw[edge] (Node49) -- (Node44);
