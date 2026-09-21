@@ -1,0 +1,158 @@
+\begin{tikzpicture}[
+    node distance=6mm and 12mm,
+    every node/.style={font=\scriptsize, align=center},
+    box/.style={draw, rectangle, rounded corners=1pt, inner sep=3pt,
+    minimum height=6mm},
+    start/.style={draw, diamond, aspect=1.6, inner sep=2pt},
+    endnode/.style={draw, rectangle, inner sep=4pt},
+    dottededge/.style={draw, dotted, thick, -{Latex[length=2mm]}},
+    rededge/.style={draw, red, thick, -{Latex[length=2mm]}},
+    dep/.style={thick, dashed, draw=black!50},
+    cluster/.style={draw=lightgray, thick, rounded corners=4pt, inner sep=6pt}
+  ]
+
+  % ---------- Start (top) and End (bottom) ----------
+  \node[start] (start) {start};
+
+  % =========================================================
+  % Hart #0 (topmost cluster)
+  % =========================================================
+  \begin{scope}[local bounding box=hart0]
+    \node[box] (lop_0_3) at ([xshift=-45mm, yshift=-14mm]start)
+    {$W03_{[y,\,y+2)}$};
+    \node[box, below=of lop_0_3] (op_0_0) {$W00_{[x,\,x+8)}$};
+    \node[box, below=of op_0_0] (lop_0_4) {$R04_{[y,\,y+4)}$};
+    \node[box, below=of lop_0_4] (lop_0_5) {$W05_{[y,\,y+8)}$};
+    \node[box, below=of lop_0_5] (op_0_1) {$W01_{[x,\,x+4)}$};
+    \node[box, below=of op_0_1] (lop_0_6) {$W06_{[y,\,y+8)}$};
+    \node[box, below=of lop_0_6] (op_0_2) {$R02_{[x,\,x+8)}$};
+    \node[box, below=of op_0_2] (lop_0_7) {$R07_{[y,\,y+1)}$};
+
+    % dotted chain
+    \draw[dottededge] (lop_0_3) -- (op_0_0);
+    \draw[dottededge] (op_0_0) -- (lop_0_4);
+    \draw[dottededge] (lop_0_4) -- (lop_0_5);
+    \draw[dottededge] (lop_0_5) -- (op_0_1);
+    \draw[dottededge] (op_0_1) -- (lop_0_6);
+    \draw[dottededge] (lop_0_6) -- (op_0_2);
+    \draw[dottededge] (op_0_2) -- (lop_0_7);
+
+    % red edges (op chain)
+    \draw[rededge] (op_0_0.east) to[out=0,in=0,looseness=0.5] (op_0_1.east);
+    \draw[rededge] (op_0_1.east) to[out=0,in=0,looseness=0.5] (op_0_2.east);
+
+    % red edges (lop chain)
+    \draw[rededge] (lop_0_3.west) to[out=180,in=180,looseness=0.5]
+    (lop_0_4.west);
+    \draw[rededge] (lop_0_4.west) to[out=180,in=180,looseness=0.5]
+    (lop_0_5.west);
+    \draw[rededge] (lop_0_5.west) to[out=180,in=180,looseness=0.5]
+    (lop_0_6.west);
+    \draw[rededge] (lop_0_6.west) to[out=180,in=180,looseness=0.5]
+    (lop_0_7.west);
+  \end{scope}
+
+  \begin{scope}[on background layer]
+    \node[cluster, fit=(hart0)] (c0) {};
+    \node[anchor=north west, font=\small\bfseries, yshift=16pt] at
+    (c0.north west)
+    {core \#0};
+  \end{scope}
+
+  % =========================================================
+  % Hart #1 (middle cluster)
+  % =========================================================
+  \begin{scope}[local bounding box=hart1]
+    \node[box] (lop_1_3) at ([yshift=-14mm]start)
+    {$R13_{[z,\,z+2)}$};
+    \node[box, below=of lop_1_3] (op_1_0) {$R10_{[x,\,x+8)}$};
+    \node[box, below=of op_1_0] (lop_1_4) {$R14_{[z,\,z+2)}$};
+    \node[box, below=of lop_1_4] (lop_1_5) {$W15_{[z,\,z+4)}$};
+    \node[box, below=of lop_1_5] (op_1_2) {$W12_{[x+6,\,x+7)}$};
+    \node[box, below=of op_1_2] (lop_1_6) {$W16_{[z+1,\,z+2)}$};
+    \node[box, below=of lop_1_6] (lop_1_7) {$W17_{[z,\,z+2)}$};
+
+    % dotted chain
+    \draw[dottededge] (lop_1_3) -- (op_1_0);
+    \draw[dottededge] (op_1_0) -- (lop_1_4);
+    \draw[dottededge] (lop_1_4) -- (lop_1_5);
+    \draw[dottededge] (lop_1_5) -- (op_1_2);
+    \draw[dottededge] (op_1_2) -- (lop_1_6);
+    \draw[dottededge] (lop_1_6) -- (lop_1_7);
+
+    % red edges
+    \draw[rededge] (op_1_0.east) to[out=0,in=0,looseness=0.5] (op_1_2.east);
+
+    \draw[rededge] (lop_1_3.west) to[out=180,in=180,looseness=0.5]
+    (lop_1_4.west);
+    \draw[rededge] (lop_1_4.west) to[out=180,in=180,looseness=0.5]
+    (lop_1_5.west);
+    \draw[rededge] (lop_1_5.west) to[out=180,in=180,looseness=0.5]
+    (lop_1_6.west);
+    \draw[rededge] (lop_1_6.west) to[out=180,in=180,looseness=0.5]
+    (lop_1_7.west);
+  \end{scope}
+
+  \begin{scope}[on background layer]
+    \node[cluster, fit=(hart1)] (c1) {};
+    \node[anchor=north west, font=\small\bfseries, yshift=16pt] at
+    (c1.north west)
+    {core \#1};
+  \end{scope}
+
+  % =========================================================
+  % Hart #2 (bottom cluster)
+  % =========================================================
+  \begin{scope}[local bounding box=hart2]
+    \node[box] (lop_2_3) at ([xshift=+45mm, yshift=-14mm]start)
+    {$R23_{[w,\,w+1)}$};
+    \node[box, below=of lop_2_3] (op_2_0) {$W20_{[x+4,\,x+8)}$};
+    \node[box, below=of op_2_0] (lop_2_4) {$R24_{[w,\,w+1)}$};
+    \node[box, below=of lop_2_4] (op_2_2) {$R22_{[x+2,\,x+4)}$};
+    \node[box, below=of op_2_2] (lop_2_5) {$W25_{[w,\,w+4)}$};
+    \node[box, below=of lop_2_5] (lop_2_6) {$R26_{[w+2,\,w+4)}$};
+    \node[box, below=of lop_2_6] (lop_2_7) {$R27_{[w+2,\,w+3)}$};
+
+    % dotted chain
+    \draw[dottededge] (lop_2_3) -- (op_2_0);
+    \draw[dottededge] (op_2_0) -- (lop_2_4);
+    \draw[dottededge] (lop_2_4) -- (op_2_2);
+    \draw[dottededge] (op_2_2) -- (lop_2_5);
+    \draw[dottededge] (lop_2_5) -- (lop_2_6);
+    \draw[dottededge] (lop_2_6) -- (lop_2_7);
+
+    % red edges
+    \draw[rededge] (op_2_0.east) to[out=0,in=0,looseness=0.5] (op_2_2.east);
+
+    \draw[rededge] (lop_2_3.west) to[out=180,in=180,looseness=0.5]
+    (lop_2_4.west);
+    \draw[rededge] (lop_2_4.west) to[out=180,in=180,looseness=0.5]
+    (lop_2_5.west);
+    \draw[rededge] (lop_2_5.west) to[out=180,in=180,looseness=0.5]
+    (lop_2_6.west);
+    \draw[rededge] (lop_2_6.west) to[out=180,in=180,looseness=0.5]
+    (lop_2_7.west);
+  \end{scope}
+
+  \begin{scope}[on background layer]
+    \node[cluster, fit=(hart2)] (c2) {};
+    \node[anchor=north west, font=\small\bfseries, yshift=16pt] at
+    (c2.north west)
+    {core \#2};
+  \end{scope}
+
+  % ---------- End (bottom) ----------
+  \node[endnode, below=14mm of lop_1_7] (end) {end};
+
+  % =========================================================
+  % Start / End dotted connections
+  % =========================================================
+  \draw[dottededge] (start) -- (lop_0_3);
+  \draw[dottededge] (start) -- (lop_1_3);
+  \draw[dottededge] (start) -- (lop_2_3);
+
+  \draw[dottededge] (lop_0_7) -- (end);
+  \draw[dottededge] (lop_1_7) -- (end);
+  \draw[dottededge] (lop_2_7) -- (end);
+
+\end{tikzpicture}
