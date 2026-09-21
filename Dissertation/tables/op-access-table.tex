@@ -1,0 +1,22 @@
+\begin{table}[h]
+  \centering
+  \caption{Список значений и адресов операций с памятью для
+  программы~\ref{fig:example-prog}}
+  \small
+  \begin{tabularx}{\textwidth}{@{}l X l@{}}
+    \toprule
+    Операций с памятью & \makecell[l]{Значение, записанное в
+    память\\(только для W операций)} & Адрес ячейки памяти \\
+    \midrule
+    W03 & 0xDEE7 & \([y, y+2)\) \\
+    W00 & 0x18AE44139A7F23F9 & \([x, x+8)\) \\
+    R04 &  & \([y, y+4)\) \\
+    W05 & 0x6CE6ACE0DDF15B17 & \([y, y+8)\) \\
+    W01 & 0xCB5F722E & \([x, x+4)\) \\
+    W06 & 0xFF07B9B7354A2309 & \([y, y+8)\) \\
+    R02 &  & \([x, x+8)\) \\
+    R07 &  & \([y, y+1)\) \\
+    \bottomrule
+  \end{tabularx}
+  \label{tab:memory-access}
+\end{table}
