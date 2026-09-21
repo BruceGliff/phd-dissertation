@@ -1,0 +1,233 @@
+% This file was created with tikzplotlib v0.10.1.post13.
+\begin{tikzpicture}
+
+  \definecolor{crimson2143940}{RGB}{214,39,40}
+  \definecolor{darkgrey176}{RGB}{176,176,176}
+  \definecolor{darkorange25512714}{RGB}{255,127,14}
+  \definecolor{forestgreen4416044}{RGB}{44,160,44}
+  \definecolor{lightgrey204}{RGB}{204,204,204}
+  \definecolor{steelblue31119180}{RGB}{31,119,180}
+
+  % === Top axis: [0.9, 1.0] ===
+  \begin{axis}[
+      name=topaxis,
+      height=0.12\textheight,
+      width=0.95\textwidth,
+      scale only axis,
+      ymin=0.9, ymax=1.0,
+      ytick={0.9, 0.95, 1.0},
+      yticklabels={0.9, 0.95, 1.0},
+      xmin=-0.69, xmax=45.69,
+      xtick=\empty,
+      axis on top,
+      y grid style={darkgrey176},
+      ymajorgrids,
+      tick align=outside,
+      tick pos=left,
+      ytick style={color=black},
+      % --- Legend style matching the reference file ---
+      legend cell align={left},
+      legend pos=north west,
+      legend style={at={(1,1.03)}, anchor=south east,
+        fill opacity=0.95, draw opacity=1, text opacity=1,
+      draw=lightgrey204},
+    ]
+    % --- Cluster 0 (first occurrence: NOT forget plot -> legend entry) ---
+    \addplot[draw=black, fill=steelblue31119180!70, line width=0.24pt,
+    area legend] coordinates {(-0.4,0.9) (0.4,0.9) (0.4,1) (-0.4,1)};
+
+    % --- Cluster 1 (first occurrence: NOT forget plot -> legend entry) ---
+    \addplot[draw=black, fill=darkorange25512714!70, line width=0.24pt,
+    area legend] coordinates {(0.6,0.9) (1.4,0.9) (1.4,1) (0.6,1)};
+
+    % --- Cluster 2 (first occurrence: NOT forget plot -> legend entry) ---
+    \addplot[draw=black, fill=forestgreen4416044!70, line width=0.24pt,
+    area legend] coordinates {(1.6,0.9) (2.4,0.9) (2.4,1) (1.6,1)};
+
+    % --- Others: zero-height dummy bar just to register the legend entry ---
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    area legend] coordinates {(46.6,0.9) (47.4,0.9) (47.4,0.9) (46.6,0.9)};
+
+    \legend{Кластер операций $C_0$, Кластер операций $C_1$, Кластер
+    операций $C_2$, Кластер операций $C_3$}
+  \end{axis}
+
+  % === Bottom axis: [0.0, 0.1] ===
+  \begin{axis}[
+      name=bottomaxis,
+      at={([yshift=-2pt]topaxis.below south west)},
+      anchor=north west,
+      height=0.25\textheight,
+      width=0.95\textwidth,
+      scale only axis,
+      ymin=0, ymax=0.1,
+      yticklabels={-0.02, 0, 0.02, 0.04, 0.06, 0.08, 0.1},
+      scaled y ticks=false,
+      xmin=-0.69, xmax=45.69,
+      xtick={0,2,...,45},
+      xticklabel style={rotate=45.0, anchor=east},
+      xlabel={Номер кластера состояний},
+      axis on top,
+      y grid style={darkgrey176},
+      x grid style={darkgrey176},
+      ymajorgrids,
+      tick align=outside,
+      tick pos=left,
+      ytick style={color=black},
+      xtick style={color=black},
+    ]
+
+    % === Cluster 0, 1, 2 bars: fill 0 to 0.1 in this panel ===
+    \addplot[draw=black, fill=steelblue31119180!70, line width=0.24pt,
+    forget plot] coordinates {(-0.4,0) (0.4,0) (0.4,0.1) (-0.4,0.1)};
+    \addplot[draw=black, fill=darkorange25512714!70, line width=0.24pt,
+    forget plot] coordinates {(0.6,0) (1.4,0) (1.4,0.1) (0.6,0.1)};
+    \addplot[draw=black, fill=forestgreen4416044!70, line width=0.24pt,
+    forget plot] coordinates {(1.6,0) (2.4,0) (2.4,0.1) (1.6,0.1)};
+
+    % === Crimson bars (values <= 0.1) ===
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(2.6,0) (3.4,0) (3.4,0.0751008) (2.6,0.0751008)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(3.6,0) (4.4,0) (4.4,0.00512197)
+    (3.6,0.00512197)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(4.6,0) (5.4,0) (5.4,0.0201037) (4.6,0.0201037)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(5.6,0) (6.4,0) (6.4,0.0036494) (5.6,0.0036494)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(6.6,0) (7.4,0) (7.4,0.057238) (6.6,0.057238)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(7.6,0) (8.4,0) (8.4,0.0112683) (7.6,0.0112683)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(8.6,0) (9.4,0) (9.4,0.0036494) (8.6,0.0036494)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(9.6,0) (10.4,0) (10.4,0.00179269)
+    (9.6,0.00179269)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(10.6,0) (11.4,0) (11.4,6.40246e-05)
+    (10.6,6.40246e-05)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(11.6,0) (12.4,0) (12.4,0.0750368)
+    (11.6,0.0750368)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(12.6,0) (13.4,0) (13.4,0.0529483)
+    (12.6,0.0529483)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(13.6,0) (14.4,0) (14.4,0.0450093)
+    (13.6,0.0450093)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(14.6,0) (15.4,0) (15.4,0.0202318)
+    (14.6,0.0202318)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(15.6,0) (16.4,0) (16.4,0.00685063)
+    (15.6,0.00685063)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(16.6,0) (17.4,0) (17.4,0.00345733)
+    (16.6,0.00345733)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(17.6,0) (18.4,0) (18.4,0.0358538)
+    (17.6,0.0358538)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(18.6,0) (19.4,0) (19.4,0.0170305)
+    (18.6,0.0170305)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(19.6,0) (20.4,0) (20.4,0.00531404)
+    (19.6,0.00531404)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(20.6,0) (21.4,0) (21.4,0.00525002)
+    (20.6,0.00525002)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(21.6,0) (22.4,0) (22.4,0.00403355)
+    (21.6,0.00403355)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(22.6,0) (23.4,0) (23.4,0.000320123)
+    (22.6,0.000320123)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(23.6,0) (24.4,0) (24.4,0.0171586)
+    (23.6,0.0171586)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(24.6,0) (25.4,0) (25.4,0.0193994)
+    (24.6,0.0193994)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(25.6,0) (26.4,0) (26.4,0.00211281)
+    (25.6,0.00211281)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(26.6,0) (27.4,0) (27.4,6.40246e-05)
+    (26.6,6.40246e-05)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(27.6,0) (28.4,0) (28.4,0.00435367)
+    (27.6,0.00435367)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(28.6,0) (29.4,0) (29.4,0.00371343)
+    (28.6,0.00371343)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(29.6,0) (30.4,0) (30.4,0.070363)
+    (29.6,0.070363)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(30.6,0) (31.4,0) (31.4,0.0595429)
+    (30.6,0.0595429)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(31.6,0) (32.4,0) (32.4,0.0553813)
+    (31.6,0.0553813)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(32.6,0) (33.4,0) (33.4,0.0604392)
+    (32.6,0.0604392)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(33.6,0) (34.4,0) (34.4,0.00768295)
+    (33.6,0.00768295)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(34.6,0) (35.4,0) (35.4,0.00320123)
+    (34.6,0.00320123)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(35.6,0) (36.4,0) (36.4,0.0318202)
+    (35.6,0.0318202)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(36.6,0) (37.4,0) (37.4,0.0137013)
+    (36.6,0.0137013)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(37.6,0) (38.4,0) (38.4,0.00646648)
+    (37.6,0.00646648)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(38.6,0) (39.4,0) (39.4,0.00672258)
+    (38.6,0.00672258)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(39.6,0) (40.4,0) (40.4,0.0474422)
+    (39.6,0.0474422)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(40.6,0) (41.4,0) (41.4,0.0526282)
+    (40.6,0.0526282)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(41.6,0) (42.4,0) (42.4,0.044305)
+    (41.6,0.044305)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(42.6,0) (43.4,0) (43.4,0.0169025)
+    (42.6,0.0169025)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(43.6,0) (44.4,0) (44.4,0.0172226)
+    (43.6,0.0172226)};
+    \addplot[draw=black, fill=crimson2143940, line width=0.24pt,
+    forget plot] coordinates {(44.6,0) (45.4,0) (45.4,0.0100519)
+    (44.6,0.0100519)};
+  \end{axis}
+
+  % === Break markers on the y-axis (left edge), between the two panels ===
+  \begin{scope}[shift={(topaxis.south west)}]
+    \draw[white, line width=4pt] (-4pt, 2pt) -- (4pt, -2pt);
+    \draw[black, line width=1pt]   (-4pt, 2pt) -- (4pt, -2pt);
+    \draw[white, line width=4pt] (-4pt, 5pt) -- (4pt, 1pt);
+    \draw[black, line width=1pt]   (-4pt, 5pt) -- (4pt, 1pt);
+  \end{scope}
+  \begin{scope}[shift={(topaxis.south east)}]
+    \draw[white, line width=4pt] (-4pt, 2pt) -- (4pt, -2pt);
+    \draw[black, line width=1pt]   (-4pt, 2pt) -- (4pt, -2pt);
+    \draw[white, line width=4pt] (-4pt, 5pt) -- (4pt, 1pt);
+    \draw[black, line width=1pt]   (-4pt, 5pt) -- (4pt, 1pt);
+  \end{scope}
+
+  % === Single y-label spanning both panels ===
+  \node[rotate=90, anchor=south, font=\normalsize, align=center]
+  at ([xshift=-1.2cm, yshift=-2cm]bottomaxis.north west |- topaxis.south)
+  {Распределение маркированных \\ кластеров состояний};
+
+\end{tikzpicture}
