@@ -1,39 +1,40 @@
 \begin{tikzpicture}[
-    node distance=1.2cm and 1.6cm,
-    every node/.style={font=\small},
-    boxnode/.style={
-      draw,
+    node distance=1.0cm and 1.2cm,
+    box/.style={
       rectangle,
-      thick,
-      align=center,
-      inner sep=4pt,
-      minimum height=1.1cm,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
     },
-    edge/.style={->, thick, >={Latex[length=3mm,width=2mm]}}
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
   ]
 
-  % Nodes (bottom row)
-  \node[boxnode] (Node44) {\(R10_{[x, x+8)}^{0x20e648dc9a7f23f9}\)};
-  \node[boxnode, below=1.6cm of Node44] (Node45) {\(R02_{[x,
-  x+8)}^{0x20e648dccb5f722e}\)};
-  \node[boxnode, below=1.6cm of Node45] (Node46) {\(R22_{[x+2,
-  x+4)}^{0xffffffffffffcb5f}\)};
+  % --- Top node ---
+  \node[box] (Node44) {$R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$};
 
-  % Nodes (middle row)
-  \node[boxnode, right=2.5cm of Node45] (Node47) {\(R02_{[x,
-  x+8)}^{0x209548dccb5f722e}\)};
-  \node[boxnode, below=1.6cm of Node47] (Node48) {\(R22_{[x+2,
-  x+4)}^{0xffffffffffffcb5f}\)};
+  % --- Middle row: three nodes below Node44 ---
+  \node[box, below left=of Node44]  (Node45)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+  \node[box, below=of Node44]       (Node47)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+  \node[box, below right=of Node44] (Node49)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
 
-  % Nodes (top row / right column)
-  \node[boxnode, right=2.5cm of Node47] (Node49) {\(R22_{[x+2,
-  x+4)}^{0xffffffffffff9a7f}\)};
-  \node[boxnode, below left=1.6cm and -0.6cm of Node49] (Node50) {\(R02_{[x,
-  x+8)}^{0x209548dccb5f722e}\)};
-  \node[boxnode, below right=1.6cm and -0.6cm of Node49] (Node51) {\(R02_{[x,
-  x+8)}^{0x20e648dccb5f722e}\)};
+  % --- Bottom row: children of each middle node ---
+  \node[box, below=of Node45] (Node46)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+  \node[box, below=of Node47] (Node48)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+  \node[box, below=of Node49] (Node50)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
 
-  % Edges
+  % --- Node51: to the right of Node50, same vertical level ---
+  \node[box, right=of Node50] (Node51)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  % --- Edges ---
   \draw[edge] (Node45) -- (Node44);
   \draw[edge] (Node47) -- (Node44);
   \draw[edge] (Node49) -- (Node44);
