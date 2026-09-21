@@ -1,0 +1,10 @@
+digraph unnamed {
+rankdir=BT;
+	Node5[style=bold,shape=box,group="Node",label="R23_{[w, w+1)}^{0x0}"];
+	Node6[style=bold,shape=box,group="Node",label="R24_{[w, w+1)}^{0x0}"];
+	Node7[style=bold,shape=box,group="Node",label="R26_{[w+2, w+4)}^{0x523F}"];
+	Node8[style=bold,shape=box,group="Node",label="R27_{[w+2, w+3)}^{0x3F}"];
+	Node6 ->Node5 [style=bold]
+	Node7 ->Node6 [style=bold]
+	Node8 ->Node7 [style=bold]
+}

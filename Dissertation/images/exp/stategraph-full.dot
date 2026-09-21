@@ -1,0 +1,374 @@
+digraph unnamed {
+rankdir=BT;
+
+	subgraph ClusterizedReads0 {
+		color=lightgrey;
+	Node1[style=bold,shape=box,group="Node",label="R04_{[y, y+4)}^{0xDEE7}"];
+	Node2[style=bold,shape=box,group="Node",label="R07_{[y, y+1)}^{0x9}"];
+}
+
+	subgraph ClusterizedReads1 {
+		color=lightgrey;
+	Node3[style=bold,shape=box,group="Node",label="R13_{[z, z+2)}^{0x0}"];
+	Node4[style=bold,shape=box,group="Node",label="R14_{[z, z+2)}^{0x0}"];
+}
+
+	subgraph ClusterizedReads2 {
+		color=lightgrey;
+	Node5[style=bold,shape=box,group="Node",label="R23_{[w, w+1)}^{0x0}"];
+	Node6[style=bold,shape=box,group="Node",label="R24_{[w, w+1)}^{0x0}"];
+	Node7[style=bold,shape=box,group="Node",label="R26_{[w+2, w+4)}^{0x523F}"];
+	Node8[style=bold,shape=box,group="Node",label="R27_{[w+2, w+3)}^{0x3F}"];
+}
+
+	subgraph ClusterizedReads3 {
+		color=lightgrey;
+	Node9[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node10[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node11[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+subgraph ClusterizedReads4 {
+		color=lightgrey;
+	Node12[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node13[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+	Node14[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+Node15[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+subgraph ClusterizedReads5 {
+		color=lightgrey;
+	Node16[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node17[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+subgraph ClusterizedReads6 {
+		color=lightgrey;
+	Node18[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+	Node19[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+Node20[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+subgraph ClusterizedReads7 {
+		color=lightgrey;
+	Node21[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node22[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads8 {
+		color=lightgrey;
+	Node23[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node24[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+subgraph ClusterizedReads9 {
+		color=lightgrey;
+	Node25[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+	Node26[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+	Node27[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads10 {
+		color=lightgrey;
+	Node28[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node29[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dccb5f722e}"];
+}
+subgraph ClusterizedReads11 {
+		color=lightgrey;
+	Node30[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node31[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+}
+
+
+	Node32[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae44139a7f23f9}"];
+subgraph ClusterizedReads12 {
+		color=lightgrey;
+	Node33[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node34[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads13 {
+		color=lightgrey;
+	Node35[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+	Node36[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads14 {
+		color=lightgrey;
+	Node37[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node38[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+subgraph ClusterizedReads15 {
+		color=lightgrey;
+	Node39[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+	Node40[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+	Node41[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads16 {
+		color=lightgrey;
+	Node42[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+}
+subgraph ClusterizedReads17 {
+		color=lightgrey;
+	Node43[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+}
+
+	Node44[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dc9a7f23f9}"];
+subgraph ClusterizedReads18 {
+		color=lightgrey;
+	Node45[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node46[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+subgraph ClusterizedReads19 {
+		color=lightgrey;
+	Node47[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+	Node48[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+
+	Node49[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads20 {
+		color=lightgrey;
+	Node50[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+}
+subgraph ClusterizedReads21 {
+		color=lightgrey;
+	Node51[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+}
+
+	Node52[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads22 {
+		color=lightgrey;
+	Node53[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node54[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+subgraph ClusterizedReads23 {
+		color=lightgrey;
+	Node55[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node56[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+
+	Node57[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae44139a7f23f9}"];
+	Node58[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads24 {
+		color=lightgrey;
+	Node59[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+subgraph ClusterizedReads25 {
+		color=lightgrey;
+	Node60[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+
+	Node61[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0x0}"];
+subgraph ClusterizedReads26 {
+		color=lightgrey;
+	Node62[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node63[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+subgraph ClusterizedReads27 {
+		color=lightgrey;
+	Node64[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node65[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+	Node66[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x18ae44139a7f23f9}"];
+subgraph ClusterizedReads28 {
+		color=lightgrey;
+	Node67[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+subgraph ClusterizedReads29 {
+		color=lightgrey;
+	Node68[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+
+	Node69[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x0}"];
+subgraph ClusterizedReads30 {
+		color=lightgrey;
+	Node70[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+	Node71[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads31 {
+		color=lightgrey;
+	Node72[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+	Node73[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads32 {
+		color=lightgrey;
+	Node74[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node75[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads33 {
+		color=lightgrey;
+	Node76[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+	Node77[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+	Node78[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads34 {
+		color=lightgrey;
+	Node79[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x209548dccb5f722e}"];
+}
+subgraph ClusterizedReads35 {
+		color=lightgrey;
+	Node80[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x20e648dccb5f722e}"];
+}
+	Node81[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads36 {
+		color=lightgrey;
+	Node82[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+subgraph ClusterizedReads37 {
+		color=lightgrey;
+	Node83[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+	Node84[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0x0}"];
+subgraph ClusterizedReads38 {
+		color=lightgrey;
+	Node85[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+subgraph ClusterizedReads39 {
+		color=lightgrey;
+	Node86[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+
+	Node87[style=bold,shape=box,group="Node",label="R10_{[x, x+8)}^{0x20e648dc00000000}"];
+subgraph ClusterizedReads40 {
+		color=lightgrey;
+	Node88[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+	Node89[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+subgraph ClusterizedReads41 {
+		color=lightgrey;
+	Node90[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+	Node91[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffffcb5f}"];
+}
+	Node92[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0xffffffffffff9a7f}"];
+subgraph ClusterizedReads42 {
+		color=lightgrey;
+	Node93[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+subgraph ClusterizedReads43 {
+		color=lightgrey;
+	Node94[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+	Node95[style=bold,shape=box,group="Node",label="R22_{[x+2, x+4)}^{0x0}"];
+subgraph ClusterizedReads44 {
+		color=lightgrey;
+	Node96[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18954413cb5f722e}"];
+}
+subgraph ClusterizedReads45 {
+		color=lightgrey;
+	Node97[style=bold,shape=box,group="Node",label="R02_{[x, x+8)}^{0x18ae4413cb5f722e}"];
+}
+
+  h00 [shape=none, width=0, height=0, label=""];
+  h01 [shape=none, width=0, height=0, label=""];
+  h02 [shape=none, width=0, height=0, label=""];
+  h03 [shape=none, width=0, height=0, label=""];
+  h05 [shape=none, width=0, height=0, label=""];
+  h07 [shape=none, width=0, height=0, label=""];
+  h08 [shape=none, width=0, height=0, label=""];
+  h09 [shape=none, width=0, height=0, label="h09"];
+  h10 [shape=none, width=0, height=0, label=""];
+  h11 [shape=none, width=0, height=0, label="h11"];
+  h15 [shape=none, width=0, height=0, label=""];
+  h16 [shape=none, width=0, height=0, label=""];
+  h18 [shape=none, width=0, height=0, label=""];
+  h19 [shape=none, width=0, height=0, label=""];
+  h20 [shape=none, width=0, height=0, label=""];
+
+	Node1 ->h00[style=bold]
+	Node3 ->h01[style=bold]
+	Node5 ->h02[style=bold]
+	Node9 ->h03[style=bold]
+	Node12->h05[style=bold]
+	Node15->h07[style=bold]
+	Node20->h08[style=bold]
+	Node27->h09[style=bold]
+	Node32->h10[style=bold]
+	Node44->h11[style=bold]
+	Node52->h15[style=bold]
+	Node57->h16[style=bold]
+	Node61->h18[style=bold]
+	Node69->h19[style=bold]
+	Node87->h20[style=bold]
+
+	Node2 ->Node1 [style=bold]
+	Node4 ->Node3 [style=bold]
+	Node6 ->Node5 [style=bold]
+	Node7 ->Node6 [style=bold]
+	Node8 ->Node7 [style=bold]
+	Node10->Node9 [style=bold]
+	Node11->Node10[style=bold]
+	Node13->Node12[style=bold]
+	Node14->Node13[style=bold]
+	Node16->Node15[style=bold]
+	Node18->Node15[style=bold]
+	Node25->Node15[style=bold]
+	Node17->Node16[style=bold]
+	Node19->Node18[style=bold]
+	Node21->Node20[style=bold]
+	Node23->Node20[style=bold]
+	Node22->Node21[style=bold]
+	Node24->Node23[style=bold]
+	Node26->Node25[style=bold]
+	Node28->Node27[style=bold]
+	Node30->Node27[style=bold]
+	Node29->Node28[style=bold]
+	Node31->Node30[style=bold]
+	Node33->Node32[style=bold]
+	Node35->Node32[style=bold]
+	Node37->Node32[style=bold]
+	Node39->Node32[style=bold]
+	Node41->Node32[style=bold]
+	Node34->Node33[style=bold]
+	Node36->Node35[style=bold]
+	Node38->Node37[style=bold]
+	Node40->Node39[style=bold]
+	Node42->Node41[style=bold]
+	Node43->Node41[style=bold]
+	Node45->Node44[style=bold]
+	Node47->Node44[style=bold]
+	Node49->Node44[style=bold]
+	Node46->Node45[style=bold]
+	Node48->Node47[style=bold]
+	Node50->Node49[style=bold]
+	Node51->Node49[style=bold]
+	Node53->Node52[style=bold]
+	Node55->Node52[style=bold]
+	Node54->Node53[style=bold]
+	Node56->Node55[style=bold]
+	Node58->Node57[style=bold]
+	Node59->Node58[style=bold]
+	Node60->Node58[style=bold]
+	Node62->Node61[style=bold]
+	Node64->Node61[style=bold]
+	Node66->Node61[style=bold]
+	Node63->Node62[style=bold]
+	Node65->Node64[style=bold]
+	Node67->Node66[style=bold]
+	Node68->Node66[style=bold]
+	Node70->Node69[style=bold]
+	Node72->Node69[style=bold]
+	Node74->Node69[style=bold]
+	Node76->Node69[style=bold]
+	Node78->Node69[style=bold]
+	Node81->Node69[style=bold]
+	Node84->Node69[style=bold]
+	Node71->Node70[style=bold]
+	Node73->Node72[style=bold]
+	Node75->Node74[style=bold]
+	Node77->Node76[style=bold]
+	Node79->Node78[style=bold]
+	Node80->Node78[style=bold]
+	Node82->Node81[style=bold]
+	Node83->Node81[style=bold]
+	Node85->Node84[style=bold]
+	Node86->Node84[style=bold]
+	Node88->Node87[style=bold]
+	Node90->Node87[style=bold]
+	Node92->Node87[style=bold]
+	Node95->Node87[style=bold]
+	Node89->Node88[style=bold]
+	Node91->Node90[style=bold]
+	Node93->Node92[style=bold]
+	Node94->Node92[style=bold]
+	Node96->Node95[style=bold]
+	Node97->Node95[style=bold]
+}

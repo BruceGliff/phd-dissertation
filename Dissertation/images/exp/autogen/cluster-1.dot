@@ -1,0 +1,6 @@
+digraph unnamed {
+rankdir=BT;
+	Node3[style=bold,shape=box,group="Node",label="R13_{[z, z+2)}^{0x0}"];
+	Node4[style=bold,shape=box,group="Node",label="R14_{[z, z+2)}^{0x0}"];
+	Node4 ->Node3 [style=bold]
+}
