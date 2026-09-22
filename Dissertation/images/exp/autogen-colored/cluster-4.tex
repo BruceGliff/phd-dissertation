@@ -1,0 +1,29 @@
+\definecolor{Indigo}{HTML}{44548F}
+\definecolor{IndigoPale}{HTML}{6976a5}
+
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box, fill={IndigoPale}]  (Node12)
+  {$R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \node[box, below=of Node12, fill={IndigoPale}]  (Node13)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+  \node[box, below=of Node13, fill={IndigoPale}]  (Node14)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \draw[edge] (Node13) -- (Node12);
+  \draw[edge] (Node14) -- (Node13);
+
+\end{tikzpicture}

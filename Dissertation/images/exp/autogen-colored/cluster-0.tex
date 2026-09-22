@@ -1,0 +1,25 @@
+\definecolor{Indigo}{HTML}{44548F}
+\definecolor{IndigoPale}{HTML}{6976a5}
+
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box, fill={IndigoPale}]  (Node1)
+  {$R04_{[y,\,y+4)}^{\texttt{0xDEE7}}$};
+
+  \node[box, below=of Node1, fill={IndigoPale}]  (Node2)
+  {$R07_{[y,\,y+1)}^{\texttt{0x9}}$};
+
+  \draw[edge] (Node2) -- (Node1);
+
+\end{tikzpicture}
