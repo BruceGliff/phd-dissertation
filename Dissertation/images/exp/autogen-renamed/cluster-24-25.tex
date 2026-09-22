@@ -1,0 +1,43 @@
+\definecolor{Indigo}{HTML}{44548F}
+\definecolor{IndigoPale}{HTML}{6976a5}
+\definecolor{DeepTeal}{HTML}{2E7E8A}
+\definecolor{DeepTealPale}{HTML}{5898a1}
+
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box, path picture={{\shade[left color=IndigoPale, right
+        color=DeepTealPale] ($(path picture bounding box.north
+        west)!0.0000!(path picture bounding box.north east)$) rectangle
+        ($(path picture bounding box.south west)!1.0000!(path picture
+  bounding box.south east)$);}}]  (Node57)
+  {$R10_1^2$};
+
+  \node[box, below=of Node57, path picture={{\shade[left
+        color=IndigoPale, right color=DeepTealPale] ($(path picture
+          bounding box.north west)!0.0000!(path picture bounding box.north
+        east)$) rectangle ($(path picture bounding box.south
+  west)!1.0000!(path picture bounding box.south east)$);}}]  (Node58)
+  {$R22_4^1$};
+
+  \node[box, below=of Node58, fill={IndigoPale}]  (Node59)
+  {$R02_3^3$};
+
+  \node[box, right=of Node59, fill={DeepTealPale}]  (Node60)
+  {$R02_3^2$};
+
+  \draw[edge] (Node58) -- (Node57);
+  \draw[edge] (Node59) -- (Node58);
+  \draw[edge] (Node60) -- (Node58);
+
+\end{tikzpicture}
