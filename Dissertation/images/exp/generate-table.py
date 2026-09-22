@@ -96,7 +96,7 @@ def generate_yaml(nodes):
     # Second pass: generate YAML lines
     lines = []
     for node in nodes:
-        key = f"{node['op']}_{node['i']}^{node['j']}"
+        key = f"{node['op']}_{{{node['i']}}}^{{{node['j']}}}"
         lines.append(f"{key}:")
         lines.append(f"  id: {node['id']}")
         lines.append(f"  value: {node['value']}")
