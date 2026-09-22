@@ -1,10 +1,10 @@
-\definecolor{Indigo}{HTML}{44548F}
-\definecolor{IndigoPale}{HTML}{6976a5}
-\definecolor{DeepTeal}{HTML}{2E7E8A}
-\definecolor{DeepTealPale}{HTML}{5898a1}
+\definecolor{MossGreen}{HTML}{7C9A5B}
+\definecolor{MossGreenPale}{HTML}{96ae7c}
+\definecolor{Olive}{HTML}{B3A24C}
+\definecolor{OlivePale}{HTML}{c2b570}
 
 \begin{tikzpicture}[
-    node distance=1.0cm and 1.0cm,
+    node distance=0.5cm and 0.5cm,
     box/.style={
       rectangle,
       draw,
@@ -16,23 +16,23 @@
     edge/.style={->, very thick, >={Latex[length=2.5mm]}}
   ]
 
-  \node[box, path picture={{\shade[left color=IndigoPale, right
-        color=DeepTealPale] ($(path picture bounding box.north
+  \node[box, path picture={{\shade[left color=MossGreenPale, right
+        color=OlivePale] ($(path picture bounding box.north
         west)!0.0000!(path picture bounding box.north east)$) rectangle
         ($(path picture bounding box.south west)!1.0000!(path picture
   bounding box.south east)$);}}]  (Node20)
   {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
 
-  \node[box, below=of Node20, fill={IndigoPale}]  (Node21)
+  \node[box, below=of Node20, fill={MossGreenPale}]  (Node21)
   {$R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
 
-  \node[box, right=of Node21, fill={DeepTealPale}]  (Node23)
+  \node[box, right=of Node21, fill={OlivePale}]  (Node23)
   {$R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
 
-  \node[box, below=of Node21, fill={IndigoPale}]  (Node22)
+  \node[box, below=of Node21, fill={MossGreenPale}]  (Node22)
   {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
 
-  \node[box, below=of Node23, fill={DeepTealPale}]  (Node24)
+  \node[box, below=of Node23, fill={OlivePale}]  (Node24)
   {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
 
   \draw[edge] (Node21) -- (Node20);

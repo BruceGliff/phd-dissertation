@@ -1,8 +1,8 @@
-\definecolor{Indigo}{HTML}{44548F}
-\definecolor{IndigoPale}{HTML}{6976a5}
+\definecolor{MossGreen}{HTML}{7C9A5B}
+\definecolor{MossGreenPale}{HTML}{96ae7c}
 
 \begin{tikzpicture}[
-    node distance=1.0cm and 1.0cm,
+    node distance=0.5cm and 0.5cm,
     box/.style={
       rectangle,
       draw,
@@ -14,13 +14,13 @@
     edge/.style={->, very thick, >={Latex[length=2.5mm]}}
   ]
 
-  \node[box, fill={IndigoPale}]  (Node9)
+  \node[box, fill={MossGreenPale}]  (Node9)
   {$R02_0^0$};
 
-  \node[box, below=of Node9, fill={IndigoPale}]  (Node10)
+  \node[box, below=of Node9, fill={MossGreenPale}]  (Node10)
   {$R10_0^0$};
 
-  \node[box, below=of Node10, fill={IndigoPale}]  (Node11)
+  \node[box, below=of Node10, fill={MossGreenPale}]  (Node11)
   {$R22_0^0$};
 
   \draw[edge] (Node10) -- (Node9);

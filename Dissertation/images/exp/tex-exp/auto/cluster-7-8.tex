@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box] (Node20)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, below=of Node20]  (Node21)
+  {$R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, right=of Node21]  (Node23)
+  {$R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \node[box, below=of Node21]  (Node22)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node23]  (Node24)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \draw[edge] (Node21) -- (Node20);
+  \draw[edge] (Node23) -- (Node20);
+  \draw[edge] (Node22) -- (Node21);
+  \draw[edge] (Node24) -- (Node23);
+
+\end{tikzpicture}

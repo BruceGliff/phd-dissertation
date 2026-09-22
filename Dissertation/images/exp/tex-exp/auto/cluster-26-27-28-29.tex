@@ -1,0 +1,46 @@
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box] (Node61)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0x0}}$};
+
+  \node[box, below=of Node61]  (Node62)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, right=of Node62]  (Node64)
+  {$R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, left=of Node62]  (Node66)
+  {$R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$};
+
+  \node[box, below=of Node62]  (Node63)
+  {$R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, below=of Node64]  (Node65)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, below=of Node66]  (Node67)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, left=of Node67]  (Node68)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \draw[edge] (Node62) -- (Node61);
+  \draw[edge] (Node64) -- (Node61);
+  \draw[edge] (Node66) -- (Node61);
+  \draw[edge] (Node63) -- (Node62);
+  \draw[edge] (Node65) -- (Node64);
+  \draw[edge] (Node67) -- (Node66);
+  \draw[edge] (Node68) -- (Node66);
+
+\end{tikzpicture}

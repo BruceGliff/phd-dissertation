@@ -1,0 +1,42 @@
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box] (Node15)
+  {$R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, below=of Node15]  (Node16)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \node[box, right=of Node16]  (Node18)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+  \node[box, left=of Node16]  (Node25)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, below=of Node16]  (Node17)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node18]  (Node19)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node25]  (Node26)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \draw[edge] (Node16) -- (Node15);
+  \draw[edge] (Node18) -- (Node15);
+  \draw[edge] (Node25) -- (Node15);
+  \draw[edge] (Node17) -- (Node16);
+  \draw[edge] (Node19) -- (Node18);
+  \draw[edge] (Node26) -- (Node25);
+
+\end{tikzpicture}

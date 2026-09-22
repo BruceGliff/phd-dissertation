@@ -1,0 +1,155 @@
+Write python code to transform dot code into tikz code.
+The structure of tikz code must be as following:
+
+Predefined begin part
+```
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+```
+
+list of nodes:
+```
+\node[box] (Node44) {$R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$};
+
+\node[box, below left=of Node44]  (Node45)
+{$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+\node[box, below=of Node44]       (Node47)
+{$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+\node[box, below right=of Node44] (Node49)
+{$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
+
+\node[box, below=of Node45] (Node46)
+{$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+\node[box, below=of Node47] (Node48)
+{$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+\node[box, below=of Node49] (Node50)
+{$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+\node[box, right=of Node50] (Node51)
+{$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+```
+
+list of edges:
+```
+\draw[edge] (Node45) -- (Node44);
+\draw[edge] (Node47) -- (Node44);
+\draw[edge] (Node49) -- (Node44);
+\draw[edge] (Node46) -- (Node45);
+\draw[edge] (Node48) -- (Node47);
+\draw[edge] (Node50) -- (Node49);
+\draw[edge] (Node51) -- (Node49);
+```
+
+end:
+```
+\end{tikzpicture}
+```
+
+Mind, that positioning of nodes must be relative.
+First draw node with no outcoming edges.
+When all parent nodes are drawn below. Nodes on the same level are placed relatively to the nodes on the same level. 
+
+For example draw parents for the given node A:
+If there is one parent:
+  draw B below A;
+If there are two parents:
+  draw B1 below A
+  draw B2 right B1
+If there are three parents:
+  draw B1 below A
+  draw B2 right A
+  draw B3 left A
+And so one...
+
+Formats of nodes and edges are given in the example.
+Also transform labels from dot file to math labels in tikz format: add `$` at the start and end of label.
+Keep the same topology as in the original graph.
+
+Usage:
+```
+python ./convert2tikz.py ./dir-with-dots --out-dir ./dir-with-tikz
+```
+For each dot input file there is a corresponding tikz file with the same name, different extension.
+
+In `./dots` there is an example `dot` file, it the `tikz` there is an example of resulted `tikz` file.
+
+
+```
+Node B below A
+Node B1 right B
+Node C1 below B
+Node C2 right C1
+Node D1 below B1
+```
+Here node D1 overlaps with node C2.
+Pick directions left/right to avoid overlapping.
+
+Now adjust nodes coloring:
+All nodes with no incoming edges are asigned with unique color.
+All nodes with incoming edges accumulate colors of each parent.
+For example:
+
+```
+Node A has color red
+Node B has color blue
+Node C is child of A and B, therefore, half of node C is red, half is blue.
+Node D is child of C, therefore the same color as C
+```
+If there are N parents for node A, the node A inherits all N colors from parents.
+For this case I do not have example, so implement mechanism of coloring.
+
+
+You've generated code produces incorrect tikz:
+```
+Package xcolor Error: Undefined color `HTM
+L,1F3A5F'.
+```
+But this code works fine:
+```
+\definecolor{NavyBlue}{HTML}{1F3A5F}
+\definecolor{Teal}{HTML}{2E8B8B}
+\definecolor{SageGreen}{HTML}{9CAF88}
+\definecolor{MustardYellow}{HTML}{D4A017}
+\definecolor{Terracotta}{HTML}{C96A4B}
+\definecolor{DustyRose}{HTML}{C48B9F}
+\definecolor{Cream}{HTML}{F5F0E1}
+\definecolor{WarmGray}{HTML}{8A817C}
+\definecolor{Charcoal}{HTML}{3B3B3B}
+\definecolor{SoftCoral}{HTML}{F28C7A}
+
+% Example: display all colors as swatches
+\begin{tikzpicture}
+  \foreach \colorname/\hex/\x in {%
+    NavyBlue/1F3A5F/0,
+    Teal/2E8B8B/1.5,
+    SageGreen/9CAF88/3,
+    MustardYellow/D4A017/4.5,
+    Terracotta/C96A4B/6,
+    DustyRose/C48B9F/7.5,
+    Cream/F5F0E1/9,
+    WarmGray/8A817C/10.5,
+    Charcoal/3B3B3B/12,
+    SoftCoral/F28C7A/13.5%
+  }{
+    \fill[\colorname] (\x,0) rectangle ++(1.2,1.2);
+    \draw[black] (\x,0) rectangle ++(1.2,1.2);
+    \node[rotate=90, anchor=west, font=\tiny] at (\x+0.6, -0.1) {\colorname};
+  }
+\end{tikzpicture}
+
+```
+

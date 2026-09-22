@@ -1,14 +1,14 @@
-\definecolor{Indigo}{HTML}{44548F}
-\definecolor{IndigoPale}{HTML}{6976a5}
-\definecolor{DeepTeal}{HTML}{2E7E8A}
-\definecolor{DeepTealPale}{HTML}{5898a1}
 \definecolor{MossGreen}{HTML}{7C9A5B}
 \definecolor{MossGreenPale}{HTML}{96ae7c}
 \definecolor{Olive}{HTML}{B3A24C}
 \definecolor{OlivePale}{HTML}{c2b570}
+\definecolor{Amber}{HTML}{D98E32}
+\definecolor{AmberPale}{HTML}{e1a55b}
+\definecolor{Coral}{HTML}{D96B52}
+\definecolor{CoralPale}{HTML}{e18975}
 
 \begin{tikzpicture}[
-    node distance=1.0cm and 1.0cm,
+    node distance=0.5cm and 0.5cm,
     box/.style={
       rectangle,
       draw,
@@ -20,44 +20,44 @@
     edge/.style={->, very thick, >={Latex[length=2.5mm]}}
   ]
 
-  \node[box, path picture={{\shade[left color=IndigoPale, right
-        color=DeepTealPale] ($(path picture bounding box.north
+  \node[box, path picture={{\shade[left color=MossGreenPale, right
+        color=OlivePale] ($(path picture bounding box.north
         west)!0.0000!(path picture bounding box.north east)$) rectangle
         ($(path picture bounding box.south west)!0.3333!(path picture
-        bounding box.south east)$); \shade[left color=DeepTealPale, right
-        color=MossGreenPale] ($(path picture bounding box.north
+        bounding box.south east)$); \shade[left color=OlivePale, right
+        color=AmberPale] ($(path picture bounding box.north
         west)!0.3333!(path picture bounding box.north east)$) rectangle
         ($(path picture bounding box.south west)!0.6667!(path picture
-        bounding box.south east)$); \shade[left color=MossGreenPale, right
-        color=OlivePale] ($(path picture bounding box.north
+        bounding box.south east)$); \shade[left color=AmberPale, right
+        color=CoralPale] ($(path picture bounding box.north
         west)!0.6667!(path picture bounding box.north east)$) rectangle
         ($(path picture bounding box.south west)!1.0000!(path picture
   bounding box.south east)$);}}]  (Node44)
   {$R10_0^3$};
 
-  \node[box, below=of Node44, fill={IndigoPale}]  (Node45)
+  \node[box, below=of Node44, fill={MossGreenPale}]  (Node45)
   {$R02_5^0$};
 
-  \node[box, right=of Node45, fill={DeepTealPale}]  (Node47)
+  \node[box, right=of Node45, fill={OlivePale}]  (Node47)
   {$R02_5^1$};
 
   \node[box, left=of Node45, path picture={{\shade[left
-        color=MossGreenPale, right color=OlivePale] ($(path picture
-          bounding box.north west)!0.0000!(path picture bounding box.north
-        east)$) rectangle ($(path picture bounding box.south
-  west)!1.0000!(path picture bounding box.south east)$);}}]  (Node49)
+        color=AmberPale, right color=CoralPale] ($(path picture bounding
+        box.north west)!0.0000!(path picture bounding box.north east)$)
+        rectangle ($(path picture bounding box.south west)!1.0000!(path
+  picture bounding box.south east)$);}}]  (Node49)
   {$R22_2^1$};
 
-  \node[box, below=of Node45, fill={IndigoPale}]  (Node46)
+  \node[box, below=of Node45, fill={MossGreenPale}]  (Node46)
   {$R22_11^0$};
 
-  \node[box, below=of Node47, fill={DeepTealPale}]  (Node48)
+  \node[box, below=of Node47, fill={OlivePale}]  (Node48)
   {$R22_12^0$};
 
-  \node[box, below=of Node49, fill={MossGreenPale}]  (Node50)
+  \node[box, below=of Node49, fill={AmberPale}]  (Node50)
   {$R02_6^1$};
 
-  \node[box, left=of Node50, fill={OlivePale}]  (Node51)
+  \node[box, left=of Node50, fill={CoralPale}]  (Node51)
   {$R02_6^0$};
 
   \draw[edge] (Node45) -- (Node44);

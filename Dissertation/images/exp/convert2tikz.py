@@ -15,7 +15,7 @@ import re
 from collections import deque
 
 PREAMBLE = r"""\begin{tikzpicture}[
-    node distance=0.5cm and 0.5cm,
+    node distance=1.0cm and 1.0cm,
     box/.style={
       rectangle,
       draw,
@@ -31,10 +31,9 @@ PREAMBLE = r"""\begin{tikzpicture}[
 POSTAMBLE = r"""\end{tikzpicture}
 """
 
-# A declared node with a label: "Name[label="..."]".
-_NODE_DECL_RE = re.compile(
-    r"(?P<name>\w+)\s*\[\s*[^\]]*?label\s*=\s*\"(?P<label>[^\"]*)\"",
-    re.IGNORECASE,
+# Name plus optional label="..." (name may occur with or without a trailing ;).
+_NODE_RE = re.compile(
+    r"(?P<name>\w+)\s*\[\s*[^\]]*?label\s*=\s*\"(?P<label>[^\"]*)\"", re.IGNORECASE
 )
 
 # "A -> B" possibly with an attribute block, e.g. "A->B[style=bold]".
@@ -155,182 +154,28 @@ def directive_for(child, info, parents):
     return ("left", anchor, -delta)
 
 
-# A harmonious, muted palette: comparable lightness, moderately de-saturated
-# hues spread smoothly around the colour wheel so adjacent sources read well
-# together and inherited gradients blend pleasingly.
-PALETTE = [
-    "7C9A5B",  # MossGreen   (green)
-    "B3A24C",  # Olive       (yellow-green)
-    "D98E32",  # Amber       (gold)
-    "D96B52",  # Coral       (red-orange)
-    "C66E8B",  # Rose        (pink-mauve)
-    "9B87C6",  # Lavender    (soft violet)
-    "7784A8",  # SlateBlue   (muted blue)
-    "A58F78",  # Taupe       (warm neutral)
-    "44548F",  # Indigo      (blue-violet)
-    "2E7E8A",  # DeepTeal    (blue-green)
-]
-
-# Names for the palette colours (used for \definecolor and fill=Name).
-PALETTE_NAMES = {
-    "7C9A5B": "MossGreen",
-    "B3A24C": "Olive",
-    "D98E32": "Amber",
-    "D96B52": "Coral",
-    "C66E8B": "Rose",
-    "9B87C6": "Lavender",
-    "7784A8": "SlateBlue",
-    "A58F78": "Taupe",
-    "44548F": "Indigo",
-    "2E7E8A": "DeepTeal",
-}
-
-
-def _palette_hex(index):
-    """Hex colour for a unique node, cycling through the fixed palette."""
-    return PALETTE[index % len(PALETTE)]
-
-
-def node_colors(nodes, edges):
-    """Return ``{node: [hex, ...]}`` -- the ordered colour set of each node.
-
-    * A node with no incoming edges is a colour source and gets one brand-new
-      palette colour.
-    * Every other node inherits the ordered, deduplicated union of the
-      colours of its parents, where ``src`` of an edge ``src -> node`` is a
-      parent. A child of a red and a blue node thus ends up ``{red, blue}``.
-
-    An empty list is never produced: a node with parents always inherits at
-    least one colour from them.
-    """
-    parents = {n: [] for n in nodes}
-    for src, dst in edges:
-        parents[dst].append(src)
-
-    colors = {}
-    idx = [0]
-
-    def resolve(node, visiting=None):
-        if node in colors:
-            return colors[node]
-        if visiting is None:
-            visiting = set()
-        ps = [p for p in parents[node] if p in nodes]
-        if not ps:
-            c = [_palette_hex(idx[0])]
-            idx[0] += 1
-            colors[node] = c
-            return c
-        visiting.add(node)
-        seen, result = set(), []
-        for p in ps:
-            if p not in visiting:
-                for col in resolve(p, visiting):
-                    if col not in seen:
-                        seen.add(col)
-                        result.append(col)
-        visiting.discard(node)
-        colors[node] = result
-        return result
-
-    for node in nodes:
-        resolve(node)
-    return colors
-
-
-PALE_FACTOR = 0.80  # mix palette colour 80% with 20% white
-
-
-def _mix_with_white(hex_color, factor):
-    """Return ``hex_color`` lightened towards white by ``1-factor``."""
-    r = int(hex_color[0:2], 16)
-    g = int(hex_color[2:4], 16)
-    b = int(hex_color[4:6], 16)
-    r = round(r * factor + 255 * (1 - factor))
-    g = round(g * factor + 255 * (1 - factor))
-    b = round(b * factor + 255 * (1 - factor))
-    return "%02x%02x%02x" % (r, g, b)
-
-
-def pale_name(name):
-    """TikZ colour name for the pale version of a palette colour."""
-    return name + "Pale"
-
-
-def fill_option(colors, node):
-    """TikZ node options painting ``node``'s colour set onto the box.
-
-    One colour fills the box with a slightly pale version of it. Several
-    colours paint a smooth horizontal gradient through them (left to right),
-    built from adjacent ``\\shade`` segments -- the standard TikZ gradient,
-    avoiding fragile custom shadings. Returns ``None`` for uncoloured nodes.
-    """
-    cols = colors.get(node)
-    if not cols:
-        return None
-    if len(cols) == 1:
-        return "fill={{{}}}".format(pale_name(PALETTE_NAMES[cols[0]]))
-    n = len(cols)
-    segments = []
-    for k in range(n - 1):
-        x0, x1 = k / (n - 1), (k + 1) / (n - 1)
-        c0 = pale_name(PALETTE_NAMES[cols[k]])
-        c1 = pale_name(PALETTE_NAMES[cols[k + 1]])
-        segments.append(
-            r"\shade[left color={0}, right color={1}] "
-            r"($(path picture bounding box.north west)!{2:.4f}!".format(c0, c1, x0) +
-            r"(path picture bounding box.north east)$) rectangle "
-            r"($(path picture bounding box.south west)!{0:.4f}!".format(x1) +
-            r"(path picture bounding box.south east)$);")
-    return "path picture={{" + " ".join(segments) + "}}"
-
-
-def color_definitions(colors):
-    """Return ``\\definecolor`` lines for every palette colour that is used.
-
-    Each colour is defined twice: once with its own name and once as a pale
-    (mixed towards white) ``<Name>Pale`` variant used for the fills.
-    """
-    used = set()
-    for cols in colors.values():
-        for h in cols:
-            used.add(h)
-    lines = []
-    for h in PALETTE:
-        if h not in used:
-            continue
-        name = PALETTE_NAMES[h]
-        lines.append("\\definecolor{{{}}}{{HTML}}{{{}}}".format(name, h))
-        lines.append("\\definecolor{{{}}}{{HTML}}{{{}}}".format(
-            pale_name(name), _mix_with_white(h, PALE_FACTOR)))
-    return lines
-
-
 def render_tikz(dot_graph):
     nodes, edges = dot_graph
     drawn, info, parents = build_layout(dot_graph)
-    colors = node_colors(nodes, edges)
 
     directives = {n: directive_for(n, info, parents) for n in drawn}
 
-    lines = []                              # node + edge statements
+    lines = [PREAMBLE]
     for i, name in enumerate(drawn):
         math = parse_label(nodes[name])
         directive = directives[name]
-        opts = []
-        if directive is not None:
+        if directive is None:
+            spec = ""
+        else:
             relation, ref, dist = directive
             if relation == "below":
-                opts.append("below=of {}".format(ref))
+                spec = "below=of {}".format(ref)
             elif dist == 1:
-                opts.append("{}=of {}".format(relation, ref))
+                spec = "{}=of {}".format(relation, ref)
             else:
-                opts.append("{}={} of {}".format(relation, dist, ref))
-        fill = fill_option(colors, name)
-        if fill is not None:
-            opts.append(fill)
-        if opts:
-            lines.append("  \\node[box, {}]  ({})".format(", ".join(opts), name))
+                spec = "{}={} of {}".format(relation, dist, ref)
+        if spec:
+            lines.append("  \\node[box, {}]  ({})".format(spec, name))
             lines.append("  {{{}}};".format(math))
         else:
             lines.append("  \\node[box] ({})".format(name))
@@ -342,32 +187,18 @@ def render_tikz(dot_graph):
     for src, dst in edges:
         lines.append("  \\draw[edge] ({}) -- ({});".format(src, dst))
     lines.append("")
-
-    result = color_definitions(colors)
-    result.append("")
-    result.append(PREAMBLE.rstrip("\n"))
-    result.append("")
-    result.extend(lines)
-    result.append(POSTAMBLE.rstrip("\n"))
-    return "\n".join(result)
+    lines.append(POSTAMBLE)
+    return "\n".join(lines)
 
 
 def parse_dot(text):
-    """Parse dot source into (node_name -> label, edge list).
-
-    A name counts as a node when it is either declared with a ``label``
-    attribute or used as an endpoint of an edge -- this never mistakes
-    graph keywords (``digraph``, ``graph``, ``rankdir``, ...) for nodes.
-    """
+    """Parse dot source into (node_name -> label, edge list)."""
     nodes = {}
-    for m in _NODE_DECL_RE.finditer(text):
+    for m in _NODE_RE.finditer(text):
         nodes.setdefault(m.group("name"), m.group("label"))
     edges = []
     for m in _EDGE_RE.finditer(text):
         edges.append((m.group("src"), m.group("dst")))
-        # Any node appearing in an edge is a real node (even without a label).
-        nodes.setdefault(m.group("src"), "")
-        nodes.setdefault(m.group("dst"), "")
     return nodes, edges
 
 

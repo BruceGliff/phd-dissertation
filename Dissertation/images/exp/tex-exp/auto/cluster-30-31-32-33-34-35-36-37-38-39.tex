@@ -1,0 +1,86 @@
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box] (Node69)
+  {$R10_{[x,\,x+8)}^{\texttt{0x0}}$};
+
+  \node[box, below=of Node69]  (Node70)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \node[box, right=of Node70]  (Node72)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+  \node[box, left=of Node70]  (Node74)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, right=2 of Node70]  (Node76)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, left=2 of Node70]  (Node78)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
+
+  \node[box, right=3 of Node70]  (Node81)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
+
+  \node[box, left=3 of Node70]  (Node84)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0x0}}$};
+
+  \node[box, below=of Node70]  (Node71)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node72]  (Node73)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node74]  (Node75)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node76]  (Node77)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node78]  (Node79)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+  \node[box, left=of Node79]  (Node80)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \node[box, below=of Node81]  (Node82)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, right=of Node82]  (Node83)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, below=of Node84]  (Node85)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, left=2 of Node85]  (Node86)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \draw[edge] (Node70) -- (Node69);
+  \draw[edge] (Node72) -- (Node69);
+  \draw[edge] (Node74) -- (Node69);
+  \draw[edge] (Node76) -- (Node69);
+  \draw[edge] (Node78) -- (Node69);
+  \draw[edge] (Node81) -- (Node69);
+  \draw[edge] (Node84) -- (Node69);
+  \draw[edge] (Node71) -- (Node70);
+  \draw[edge] (Node73) -- (Node72);
+  \draw[edge] (Node75) -- (Node74);
+  \draw[edge] (Node77) -- (Node76);
+  \draw[edge] (Node79) -- (Node78);
+  \draw[edge] (Node80) -- (Node78);
+  \draw[edge] (Node82) -- (Node81);
+  \draw[edge] (Node83) -- (Node81);
+  \draw[edge] (Node85) -- (Node84);
+  \draw[edge] (Node86) -- (Node84);
+
+\end{tikzpicture}

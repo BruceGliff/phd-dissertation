@@ -1,8 +1,5 @@
-\definecolor{MossGreen}{HTML}{7C9A5B}
-\definecolor{MossGreenPale}{HTML}{96ae7c}
-
 \begin{tikzpicture}[
-    node distance=0.5cm and 0.5cm,
+    node distance=1.0cm and 1.0cm,
     box/.style={
       rectangle,
       draw,
@@ -14,13 +11,13 @@
     edge/.style={->, very thick, >={Latex[length=2.5mm]}}
   ]
 
-  \node[box, fill={MossGreenPale}]  (Node9)
+  \node[box] (Node9)
   {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
 
-  \node[box, below=of Node9, fill={MossGreenPale}]  (Node10)
+  \node[box, below=of Node9]  (Node10)
   {$R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
 
-  \node[box, below=of Node10, fill={MossGreenPale}]  (Node11)
+  \node[box, below=of Node10]  (Node11)
   {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
 
   \draw[edge] (Node10) -- (Node9);

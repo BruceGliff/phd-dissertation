@@ -15,7 +15,7 @@ import re
 from collections import deque
 
 PREAMBLE = r"""\begin{tikzpicture}[
-    node distance=0.5cm and 0.5cm,
+    node distance=1.0cm and 1.0cm,
     box/.style={
       rectangle,
       draw,
@@ -159,6 +159,8 @@ def directive_for(child, info, parents):
 # hues spread smoothly around the colour wheel so adjacent sources read well
 # together and inherited gradients blend pleasingly.
 PALETTE = [
+    "44548F",  # Indigo      (blue-violet)
+    "2E7E8A",  # DeepTeal    (blue-green)
     "7C9A5B",  # MossGreen   (green)
     "B3A24C",  # Olive       (yellow-green)
     "D98E32",  # Amber       (gold)
@@ -167,12 +169,12 @@ PALETTE = [
     "9B87C6",  # Lavender    (soft violet)
     "7784A8",  # SlateBlue   (muted blue)
     "A58F78",  # Taupe       (warm neutral)
-    "44548F",  # Indigo      (blue-violet)
-    "2E7E8A",  # DeepTeal    (blue-green)
 ]
 
 # Names for the palette colours (used for \definecolor and fill=Name).
 PALETTE_NAMES = {
+    "44548F": "Indigo",
+    "2E7E8A": "DeepTeal",
     "7C9A5B": "MossGreen",
     "B3A24C": "Olive",
     "D98E32": "Amber",
@@ -181,8 +183,6 @@ PALETTE_NAMES = {
     "9B87C6": "Lavender",
     "7784A8": "SlateBlue",
     "A58F78": "Taupe",
-    "44548F": "Indigo",
-    "2E7E8A": "DeepTeal",
 }
 
 

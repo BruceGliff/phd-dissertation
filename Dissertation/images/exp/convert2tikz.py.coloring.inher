@@ -15,7 +15,7 @@ import re
 from collections import deque
 
 PREAMBLE = r"""\begin{tikzpicture}[
-    node distance=0.5cm and 0.5cm,
+    node distance=1.0cm and 1.0cm,
     box/.style={
       rectangle,
       draw,
@@ -155,34 +155,31 @@ def directive_for(child, info, parents):
     return ("left", anchor, -delta)
 
 
-# A harmonious, muted palette: comparable lightness, moderately de-saturated
-# hues spread smoothly around the colour wheel so adjacent sources read well
-# together and inherited gradients blend pleasingly.
 PALETTE = [
-    "7C9A5B",  # MossGreen   (green)
-    "B3A24C",  # Olive       (yellow-green)
-    "D98E32",  # Amber       (gold)
-    "D96B52",  # Coral       (red-orange)
-    "C66E8B",  # Rose        (pink-mauve)
-    "9B87C6",  # Lavender    (soft violet)
-    "7784A8",  # SlateBlue   (muted blue)
-    "A58F78",  # Taupe       (warm neutral)
-    "44548F",  # Indigo      (blue-violet)
-    "2E7E8A",  # DeepTeal    (blue-green)
+    "1F3A5F",  # NavyBlue
+    "2E8B8B",  # Teal
+    "9CAF88",  # SageGreen
+    "D4A017",  # MustardYellow
+    "C96A4B",  # Terracotta
+    "C48B9F",  # DustyRose
+    "F5F0E1",  # Cream
+    "8A817C",  # WarmGray
+    "3B3B3B",  # Charcoal
+    "F28C7A",  # SoftCoral
 ]
 
 # Names for the palette colours (used for \definecolor and fill=Name).
 PALETTE_NAMES = {
-    "7C9A5B": "MossGreen",
-    "B3A24C": "Olive",
-    "D98E32": "Amber",
-    "D96B52": "Coral",
-    "C66E8B": "Rose",
-    "9B87C6": "Lavender",
-    "7784A8": "SlateBlue",
-    "A58F78": "Taupe",
-    "44548F": "Indigo",
-    "2E7E8A": "DeepTeal",
+    "1F3A5F": "NavyBlue",
+    "2E8B8B": "Teal",
+    "9CAF88": "SageGreen",
+    "D4A017": "MustardYellow",
+    "C96A4B": "Terracotta",
+    "C48B9F": "DustyRose",
+    "F5F0E1": "Cream",
+    "8A817C": "WarmGray",
+    "3B3B3B": "Charcoal",
+    "F28C7A": "SoftCoral",
 }
 
 
@@ -238,72 +235,39 @@ def node_colors(nodes, edges):
     return colors
 
 
-PALE_FACTOR = 0.80  # mix palette colour 80% with 20% white
-
-
-def _mix_with_white(hex_color, factor):
-    """Return ``hex_color`` lightened towards white by ``1-factor``."""
-    r = int(hex_color[0:2], 16)
-    g = int(hex_color[2:4], 16)
-    b = int(hex_color[4:6], 16)
-    r = round(r * factor + 255 * (1 - factor))
-    g = round(g * factor + 255 * (1 - factor))
-    b = round(b * factor + 255 * (1 - factor))
-    return "%02x%02x%02x" % (r, g, b)
-
-
-def pale_name(name):
-    """TikZ colour name for the pale version of a palette colour."""
-    return name + "Pale"
-
-
 def fill_option(colors, node):
     """TikZ node options painting ``node``'s colour set onto the box.
 
-    One colour fills the box with a slightly pale version of it. Several
-    colours paint a smooth horizontal gradient through them (left to right),
-    built from adjacent ``\\shade`` segments -- the standard TikZ gradient,
-    avoiding fragile custom shadings. Returns ``None`` for uncoloured nodes.
+    One colour fills the box solid; several colours divide it into equal
+    vertical stripes (half / half for two parents, thirds for three, ...).
+    Returns ``None`` when the node has no colours.
     """
     cols = colors.get(node)
     if not cols:
         return None
     if len(cols) == 1:
-        return "fill={{{}}}".format(pale_name(PALETTE_NAMES[cols[0]]))
+        return "fill={{{}}}".format(PALETTE_NAMES[cols[0]])
     n = len(cols)
-    segments = []
-    for k in range(n - 1):
-        x0, x1 = k / (n - 1), (k + 1) / (n - 1)
-        c0 = pale_name(PALETTE_NAMES[cols[k]])
-        c1 = pale_name(PALETTE_NAMES[cols[k + 1]])
-        segments.append(
-            r"\shade[left color={0}, right color={1}] "
-            r"($(path picture bounding box.north west)!{2:.4f}!".format(c0, c1, x0) +
-            r"(path picture bounding box.north east)$) rectangle "
-            r"($(path picture bounding box.south west)!{0:.4f}!".format(x1) +
+    parts = []
+    for k, col in enumerate(cols):
+        x1, x2 = k / n, (k + 1) / n
+        parts.append(
+            r"\fill[{}] ".format(PALETTE_NAMES[col]) +
+            r"($(path picture bounding box.north west)!{:.4f}!".format(x1) +
+            r"(path picture bounding box.north east)$) rectangle " +
+            r"($(path picture bounding box.south west)!{:.4f}!".format(x2) +
             r"(path picture bounding box.south east)$);")
-    return "path picture={{" + " ".join(segments) + "}}"
+    return "path picture={{" + " ".join(parts) + "}}"
 
 
 def color_definitions(colors):
-    """Return ``\\definecolor`` lines for every palette colour that is used.
-
-    Each colour is defined twice: once with its own name and once as a pale
-    (mixed towards white) ``<Name>Pale`` variant used for the fills.
-    """
+    """Return ``\\definecolor`` lines for every palette colour that is used."""
     used = set()
     for cols in colors.values():
         for h in cols:
             used.add(h)
-    lines = []
-    for h in PALETTE:
-        if h not in used:
-            continue
-        name = PALETTE_NAMES[h]
-        lines.append("\\definecolor{{{}}}{{HTML}}{{{}}}".format(name, h))
-        lines.append("\\definecolor{{{}}}{{HTML}}{{{}}}".format(
-            pale_name(name), _mix_with_white(h, PALE_FACTOR)))
-    return lines
+    return ["\\definecolor{{{}}}{{HTML}}{{{}}}".format(
+        PALETTE_NAMES[h], h) for h in PALETTE if h in used]
 
 
 def render_tikz(dot_graph):

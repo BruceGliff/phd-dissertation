@@ -1,0 +1,62 @@
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box] (Node32)
+  {$R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$};
+
+  \node[box, below=of Node32]  (Node33)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \node[box, right=of Node33]  (Node35)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+  \node[box, left=of Node33]  (Node37)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, right=2 of Node33]  (Node39)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, left=2 of Node33]  (Node41)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
+
+  \node[box, below=of Node33]  (Node34)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node35]  (Node36)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node37]  (Node38)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node39]  (Node40)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node41]  (Node42)
+  {$R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$};
+
+  \node[box, left=of Node42]  (Node43)
+  {$R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$};
+
+  \draw[edge] (Node33) -- (Node32);
+  \draw[edge] (Node35) -- (Node32);
+  \draw[edge] (Node37) -- (Node32);
+  \draw[edge] (Node39) -- (Node32);
+  \draw[edge] (Node41) -- (Node32);
+  \draw[edge] (Node34) -- (Node33);
+  \draw[edge] (Node36) -- (Node35);
+  \draw[edge] (Node38) -- (Node37);
+  \draw[edge] (Node40) -- (Node39);
+  \draw[edge] (Node42) -- (Node41);
+  \draw[edge] (Node43) -- (Node41);
+
+\end{tikzpicture}

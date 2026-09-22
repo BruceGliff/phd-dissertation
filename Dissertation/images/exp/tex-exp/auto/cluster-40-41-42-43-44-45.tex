@@ -1,0 +1,58 @@
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm,
+    box/.style={
+      rectangle,
+      draw,
+      very thick,
+      inner sep=3pt,
+      font=\small,
+      align=center
+    },
+    edge/.style={->, very thick, >={Latex[length=2.5mm]}}
+  ]
+
+  \node[box] (Node87)
+  {$R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$};
+
+  \node[box, below=of Node87]  (Node88)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, right=of Node88]  (Node90)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, left=of Node88]  (Node92)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$};
+
+  \node[box, right=2 of Node88]  (Node95)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0x0}}$};
+
+  \node[box, below=of Node88]  (Node89)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node90]  (Node91)
+  {$R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$};
+
+  \node[box, below=of Node92]  (Node93)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, left=of Node93]  (Node94)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \node[box, below=of Node95]  (Node96)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$};
+
+  \node[box, right=of Node96]  (Node97)
+  {$R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$};
+
+  \draw[edge] (Node88) -- (Node87);
+  \draw[edge] (Node90) -- (Node87);
+  \draw[edge] (Node92) -- (Node87);
+  \draw[edge] (Node95) -- (Node87);
+  \draw[edge] (Node89) -- (Node88);
+  \draw[edge] (Node91) -- (Node90);
+  \draw[edge] (Node93) -- (Node92);
+  \draw[edge] (Node94) -- (Node92);
+  \draw[edge] (Node96) -- (Node95);
+  \draw[edge] (Node97) -- (Node95);
+
+\end{tikzpicture}
