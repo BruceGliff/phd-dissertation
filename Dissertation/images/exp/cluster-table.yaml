@@ -1,0 +1,183 @@
+$C_{3}^{0}$:
+ - $R04_{[y,\,y+4)}^{\texttt{0xDEE7}}$
+   $R07_{[y,\,y+1)}^{\texttt{0x9}}$
+$C_{3}^{1}$:
+ - $R13_{[z,\,z+2)}^{\texttt{0x0}}$
+   $R14_{[z,\,z+2)}^{\texttt{0x0}}$
+$C_{3}^{10}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{11}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{12}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{13}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{14}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{15}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{16}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{17}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{18}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{19}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{20}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{21}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc9a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{2}$:
+ - $R23_{[w,\,w+1)}^{\texttt{0x0}}$
+   $R24_{[w,\,w+1)}^{\texttt{0x0}}$
+   $R26_{[w+2,\,w+4)}^{\texttt{0x523F}}$
+   $R27_{[w+2,\,w+3)}^{\texttt{0x3F}}$
+$C_{3}^{22}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{23}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{24}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{25}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{26}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{27}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{28}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{29}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae44139a7f23f9}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{3}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{30}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{31}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{32}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{33}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{34}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{35}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{36}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{37}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{38}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{39}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x0}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{4}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{40}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{41}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{42}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{43}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffff9a7f}}$
+$C_{3}^{44}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{45}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dc00000000}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0x0}}$
+$C_{3}^{5}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{6}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x209548dccb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{9}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18954413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{7}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
+$C_{3}^{8}$:
+ - $R02_{[x,\,x+8)}^{\texttt{0x18ae4413cb5f722e}}$
+   $R10_{[x,\,x+8)}^{\texttt{0x20e648dccb5f722e}}$
+   $R22_{[x+2,\,x+4)}^{\texttt{0xffffffffffffcb5f}}$
