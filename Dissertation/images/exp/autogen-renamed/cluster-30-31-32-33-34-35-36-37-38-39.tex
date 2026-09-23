@@ -80,24 +80,24 @@
   \node[box, left=of Node70, fill={AmberPale}]  (Node74)
   {$\rho02_{6}^{2}$};
 
-  \node[box, right=2 of Node70, fill={CoralPale}]  (Node76)
+  \node[box, right=of Node72, fill={CoralPale}]  (Node76)
   {$\rho02_{6}^{3}$};
 
-  \node[box, left=2 of Node70, path picture={{\shade[left
+  \node[box, left=of Node74, path picture={{\shade[left
         color=RosePale, right color=LavenderPale] ($(path picture bounding
         box.north west)!0.0000!(path picture bounding box.north east)$)
         rectangle ($(path picture bounding box.south west)!1.0000!(path
   picture bounding box.south east)$);}}]  (Node78)
   {$\rho22_{5}^{1}$};
 
-  \node[box, right=3 of Node70, path picture={{\shade[left
+  \node[box, right=of Node76, path picture={{\shade[left
         color=SlateBluePale, right color=TaupePale] ($(path picture
           bounding box.north west)!0.0000!(path picture bounding box.north
         east)$) rectangle ($(path picture bounding box.south
   west)!1.0000!(path picture bounding box.south east)$);}}]  (Node81)
   {$\rho22_{6}^{1}$};
 
-  \node[box, left=3 of Node70, path picture={{\shade[left
+  \node[box, left=2 of Node78, path picture={{\shade[left
         color=IndigoPale, right color=DeepTealPale] ($(path picture
           bounding box.north west)!0.0000!(path picture bounding box.north
         east)$) rectangle ($(path picture bounding box.south
@@ -131,7 +131,7 @@
   \node[box, below=of Node84, fill={IndigoPale}]  (Node85)
   {$\rho02_{8}^{3}$};
 
-  \node[box, left=2 of Node85, fill={DeepTealPale}]  (Node86)
+  \node[box, left=of Node85, fill={DeepTealPale}]  (Node86)
   {$\rho02_{8}^{2}$};
 
   \draw[edge] (Node70) -- (Node69);
