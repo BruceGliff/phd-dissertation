@@ -1,0 +1,25 @@
+\begin{tikzpicture}[
+    node distance=1.0cm,
+    >=Stealth,
+    every node/.style={minimum size=8mm}
+  ]
+
+  % Define nodes
+  \node (W) {(0) $\text{W}_{[x, x+8)}$};
+  \node[below=of W] (RWM) {(1) $\text{RWM}_{[x+4, x+8)}$};
+
+  \node[right=of W] (R1) {(2) $\text{R}_{[x+4, x+8)}$};
+  \node[below=of R1] (F) {FENCE};
+  \node[below=of F] (R2) {(3) $\text{R}_{[x, x+4)}$};
+
+  % Red arrows (solid) - on the right side
+  \draw[red, thick, ->] (R1) to[bend right] (F);
+  \draw[red, thick, ->] (F) to[bend right] (R2);
+
+  % Black dashed arrows - on the left side
+  \draw[black, dashed, ->] (R1) -- (F);
+  \draw[black, dashed, ->] (F) -- (R2);
+
+  \draw[black, dashed, ->] (W) -- (RWM);
+
+\end{tikzpicture}
