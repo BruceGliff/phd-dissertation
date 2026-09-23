@@ -12,7 +12,7 @@
   ]
 
   % ---------- Start (top) and End (bottom) ----------
-  \node[start] (start) {start};
+  \node[start] (start) {Начало};
 
   % =========================================================
   % Hart #0 (topmost cluster)
@@ -56,7 +56,7 @@
     \node[cluster, fit=(hart0)] (c0) {};
     \node[anchor=north west, font=\small\bfseries, yshift=16pt] at
     (c0.north west)
-    {core \#0};
+    {Ядро \#0};
   \end{scope}
 
   % =========================================================
@@ -97,7 +97,7 @@
     \node[cluster, fit=(hart1)] (c1) {};
     \node[anchor=north west, font=\small\bfseries, yshift=16pt] at
     (c1.north west)
-    {core \#1};
+    {Ядро \#1};
   \end{scope}
 
   % =========================================================
@@ -138,11 +138,11 @@
     \node[cluster, fit=(hart2)] (c2) {};
     \node[anchor=north west, font=\small\bfseries, yshift=16pt] at
     (c2.north west)
-    {core \#2};
+    {Ядро \#2};
   \end{scope}
 
   % ---------- End (bottom) ----------
-  \node[endnode, below=14mm of lop_1_7] (end) {end};
+  \node[endnode, below=14mm of lop_1_7] (end) {Конец};
 
   % =========================================================
   % Start / End dotted connections
