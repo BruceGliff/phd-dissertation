@@ -1,339 +1,248 @@
-\section{Списки}
+\section{Анализ подходов к верификации подсистемы памяти}
 \begin{frame}[plain, noframenumbering]
   \begin{center}
     \Huge
-    Списки
+    Анализ подходов~~к~~верификации~~подсистемы~~памяти
   \end{center}
 \end{frame}
 
-\subsection{Нумерованные}
-
 \begin{frame}
-  \frametitle{Нумерованные списки}
-  \begin{enumerate}
-    \item один
-    \item два
-    \item три
-  \end{enumerate}
-\end{frame}
-\note{
-  Этот текст будет виден только если его отображение включено
-  в~файле \textbf{Presentation/setup}.
-  Для раздельного вывода презентации и заметок на~разные экраны (как
-  в~impress или powerpoint) можно использовать программу
-  \textit{pdf-presenter-console}.
-}
-
-\subsection{Не нумерованные}
-
-\begin{frame}
-  \frametitle{Перечисления}
+  \frametitle{Актуальность}
   \begin{itemize}
-    \item Проблема 1
-    \item Проблема 2
-    \item Проблема 3
+    \item Рост числа ядер в~многопроцессорных системах существенно
+      усложняет архитектуру подсистемы памяти;
+    \item Усложнение иерархии памяти и~увеличение параллелизма требуют
+      развития механизмов синхронизации;
+    \item Верификация консистентности памяти --- корректности результатов
+      операций чтения/записи при параллельном исполнении ---
+      остаётся одной из~наиболее сложных задач;
+    \item Нарушения спецификации модели памяти приводят к~трудно
+      воспроизводимым сбоям.
   \end{itemize}
 \end{frame}
-\note[itemize]{
-\item Тезис 1
-\item Тезис 2
-\item Тезис 3
-}
-
-\subsection{Комбинированные}
 
 \begin{frame}
-  \frametitle{Комбинация списков}
+  \frametitle{Модели памяти}
+  Модель памяти --- часть архитектуры процессора, определяющая порядок,
+  в~котором результаты операций из разных потоков становятся видимыми
+  друг для друга:
+  \begin{description}
+    \item[SC] --- последовательная консистентность (strongest);
+    \item[TSO] --- последовательная консистентность с~буферизацией
+      записей;
+    \item[XC] --- расширенная консистентность для слабоупорядоченных
+      систем;
+    \item[RC] --- слабая консистентность (release/acquire);
+    \item[RVWMO] --- слабая модель памяти RISC-V.
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Обзор существующих подходов}
+  \begin{itemize}
+    \item \textbf{Литмус-тестирование} --- ориентировано на~проверку
+      соответствия системы заданной модели памяти, тесты содержат
+      небольшое число операций;
+    \item \textbf{Стресс-тестирование} --- тысячи конкурирующих
+      обращений, но~экспоненциальный рост числа трасс;
+    \item \textbf{Pre-silicon верификация} --- направленное тестирование
+      на~ранних стадиях, но~недостаточная масштабируемость;
+    \item \textbf{Аппаратные механизмы трассировки} --- требуют
+      дополнительных ресурсов на~кристалле.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Постановка задачи}
+  Свести задачу анализа консистентности памяти к~построению всех
+  линейных порядков частично упорядоченного множества операций
+  с~памятью, учитывая модель памяти и~классы эквивалентности
+  перестановок.
+  \medskip
+
+  Для достижения цели требовалось:
   \begin{enumerate}
-    \item \textbf{Задача 1}
-      \begin{itemize}
-        \item Подзадача 1-1
-        \item Подзадача 1-2
-      \end{itemize}
-    \item \textbf{Задача 2}
-      \begin{itemize}
-        \item Подзадача 2-1
-        \item Подзадача 2-2
-        \item Подзадача 2-3
-      \end{itemize}
-    \item \textbf{Задача 3}
-      \begin{itemize}
-        \item Подзадача 3-1
-        \item Подзадача 3-2
-        \item Подзадача 3-3
-      \end{itemize}
+    \item свести многопоточную программу к~частично упорядоченному
+      множеству операций;
+    \item разработать алгоритмы построения линейных порядков с~учётом
+      эквивалентных перестановок;
+    \item разработать граф состояний для компактного описания результатов;
+    \item разработать алгоритмы верификации соответствия аппаратуры
+      модели памяти.
   \end{enumerate}
 \end{frame}
-\note[itemize]{
-\item Задача 1
-\item Задача 2
-\item Задача 3
-}
 
-\begin{frame}[allowframebreaks]
-  \frametitle{Разделение слайда}
-  Поясняющий текст
+\section{Представление программы в~виде ЧУМ}
+\begin{frame}[plain, noframenumbering]
+  \begin{center}
+    \Huge
+    Представление~~программы~~в~~виде~~ЧУМ
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Математическая модель}
+  \begin{block}{Представление программы}
+    Многопоточная программа представляется в~виде частично упорядоченного
+    множества (ЧУМ, partial~order) операций с~памятью, построенного
+    с~учётом выбранной модели памяти.
+  \end{block}
   \begin{itemize}
-    \item Один
-    \item Два
-    \item Три
+    \item Каждая операция с~памятью (загрузка, сохранение) --- элемент
+      множества;
+    \item Порядок задаётся программным порядком и~ограничениями модели
+      памяти;
+    \item Модель памяти задаёт множество допустимых результатов
+      исполнения.
   \end{itemize}
-  \framebreak
-  Продолжение предыдущего слайда
 \end{frame}
 
-\section{Графика}
+\begin{frame}
+  \frametitle{Учёт классов эквивалентности}
+  \begin{itemize}
+    \item Операции, не~связанные зависимостями, могут быть
+      переупорядочены --- порождают классы эквивалентности перестановок;
+    \item Учёт независимости и~зависимости операций сокращает
+      пространство анализируемых линейных порядков;
+    \item Снимаются ограничения на~типы операций и~пересечение адресов,
+      присущие литмус-тестам;
+    \item Модель накладывает лишь ограничения, задаваемые моделью
+      памяти.
+  \end{itemize}
+\end{frame}
+
+\section{Линейные порядки ЧУМ}
 \begin{frame}[plain, noframenumbering]
   \begin{center}
     \Huge
-    Графика
+    Линейные~~порядки~~ЧУМ
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Одиночное изображение}
-  \centering
-  \includegraphics[width=0.8\linewidth]{latex} % окружение figure не требуется
+  \frametitle{Комбинаторный взрыв}
+  Прямое построение всех линейных порядков ЧУМ сталкивается
+  с~комбинаторным взрывом:
+  \begin{itemize}
+    \item в~худшем случае число порядков растёт как $n!$;
+    \item средняя асимптотическая сложность прямого алгоритма ---
+      $O(2^n)$.
+  \end{itemize}
+  Это обосновывает необходимость разработки специализированных
+  алгоритмов и~структур данных.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Векторная графика}
-  \begin{figure}
-    \centering
-    \ifdefmacro{\tikzsetnextfilename}{\tikzsetnextfilename{tikz_presentation}}{}%
-    % присваиваемое предкомпилированному pdf имя файла (не обязательно)
-    \input{Presentation/images/tikz_plot.tikz}
-  \end{figure}
+  \frametitle{Алгоритмы топологической сортировки}
+  Разработаны алгоритмы построения линейных порядков:
+  \begin{itemize}
+    \item топологическая сортировка с~учётом \textbf{независимости}
+      операций;
+    \item топологическая сортировка с~учётом \textbf{зависимостей};
+    \item использование заранее построенных таблиц перестановок.
+  \end{itemize}
+  \begin{alertblock}{Оценка сложности}
+    В~предельном случае высокой независимости операций вычислительные
+    затраты снижаются до~$O(n^2)$.
+  \end{alertblock}
 \end{frame}
 
-\subsection{Расположение}
-
-\begin{frame}
-  \frametitle{Изображения по-вертикали}
-  \centering
-  \vfill
-  \includegraphics[width=0.8\linewidth,height=0.1\textheight]{latex} \\
-  \TeX
-  \vfill
-  \includegraphics[width=0.8\linewidth,height=0.2\textheight]{latex} \\
-  \LaTeX
-  \vfill
-  \includegraphics[scale=0.2]{latex} \\
-  \vfill
-\end{frame}
-
-\begin{frame}
-  \frametitle{Изображения по-горизонтали}
-  \begin{minipage}[t]{0.47\linewidth}
-    \textbf{Составная \\ подпись 1}
-    \center{\includegraphics[width=1\linewidth]{knuth1}}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[t]{0.47\linewidth}
-    \textbf{Составная \\ подпись 2}
-    \center{\includegraphics[width=1\linewidth]{knuth2}}
-  \end{minipage}
-\end{frame}
-
-\subsection{Линии}
-
-\begin{frame}
-  \frametitle{Разделяющие линии}
-  \begin{minipage}[c]{0.47\linewidth}
-    \center{\includegraphics[width=1\linewidth]{latex}}
-    \bigskip
-    \hrule{}
-    \bigskip
-    \textbf{Составная \\ подпись 1}
-  \end{minipage}
-  \hfill
-  \vrule{}
-  \hfill
-  \begin{minipage}[c]{0.47\linewidth}
-    \flushright
-    \textbf{Составная \\ подпись 2}
-    \center{\includegraphics[width=1\linewidth]{knuth2}}
-  \end{minipage}
-\end{frame}
-
-\section{Остальное}
+\section{Компактное представление результатов}
 \begin{frame}[plain, noframenumbering]
   \begin{center}
     \Huge
-    Остальное
+    Компактное~~представление~~результатов
   \end{center}
 \end{frame}
 
-\subsection{Формулы}
+\begin{frame}
+  \frametitle{Граф состояний (State Graph)}
+  \begin{block}{Структура данных}
+    Граф состояний --- компактное и~полное представление всех возможных
+    результатов исполнения многопоточной программы, позволяющее
+    восстанавливать линейные порядки без их~явного хранения.
+  \end{block}
+  \begin{itemize}
+    \item Позволяет преодолеть экспоненциальный рост числа состояний;
+    \item Даёт возможность верификации программ с~большим числом
+      конкурирующих обращений;
+    \item Применим для программ с~десятками тысяч операций.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
-  \frametitle{Формулы}
-  \[
-    \left\{
-      \begin{array}{rl}
-        \dot x = & \sigma (y-x)  \\
-        \dot y = & x (r - z) - y \\
-        \dot z = & xy - bz
-      \end{array}
-      \right.
-    \]
-  \end{frame}
+  \frametitle{Метод кластеризации}
+  \begin{itemize}
+    \item Предложен метод \textbf{кластеризации графа состояний}
+      для декомпозиции задачи верификации на~независимые подзадачи;
+    \item Введена \textbf{метрика насыщения}, позволяющая различать
+      эффекты, обусловленные переупорядочиванием зависимых операций
+      и~моделью памяти;
+    \item Метрика насыщения позволяет останавливать исполнение программы
+      при достижении полного покрытия кластеров состояний.
+  \end{itemize}
+\end{frame}
 
-  \begin{frame}
-    \frametitle{amsmath}
-    \centering
-    \begin{minipage}[t]{0.5\linewidth}
-      \begin{multline*}
-        y = 1 x^1 + 2 x^2 + 3 x^3 + \\ + 4 x^4 + 5 x^5 + \dots
-      \end{multline*}
-    \end{minipage}
-  \end{frame}
+\begin{frame}
+  \frametitle{Алгоритмы верификации}
+  Предложены два подхода к~верификации соответствия аппаратуры
+  заявленной модели памяти:
+  \begin{enumerate}
+    \item на основе построения всех линейных порядков частично
+      упорядоченного множества;
+    \item на основе анализа графа состояний.
+  \end{enumerate}
+  \medskip
+  Доказана эквивалентность данных подходов к~верификации.
+\end{frame}
 
-  \begin{frame}[allowframebreaks]
-    \frametitle{Уравнения Максвелла}
-    \centering{
-      \small
-      \def\arraystretch{1.8}%
-      \begin{tabular}{ll}
-        \toprule
-        Интегральная форма
-        & Дифференциальная форма
-        \\ \midrule
-        \(Q_e(t) = \displaystyle\oiint_S \vec D(t) \cdot d\vec{s} =
-        \displaystyle\iiint_V \rho_v(t) dv\)
-        & \(\nabla \cdot \vec D(t) = \rho_v(t)\)
-        \\
-        \(\displaystyle\oiint_S \vec B(t) \cdot d\vec{s} = 0\)
-        & \(\nabla \cdot \vec B(t) = 0\)
-        \\
-        \(V_{emf}(t) = \displaystyle\oint_L \vec E(t) \cdot
-        d\vec{l}\) = \(- \displaystyle\iint_S
-          \left[\frac{\partial\vec{B}(t)}{\partial t}\right] \cdot
-        d\vec{s}\) & \(\nabla \times \vec E(t) = -
-        \frac{\partial\vec{B}(t)}{\partial t}\)           \\
-        \(I(t) = \displaystyle\oint_L \vec H(t) \cdot d\vec{l} =
-          \displaystyle\iint_S \left[\vec J(t) +
-        \frac{\partial\vec{D}(t)}{\partial t}\right] \cdot d\vec{s}\)
-        & \(\nabla \times \vec H(t) = \vec J(t) +
-        \frac{\partial\vec{D}(t)}{\partial t}\) \\ \midrule
-        \(\displaystyle\oiint_S \vec J \cdot d\vec{s} =
-        -\frac{\partial Q_e}{\partial t}\)
-        & \(\nabla \cdot \vec J = - \frac{\partial \rho_v}{\partial
-        t}\)                  \\
-        \bottomrule
-        \multicolumn{2}{c}{\(\vec D(t) = \left[\varepsilon(t)\right]
-        * \vec E(t)\)}
-        \\
-        \multicolumn{2}{c}{\(\vec B(t) = \left[\mu(t)\right] * \vec
-        H(t)\)}
-        \\
-      \end{tabular}
-    }
-    \framebreak
+\section{Результаты}
+\begin{frame}[plain, noframenumbering]
+  \begin{center}
+    \Huge
+    Результаты
+  \end{center}
+\end{frame}
 
-    \hspace{0.05\linewidth}
-    \centering{
-      \small
-      \def\arraystretch{1.8}%
-      \begin{tabular}{ll}
-        \toprule
-        Интегральная форма
-        & Дифференциальная форма                               \\ \midrule
-        \(Q_e = \displaystyle\oiint_S \vec D \cdot d\vec{s} =
-        \displaystyle\iiint_V \rho_v dv\)
-        & \(\nabla \cdot \vec D = \rho_v\)                     \\
-        \(\displaystyle\oiint_S \vec B \cdot d\vec{s} = 0\)
-        & \(\nabla \cdot \vec B = 0\)                          \\
-        \(V_{emf} = \displaystyle\oint_L \vec E \cdot d\vec{l}\) =
-        \(- \displaystyle\iint_S \left[j \omega \vec B\right] \cdot
-        d\vec{s}\) & \(\nabla \times \vec E = - j \omega \vec B\)         \\
-        \(I = \displaystyle\oint_L \vec H \cdot d\vec{l} =
-          \displaystyle\iint_S \left[\vec J + j \omega \vec D\right]
-        \cdot d\vec{s}\)    & \(\nabla \times \vec H = \vec J + j
-        \omega \vec{D}\) \\ \midrule
-        \(\displaystyle\oiint_S \vec J \cdot d\vec{s} = - j \omega
-        Q_e\)
-        & \(\nabla \cdot \vec J = - j \omega \rho_v\)          \\
-        \bottomrule
-        \multicolumn{2}{c}{\(\vec D(t) = \left[\varepsilon\right]
-        \vec E(t)\)}
-        \\
-        \multicolumn{2}{c}{\(\vec B(t) = \left[\mu\right] \vec
-        H(t)\)}
-        \\
-      \end{tabular}
-    }
-  \end{frame}
+\begin{frame}
+  \frametitle{Экспериментальная апробация}
+  Апробация проводилась на~тестовых сценариях, моделирующих:
+  \begin{itemize}
+    \item классические \textbf{литмус-тесты};
+    \item нагрузки с~большим числом конкурирующих обращений
+      к~памяти.
+  \end{itemize}
+  \begin{alertblock}{Масштабируемость}
+    Предложенный подход позволяет масштабировать верификацию на~программы
+    с~десятками тысяч операций, что выходит за~рамки применимости
+    классических подходов.
+  \end{alertblock}
+\end{frame}
 
-  \subsection{Таблицы}
+\begin{frame}
+  \frametitle{Основные результаты работы}
+  \begin{enumerate}
+    \item Предложена модель представления программы в~виде ЧУМ операций
+      с~памятью с~учётом моделей памяти (SC, TSO, XC, RC, RVWMO);
+    \item Разработаны алгоритмы построения линейных порядков с~учётом
+      классов эквивалентности перестановок;
+    \item Разработана структура данных ``граф состояний'' для
+      компактного и~полного представления результатов;
+    \item Предложены алгоритмы верификации на~основе линейных порядков
+      и~на~основе анализа графа состояний;
+    \item Созданы метод кластеризации графа состояний и~метрика
+      насыщения.
+  \end{enumerate}
+\end{frame}
 
-  \begin{frame}
-    \frametitle{Таблица}
-    \centering
-    \begin{tabular}{|l|l|}
-      \hline
-      \textbf{Заголовок 1} & \textbf{Заголовок 2} \\
-      \hline
-      Сумма                & \(b+a\)              \\
-      \hline
-      Разность             & \(a-b\)              \\
-      \hline
-      Произведение         & \(a*b\)              \\
-      \hline
-    \end{tabular}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Другая таблица}
-    \centering
-    \begin{tabular}{lc}
-      \toprule
-      \multicolumn{1}{c}{\textbf{Заголовок 1}} & \textbf{Заголовок 2}
-      \\ \midrule
-      Сумма                                    & \(b+a\)              \\
-      Разность                                 & \(a-b\)              \\
-      Произведение                             & \(a*b\)              \\
-      \bottomrule
-    \end{tabular}
-  \end{frame}
-
-  \subsection{Разное}
-
-  \begin{frame}
-    \frametitle{Большой многоуровневый список}
-    \begin{itemize}
-      \item \textbf{Пункт 1}
-        \begin{itemize}
-            \itemi Подпункт 1-1
-            \itemi Подпункт 1-2
-        \end{itemize}
-      \item \textbf{Пункт 2}
-        \begin{itemize}
-            \itemi Подпункт 2-1
-        \end{itemize}
-      \item \textbf{Пункт 3}
-        \begin{itemize}
-            \itemi Подпункт 3-1
-            \itemi Подпункт 3-2
-        \end{itemize}
-      \item \textbf{Пункт 4}
-        \begin{itemize}
-            \itemi Подпункт 4-1
-        \end{itemize}
-      \item \textbf{Пункт 5}
-        \begin{itemize}
-            \itemi Подпункт 5-1
-            \itemi Подпункт 5-2
-            \itemi Подпункт 5-3
-        \end{itemize}
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Четыре изображения}
-    \centering
-    \includegraphics[width=0.35\linewidth,angle=35]{latex}
-    \includegraphics[width=0.35\linewidth,angle=135]{latex}\\
-    \includegraphics[width=0.35\linewidth,angle=15]{latex}
-    \includegraphics[width=0.35\linewidth,angle=-15]{latex}
-  \end{frame}
+\begin{frame}
+  \frametitle{Перспективы дальнейшей работы}
+  \begin{itemize}
+    \item Адаптация подхода к~гетерогенным вычислительным архитектурам
+      (GPU, FPGA, тензорные блоки) --- построение композиционной модели
+      памяти через точки синхронизации;
+    \item Развитие эвристик анализа на~основе метрики насыщения;
+    \item Разработка адаптивных стратегий генерации тестовых сценариев,
+      целенаправленно увеличивающих покрытие редких состояний.
+  \end{itemize}
+\end{frame}

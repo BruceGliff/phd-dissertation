@@ -1,74 +1,46 @@
 \begin{frame}
   \frametitle{Научная новизна}
+  В~работе впервые:
   \begin{itemize}
-    \item Впервые реализован \dots
-    \item Разработана программа \dots
-    \item Впервые проведён анализ \dots
-    \item Предложена схема \dots
+    \item предложена математическая модель представления многопоточной
+      программы в~виде ЧУМ операций с~памятью, сводящая задачу анализа
+      консистентности к~построению линейных порядков;
+    \item разработаны алгоритмы эффективного построения всех линейных
+      порядков ЧУМ с~учётом классов эквивалентности перестановок;
+    \item разработана структура данных --- граф состояний (State~Graph)
+      --- для компактного и~полного представления результатов исполнения;
+    \item предложены алгоритмы верификации на~основе линейных порядков
+      и~на~основе графа состояний.
   \end{itemize}
 \end{frame}
 \note{
-  Проговаривается вслух научная новизна
+  Проговаривается вслух научная новизна.
 }
 
 \begin{frame}
-  \frametitle{Научная и практическая значимость}
-  \begin{itemize}
-    \item Получены выражения для \dots.
-    \item Определены условия \dots.
-    \item Разработаны устройства \dots.
-  \end{itemize}
+  \frametitle{Научная и~практическая значимость}
+  \begin{description}
+    \item[Теоретическая значимость] --- математическое описание
+      многопоточных программ с~учётом моделей памяти, алгоритмы
+      построения линейных порядков, структура данных графа состояний;
+    \item[Практическая значимость] --- инструментарий верификации
+      подсистемы памяти, снимающий ограничения существующих подходов
+      по~типам операций и~пересечению адресов и~применимый к~программам
+      с~большим числом конкурирующих обращений.
+  \end{description}
 \end{frame}
 \note{
-  Проговариваются вслух научная и практическая значимость
+  Проговариваются вслух научная и~практическая значимость.
 }
 
-\begin{frame}
-  \frametitle{Свидетельство о регистрации программы}
-  \begin{figure}[h]
-    \centering
-    \includegraphics[height=0.7\textheight]{registration}
-  \end{figure}
-\end{frame}
-\note{
-  Получено свидетельство о регистрации разработанной программы
-  \textsc{Hello~world™}.
-}
-
-\begin{frame}
-  \frametitle{Акт о внедрении}
-  \begin{figure}[h]
-    \centering
-    \fbox{
-      \begin{minipage}[t]{0.4\linewidth}
-        \includegraphics[width=\linewidth]{implementation}
-      \end{minipage}
-    }
-  \end{figure}
-\end{frame}
-\note{
-  Получен акт о внедрении.
-}
-
-\begin{frame} % публикации на одной странице
-  % \begin{frame}[t,allowframebreaks] % публикации на нескольких страницах
+\begin{frame}[t,allowframebreaks]
   \frametitle{Основные публикации}
-  \nocite{vakbib1}%
-  %\nocite{vakbib2}%
-  %
-  %% authorwos
-  \nocite{wosbib1}%
-  %
-  %% authorscopus
-  \nocite{scbib1}%
-  %
-  %% authorconf
-  \nocite{confbib1}%
-  \nocite{confbib2}%
-  %
-  %% authorother
-  \nocite{bib1}%
-  \nocite{bib2}%
+  \nocite{sitito_2}%
+  \nocite{sitito_1}%
+  % Статьи в журналах, рекомендованных ВАК
+  \nocite{mipt68}%
+  \nocite{mipt66}%
+  % Тезисы докладов на конференциях
   \ifnumequal{\value{bibliosel}}{0}{
     \insertbiblioauthor
   }{
@@ -76,28 +48,33 @@
   }
 \end{frame}
 \note{
-  Результаты работы опубликованы в N печатных изданиях,
-  в~т.\:ч. M реферируемых изданиях.
+  Результаты работы опубликованы в четырёх печатных изданиях,
+  в~т.ч. двух изданиях, рекомендованных ВАК.
 }
 
 \begin{frame}
-  \frametitle{Участие в конференциях}
+  \frametitle{Апробация работы}
+  Основные результаты работы докладывались на:
   \begin{itemize}
-    \item Научная сессия МГУ, Москва 2013--2015;
-    \item \rom{24} Russian Conference (RuC 2014), Obninsk, Russia, 2014
-    \item \rom{7} International Conference (IAC 16), Busan, Korea,
-      2016;
-    \item \rom{28} Other Conference (AC 16), East Lansing, MI USA, 2016;
-    \item \dots
+    \item 66-й Всероссийской научной конференции МФТИ, Москва,
+      апрель~2024~г.;
+    \item 68-й Всероссийской научной конференции МФТИ в~честь
+      130-летия~со~дня~рождения~Н.\,Н.~Семенова, Москва,
+      30~марта~--~04~апреля~2026~г.
   \end{itemize}
 \end{frame}
 \note{
-  Работа была представлена на ряде конференций.
+  Работа была представлена на конференциях МФТИ.
 }
 
 \begin{frame}[plain, noframenumbering] % последний слайд без оформления
   \begin{center}
     \Huge
     Спасибо за внимание!
+  \end{center}
+  \vfill
+  \begin{center}
+    \thesisAuthorShort\ --- \thesisTitle\\
+    Руководитель: \supervisorFioShort
   \end{center}
 \end{frame}
