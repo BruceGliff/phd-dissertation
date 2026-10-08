@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+    every node/.style={font=\normalsize},
+    op/.style={inner sep=2pt},
+    po/.style={-{Latex[length=2.5mm]}, line width=2pt, black},
+    fr/.style={-{Latex[length=2.5mm]}, line width=2pt, orange},
+    rf/.style={-{Latex[length=2.5mm]}, line width=2pt, red},
+    co/.style={-{Latex[length=2.5mm]}, line width=2pt, blue},
+    lbl/.style={midway, fill=none, inner sep=1pt},
+    pt/.style={circle, fill=red, inner sep=1.5pt},
+  ]
+
+  % Вершины
+  \node[op] (w1) at (0, 2.5) {(a) $\text{W}_{[x, x+8)}$};
+  \node[op] (r2) at (0, 1.0) {(b) $\text{RWM}_{[x+4,x+8)}$};
+  \node[op] (r3) at (5, 2.5) {(c) $\text{R}_{[x+4,x+8)}$};
+  \node[op] (fence) at (5, 1.0) {FENCE};
+  \node[op] (r4) at (5, -0.5) {(d) $\text{R}_{[x,x+4)}$};
+
+  % po-рёбра
+  \draw[po, transform canvas={xshift=-20}] (w1) -- (r2) node[lbl,
+  left, pos=0.1] {po-loc} node[lbl, left, pos=0.7] {ppo};
+  \draw[po] (r3) -- (fence) node[lbl, right] {po};
+  \draw[po] (fence) -- (r4) node[lbl, right] {po};
+
+  \draw[po, transform canvas={xshift=10}] (r3) to[bend left] (r4)
+  node[right] {ppo};
+
+  % rfe-ребро (2) -> (3)
+  \draw[rf] (r2) -- (r3) node[lbl, pos=0.5, above, sloped] {rfe};
+
+  \draw[rf, transform canvas={xshift=3}] (w1) -- (r2) node[lbl, right] {rf};
+  \draw[co] (w1) -- (r2) node[lbl, left] {co};
+
+  % fr-ребро (4) -> (1)
+  \draw[fr] (r4) -- (w1) node[lbl, pos=0.5, above, sloped] {fr};
+
+  % co-рёбра от init
+  \draw[co] (-1.5, 3.0) node[pt, fill=blue] {} -- (w1) node[lbl,
+  pos=0.5, above] {co};
+
+  % rf-ребро от init к (4)
+  \draw[rf] (4.1, 0.6) node[pt] {} -- (r4) node[lbl, pos=0.3, right] {rf};
+
+\end{tikzpicture}
