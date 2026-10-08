@@ -1,0 +1,29 @@
+\begin{tikzpicture}[
+    every node/.style={font=\normalsize},
+    op/.style={inner sep=2pt},
+    po/.style={-{Latex[length=2.5mm]}, line width=2pt, black},
+    fr/.style={-{Latex[length=2.5mm]}, line width=2pt, orange},
+    rf/.style={-{Latex[length=2.5mm]}, line width=2pt, red},
+    lbl/.style={midway, fill=none, inner sep=1pt},
+    pt/.style={circle, fill=red, inner sep=1.5pt},
+  ]
+
+  % Вершины
+  \node[op] (a) at (0, 2)   {a: W[x]=1};
+  \node[op] (b) at (0, 0)   {b: R[y]=0};
+  \node[op] (c) at (4, 2)   {c: W[y]=1};
+  \node[op] (d) at (4, 0)   {d: R[x]=0};
+
+  % po-рёбра
+  \draw[po] (a) -- (b) node[lbl, left] {po};
+  \draw[po] (c) -- (d) node[lbl, right] {po};
+
+  % fr-рёбра (диагонали)
+  \draw[fr] (b) -- (c) node[lbl, pos=0.6, sloped, above] {fr};
+  \draw[fr] (d) -- (a) node[lbl, pos=0.6, sloped, above] {fr};
+
+  \draw[rf] (-1.8, 0.5) node[pt] {} --
+  (-0.9, 0.2) node[lbl, pos=0.2, below] {rf};
+  \draw[rf] (2.3, 0.5) node[pt] {} -- (3.2, 0.2) node[lbl, pos=0.2, below] {rf};
+
+\end{tikzpicture}
