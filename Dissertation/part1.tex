@@ -1887,10 +1887,13 @@ POR/DPOR широко используются в теории верифика�
   \renewcommand{\arraystretch}{1.4}
   \begin{tabular}{|p{2.6cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
     \hline
-    \textbf{Подход} & \textbf{типы операций} & \textbf{число операций}
-    & \textbf{анализируемость} & \textbf{требования к среде} \\
+    \centering\textbf{подход} &
+    \centering\textbf{типы операций} &
+    \centering\textbf{число операций} &
+    \centering\textbf{диагно\-сти\-ру\-е\-мость ошибки} &
+    \centering\textbf{требования к среде}\arraybackslash \\
     \hline
-    Литмус-тесты (см.~раздел~\ref{sec:litmus-intro}) &
+    Литмус-тесты \newline (\ref{sec:litmus-intro}) &
     \textbf{\Large{-}}\newline нет поддержки алиасинга и примитивов
     межпоточных синхронизаций &
     \textbf{\Large{-}}\newline расчитан на малое число операций &
@@ -1898,9 +1901,8 @@ POR/DPOR широко используются в теории верифика�
     количестве операций &
     \textbf{\Large{+}}\newline применим к готовой системе \\
     \hline
-    TSOtool, Axe (см.~разделы \newline
-    \ref{sec:manovit},\ref{sec:manovit-adv}) &
-    \textbf{\Large{-}}\newline только парные чтения/записи, нет атомарных
+    TSOtool, Axe \newline (\ref{sec:manovit},\ref{sec:manovit-adv}) &
+    \textbf{\Large{-}}\newline только парные чтения записи, нет атомарных
     операций (кроме
     \texttt{swap}) и алиасинга, строгие наперёд заданные сценарии &
     \textbf{\Large{+}}\newline большое число операций за счёт
@@ -1908,8 +1910,8 @@ POR/DPOR широко используются в теории верифика�
     \textbf{\Large{-}}\newline фиксирует только факт нарушения &
     \textbf{\Large{+}}\newline применим к готовой системе \\
     \hline
-    Post-silicon с аппаратным логированием
-    (см.~раздел~\ref{sec:post-silicon}) &
+    Post-silicon с аппаратным логированием \newline
+    (\ref{sec:post-silicon}) &
     \textbf{\Large{+}}\newline любые операции с памятью &
     \textbf{\Large{+}}\newline любое число операций &
     \textbf{\Large{+}}\newline полная трасса исполнения &
