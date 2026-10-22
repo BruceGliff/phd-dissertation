@@ -1,53 +1,153 @@
 % Общие стили оформления.
-% Возможные варианты значений ищите в описании библиотеки beamer
-\usetheme{Pittsburgh}
-\usecolortheme{whale}
+%%% Минималистичный академический стиль: белый фон, тёмно-серый текст,
+%%% синий акцент, без рамок и теней. Никаких стандартных тем beamer.
 
-% \usetheme[secheader]{Boadilla}
-% \usecolortheme{seahorse}
+% --- Цветовая палитра ---
+\definecolor{bgWhite}{HTML}{FFFFFF}      % фон
+\definecolor{fgDark}{HTML}{1A1A1A}       % основной текст
+\definecolor{accentBlue}{HTML}{2563EB}   % акцент (заголовки, структура)
+\definecolor{secondaryGray}{HTML}{6B7280}% серый (подписи, нижний колонтитул)
+\definecolor{blockFill}{HTML}{F3F4F6}    % подложка блоков
 
-% Размер полей слайдов
-\setbeamersize{text margin left=1cm,%
-text margin right=1cm}
+\setbeamercolor{normal text}{fg=fgDark,bg=bgWhite}
+\setbeamercolor{title}{fg=fgDark}
+\setbeamercolor{subtitle}{fg=secondaryGray}
+\setbeamercolor{frametitle}{fg=accentBlue}
+\setbeamercolor{structure}{fg=accentBlue}
+\setbeamercolor{block title}{fg=accentBlue}
+\setbeamercolor{block body}{bg=blockFill}
+\setbeamercolor{block title alerted}{fg=accentBlue}
+\setbeamercolor{block body alerted}{bg=blockFill}
+\setbeamercolor{block title example}{fg=accentBlue}
+\setbeamercolor{block body example}{bg=blockFill}
+\setbeamercolor{footline}{fg=secondaryGray}
+\setbeamercolor{caption}{fg=secondaryGray}
+\setbeamercolor{caption name}{fg=secondaryGray}
+\setbeamercolor{bibliography item}{fg=fgDark}
+\setbeamercolor{bibliography entry author}{fg=fgDark}
+\setbeamercolor{bibliography entry title}{fg=fgDark}
+\setbeamercolor{bibliography entry location}{fg=fgDark}
+\setbeamercolor{bibliography entry note}{fg=fgDark}
+
+% Шрифт без засечек --- гротеск Liberation Sans (гарантированно установлен
+% в dockertex-образе; Inter и Source Sans 3 в нём отсутствуют).
+\setsansfont{Liberation Sans}
+\renewfontfamily\cyrillicfontsf{Liberation Sans}
+
+% Размеры полей слайдов
+\setbeamersize{text margin left=1.2cm,%
+text margin right=1.2cm}
 
 % выключение кнопок навигации
 \beamertemplatenavigationsymbolsempty
 
-% Размеры шрифтов
-\setbeamerfont{title}{size=\large}
-\setbeamerfont{subtitle}{size=\small}
+% Использовать шрифт с засечками для формул, чтобы формулы не ломались
+% https://tex.stackexchange.com/a/34267/104425
+\usefonttheme[onlymath]{serif}
+
+% --- Размеры шрифтов ---
+\setbeamerfont{frametitle}{size=\Large\bfseries}
+\setbeamerfont{title}{size=\LARGE\bfseries}
+\setbeamerfont{subtitle}{size=\large}
 \setbeamerfont{author}{size=\normalsize}
 \setbeamerfont{institute}{size=\small}
 \setbeamerfont{date}{size=\normalsize}
+\setbeamerfont{caption}{size=\footnotesize}
 \setbeamerfont{bibliography item}{size=\small}
 \setbeamerfont{bibliography entry author}{size=\small}
 \setbeamerfont{bibliography entry title}{size=\small}
 \setbeamerfont{bibliography entry location}{size=\small}
 \setbeamerfont{bibliography entry note}{size=\small}
-% Аналогично можно настроить и другие размеры.
-% Названия классов элементов можно найти здесь
-% http://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf
 
-% Цвет элементов
-\setbeamercolor{footline}{fg=blue}
-\setbeamercolor{bibliography item}{fg=black}
-\setbeamercolor{bibliography entry author}{fg=black}
-\setbeamercolor{bibliography entry title}{fg=black}
-\setbeamercolor{bibliography entry location}{fg=black}
-\setbeamercolor{bibliography entry note}{fg=black}
-% Аналогично можно настроить и другие цвета.
-% Названия классов элементов можно найти здесь
-% http://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf
+% --- Заголовок слайда: простой выровненный по левому краю текст ---
+% Без декоративной линии/плашки.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \vskip0.45cm%
+  {\usebeamerfont{frametitle}%
+    \usebeamercolor[fg]{frametitle}%
+  \insertframetitle\par}%
+  \vskip0.35cm%
+}
 
-% Нумеровать список статей
+% --- Номеровать список статей ---
 % https://tex.stackexchange.com/a/419506/104425
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 % или убрать номера
 % \setbeamertemplate{bibliography item}{}
 
-% Использовать шрифт с засечками для формул
-% https://tex.stackexchange.com/a/34267/104425
-\usefonttheme[onlymath]{serif}
+% --- Нижний колонтитул: тонкий прогресс-бар + номер страницы ---
+% Ширина бара пропорциональна \insertframenumber/\inserttotalframenumber.
+% (appendixnumberbeamer уже загружен, поэтому номера слайдов приложения
+% не учитываются.) Замечание: опция кадра [plain, noframenumbering] не
+% отключает нижний колонтитул — номер слайда при этом не инкрементируется,
+% но прогресс-бар и номер по-прежнему рисуются.
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{}%
+    {\color{accentBlue}%
+      \rule{\dimexpr\paperwidth*\insertframenumber/%
+    \inserttotalframenumber\relax}{2pt}}%
+    {\color{secondaryGray}%
+      \rule{\dimexpr\paperwidth-\paperwidth*\insertframenumber/%
+    \inserttotalframenumber\relax}{2pt}}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{}%
+    {\color{secondaryGray}\scriptsize\insertframenumber}%
+    \hspace*{0.8em}%
+  \end{beamercolorbox}%
+}
+
+% --- Блоки: без рамок, только лёгкая подложка и акцентный заголовок ---
+\setbeamertemplate{block begin}{%
+  \vskip\medskipamount%
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.7em,left]{block body}%
+    {\usebeamerfont{block title}\usebeamercolor[fg]{block title}%
+    \insertblocktitle\par\vskip0.35em}%
+  }
+  \setbeamertemplate{block end}{%
+  \end{beamercolorbox}%
+  \vskip\medskipamount%
+}
+\setbeamertemplate{block alerted begin}{%
+  \vskip\medskipamount%
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.7em,left]{block body alerted}%
+    {\usebeamerfont{block title alerted}\usebeamercolor[fg]{block
+      title alerted}%
+    \insertblocktitle\par\vskip0.35em}%
+  }
+  \setbeamertemplate{block alerted end}{%
+  \end{beamercolorbox}%
+  \vskip\medskipamount%
+}
+\setbeamertemplate{block example begin}{%
+  \vskip\medskipamount%
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.7em,left]{block body example}%
+    {\usebeamerfont{block title example}\usebeamercolor[fg]{block
+      title example}%
+    \insertblocktitle\par\vskip0.35em}%
+  }
+  \setbeamertemplate{block example end}{%
+  \end{beamercolorbox}%
+  \vskip\medskipamount%
+}
+
+% --- Списки: компактные, акцентные маркеры ---
+\setbeamertemplate{itemize item}{\color{accentBlue}\rule{0.9mm}{0.9mm}}
+\setbeamertemplate{itemize subitem}{\color{accentBlue}\rule{0.6mm}{0.6mm}}
+\setbeamertemplate{itemize subsubitem}{\color{accentBlue}\rule{0.45mm}{0.45mm}}
+\setbeamertemplate{enumerate item}{{\color{accentBlue}\insertenumlabel.}}
+\setbeamertemplate{enumerate subitem}{{\color{accentBlue}\insertsubenumlabel.}}
+\setbeamertemplate{enumerate
+subsubitem}{{\color{accentBlue}\insertsubsubenumlabel.}}
+\setbeamertemplate{itemize/enumerate body begin}{%
+  \setlength\itemsep{0.35em}%
+}
+\setbeamertemplate{itemize/enumerate subbody begin}{%
+  \setlength\itemsep{0.35em}%
+}
+
+% --- Подписи к рисункам: маленькие серые, без рамок ---
+% Текст подписи не меняем, задаём только цвет и размер.
 
 % https://tex.stackexchange.com/a/291545/104425
 \makeatletter
@@ -57,24 +157,6 @@ text margin right=1cm}
   \gdef\beamer@notes{}%
 }
 \makeatother
-
-% footer презентации
-\setbeamertemplate{footline}{
-  \leavevmode%
-  \hbox{%
-    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
-      % И. О. Фамилия, Организация кратко
-      \thesisAuthorShort, \thesisOrganizationShort
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
-      % Город, 20XX
-      \thesisCity, \thesisYear
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
-      Стр. \insertframenumber{} из \inserttotalframenumber \hspace*{2ex}
-  \end{beamercolorbox}}%
-  \vskip0pt%
-}
 
 % вывод на экран заметок к презентации
 \ifnumequal{\value{presnotes}}{0}{}{
