@@ -76,7 +76,8 @@ text margin right=1.2cm}
 % или убрать номера
 % \setbeamertemplate{bibliography item}{}
 
-% --- Нижний колонтитул: тонкий прогресс-бар + номер страницы ---
+% --- Нижний колонтитул: тонкий прогресс-бар + текст (ФИО слева,
+% --- город/год по центру, номер страницы справа) ---
 % Ширина бара пропорциональна \insertframenumber/\inserttotalframenumber.
 % (appendixnumberbeamer уже загружен, поэтому номера слайдов приложения
 % не учитываются.) Замечание: опция кадра [plain, noframenumbering] не
@@ -91,10 +92,21 @@ text margin right=1.2cm}
       \rule{\dimexpr\paperwidth-\paperwidth*\insertframenumber/%
     \inserttotalframenumber\relax}{2pt}}%
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{}%
-    {\color{secondaryGray}\scriptsize\insertframenumber}%
-    \hspace*{0.8em}%
-  \end{beamercolorbox}%
+
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+      % И. О. Фамилия, Организация кратко
+      \thesisAuthorShort, \thesisOrganizationShort
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+      % Город, 20XX
+      \thesisCity, \thesisYear
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
+      Стр. \insertframenumber{} из \inserttotalframenumber \hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
 }
 
 % --- Блоки: без рамок, только лёгкая подложка и акцентный заголовок ---
