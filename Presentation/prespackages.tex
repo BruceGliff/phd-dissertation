@@ -6,6 +6,13 @@
 \usepackage{appendixnumberbeamer} % не считать номера страниц после
 % команды \appendix
 \usepackage{array, booktabs} % для таблиц
+% Пакеты для блока algorithm в Presentation/content.tex (слайд
+% "Топологическая сортировка"); стилизация совпадает с диссертацией
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\floatname{algorithm}{Алгоритм}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
 \usepackage{pgfpages}
 \usepackage{esint} % various fancy integral symbols
 

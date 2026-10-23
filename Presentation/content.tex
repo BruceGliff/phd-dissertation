@@ -136,7 +136,33 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Топологическая сортировка.}
+  \frametitle{Топологическая сортировка}
+  \begin{algorithm}[H]
+    \caption{Обход частично упорядоченного множества топологической сортировкой}
+    \label{alg:topo}
+    \begin{algorithmic}[1]
+      \Require $P$ — частично упорядоченное множество.
+      \Require $\pi$ — текущий линейный порядок.
+      \Require $ctx$ — контекст алгоритма обхода.
+      \Function{Traverse}{$P$, $\pi$, $ctx$}
+      \If{$P = \emptyset$}
+      \State $L(P) \gets \pi \cup L(P)$ \Comment{Полностью построили
+      линейный порядок}
+      \EndIf
+      \ForAll{$\forall x \in \min(P)$}
+      \State $r \gets$ \Call{Process}{$ctx$, $\pi$, $x$}
+      \Comment{Обработка элемента множества}
+      \If{$r == \text{Next}$}
+      \State \Call{Traverse}{$P \setminus \{x\}$, $\pi
+      \stackrel{add}{\longleftarrow} x$, $ctx$} \Comment{Продолжили
+      обход в глубину}
+      \ElsIf{$r == \text{Break}$}
+      \State \Return \Comment{Закончили обход}
+      \EndIf
+      \EndFor
+      \EndFunction
+    \end{algorithmic}
+  \end{algorithm}
 \end{frame}
 
 \begin{frame}
