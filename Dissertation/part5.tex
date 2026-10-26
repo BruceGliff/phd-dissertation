@@ -226,7 +226,17 @@ $P^{\rightarrow}$, либо $P^{\leftarrow}$).
   \label{fig:all_shapes_cmp}
   % ./scripts/plot_mean_seconds.py  litmus-our-exp/results/*
   % --x-limit 7 --normalize --with-ref --to-tex
-  % FIX LEGEND!!!
+  %   xtick={1,2,3,4,5,6,7},
+  % FIX LEGEND,
+  % legend should be by color:
+  % orange color:
+  %\addlegendentry{\(\displaystyle 1 \times N\) сценарий, обобщённый подход}
+  % pink color:
+  %\addlegendentry{\(\displaystyle 1 \times N\) сценарий, herdtool7}
+  % green color:
+  %\addlegendentry{\(\displaystyle N \times 1\) сценарий, обобщённый подход}
+  % blue color:
+  %\addlegendentry{\(\displaystyle N \times 1\) сценарий, herdtool7}
 \end{figure}
 
 \section{Сравнительный анализ способов представления состояний памяти
