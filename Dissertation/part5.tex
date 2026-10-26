@@ -195,6 +195,49 @@ $P^{\rightarrow}$, либо $P^{\leftarrow}$).
 работоспособность метода за~пределами применимости классических
 подходов, ограниченных литмус-тестами и~малыми тестовыми сценариями.
 
+\section{Сравнение времени вычисления всех корректных состояний
+многопоточной программы}
+\label{sec:ch5/litmus-comparison}
+
+\begin{figure}[htbp]
+  \centering
+  \input{Dissertation/images/exp_log_Nx1_results_1xN_results.tex}
+  \caption{Наш подход.}
+  \label{fig:our-approach-time}
+  % ./scripts/plot_mean_seconds.py
+  % litmus-our-exp/results/Nx1_results
+  % litmus-our-exp/results/1xN_results --x-limit 7 --log --to-tex
+  % \begin{axis}
+  %   ...
+  %   tick pos=left
+  %   xtick={1,2,3,4,5,6,7},
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \input{Dissertation/images/exp_log_Nx1_results_litmus_1xN_results_litmus_Nx1_results.tex}
+  \caption{Их подход}
+  \label{fig:their-approach-time}
+  % ./scripts/plot_mean_seconds.py
+  % litmus-our-exp/results/Nx1_results_litmus
+  % litmus-our-exp/results/1xN_results_litmus
+  % litmus-our-exp/results/Nx1_results --x-limit 7 --log --to-tex
+  % \begin{axis}
+  %   ...
+  %   tick pos=left
+  %   xtick={1,2,3,4,5,6,7},
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \input{Dissertation/images/exp_1xN_results_normalize_1xN_results_litmus_normalize_Nx1_results_normalize_Nx1_results_litmus_normalize_with_ref.tex}
+  \caption{Все формы на одном графике.}
+  \label{fig:all_shapes_cmp}
+  % ./scripts/plot_mean_seconds.py  litmus-our-exp/results/*
+  % --x-limit 7 --normalize --with-ref --to-tex
+  % FIX LEGEND!!!
+\end{figure}
+
 \section{Сравнительный анализ способов представления состояний памяти
 многопроцессорной системы}
 \label{sec:ch5/sg-linext-comp}
