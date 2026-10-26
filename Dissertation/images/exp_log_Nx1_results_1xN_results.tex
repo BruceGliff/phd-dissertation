@@ -2,6 +2,7 @@
 \begin{tikzpicture}
 
   \definecolor{darkgrey176}{RGB}{176,176,176}
+  \definecolor{green}{RGB}{0,128,0}
   \definecolor{lightgrey204}{RGB}{204,204,204}
   \definecolor{orange}{RGB}{255,165,0}
 
@@ -21,7 +22,6 @@
       legend style={  at={(1,1.03)},  anchor=south east},
       tick align=outside,
       tick pos=left,
-      xtick={1,2,3,4,5,6,7},
       width=0.95\textwidth,
       x grid style={darkgrey176},
       xlabel={Количество операций, \(\displaystyle n\)},
@@ -29,44 +29,45 @@
       xtick style={color=black},
       y grid style={darkgrey176},
       ylabel style={text width=10cm, align=center},
-      ylabel={Время построения всех состояний, \(\displaystyle с\)
-      (\(\displaystyle \log_{10}(n * 17782.4)\))},
+      ylabel={Время построения всех состояний, с (\(\displaystyle
+      \log_{10}(n * 17782.4)\))},
       ymin=-0.172877824634088, ymax=3.33396635243205,
       ytick style={color=black}
     ]
-    \draw[draw=none,fill=orange] (axis cs:0.9375,0) rectangle (axis cs:1,0);
-    \addlegendimage{ybar,ybar legend,draw=none,fill=orange}
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:0.9375,0)
+    rectangle (axis cs:1,0);
+    \addlegendimage{ybar,ybar legend,draw=black,fill=green,line width=0.28pt}
     \addlegendentry{\(\displaystyle N \times 1\) сценарий, обобщённый подход}
 
-    \draw[draw=none,fill=orange] (axis cs:1.9375,0) rectangle (axis
-    cs:2,0.118820501383834);
-    \draw[draw=none,fill=orange] (axis cs:2.9375,0) rectangle (axis
-    cs:3,0.29570641077703);
-    \draw[draw=none,fill=orange] (axis cs:3.9375,0) rectangle (axis
-    cs:4,0.64851455246668);
-    \draw[draw=none,fill=orange] (axis cs:4.9375,0) rectangle (axis
-    cs:5,1.27457679847712);
-    \draw[draw=none,fill=orange] (axis cs:5.9375,0) rectangle (axis
-    cs:6,2.14705529913421);
-    \draw[draw=none,fill=orange] (axis cs:6.9375,0) rectangle (axis
-    cs:7,3.17198133295483);
-    \draw[draw=none,fill=blue] (axis cs:1,0) rectangle (axis
-    cs:1.0625,0.0404499820394357);
-    \addlegendimage{ybar,ybar legend,draw=none,fill=blue}
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:1.9375,0)
+    rectangle (axis cs:2,0.118820501383834);
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:2.9375,0)
+    rectangle (axis cs:3,0.29570641077703);
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:3.9375,0)
+    rectangle (axis cs:4,0.64851455246668);
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:4.9375,0)
+    rectangle (axis cs:5,1.27457679847712);
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:5.9375,0)
+    rectangle (axis cs:6,2.14705529913421);
+    \draw[draw=black,fill=green,line width=0.28pt] (axis cs:6.9375,0)
+    rectangle (axis cs:7,3.17198133295483);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:1,0)
+    rectangle (axis cs:1.0625,0.0404499820394357);
+    \addlegendimage{ybar,ybar legend,draw=black,fill=orange,line width=0.28pt}
     \addlegendentry{\(\displaystyle 1 \times N\) сценарий, обобщённый подход}
 
-    \draw[draw=none,fill=blue] (axis cs:2,0) rectangle (axis
-    cs:2.0625,0.0644667039300017);
-    \draw[draw=none,fill=blue] (axis cs:3,0) rectangle (axis
-    cs:3.0625,0.079566472276623);
-    \draw[draw=none,fill=blue] (axis cs:4,0) rectangle (axis
-    cs:4.0625,0.103256367182957);
-    \draw[draw=none,fill=blue] (axis cs:5,0) rectangle (axis
-    cs:5.0625,0.121500918601371);
-    \draw[draw=none,fill=blue] (axis cs:6,0) rectangle (axis
-    cs:6.0625,0.134970362860661);
-    \draw[draw=none,fill=blue] (axis cs:7,0) rectangle (axis
-    cs:7.0625,0.156372553383517);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:2,0)
+    rectangle (axis cs:2.0625,0.0644667039300017);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:3,0)
+    rectangle (axis cs:3.0625,0.079566472276623);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:4,0)
+    rectangle (axis cs:4.0625,0.103256367182957);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:5,0)
+    rectangle (axis cs:5.0625,0.121500918601371);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:6,0)
+    rectangle (axis cs:6.0625,0.134970362860661);
+    \draw[draw=black,fill=orange,line width=0.28pt] (axis cs:7,0)
+    rectangle (axis cs:7.0625,0.156372553383517);
     \path [draw=black]
     (axis cs:0.96875,-0.0134758165856276)
     --(axis cs:0.96875,0.0130702261742331);
