@@ -90,13 +90,8 @@ text margin right=1.2cm}
 % отключает нижний колонтитул — номер слайда при этом не инкрементируется,
 % но прогресс-бар и номер по-прежнему рисуются.
 \setbeamertemplate{footline}{%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{}%
-    {\color{accentBlue}%
-      \rule{\dimexpr\paperwidth*\insertframenumber/%
-    \inserttotalframenumber\relax}{2pt}}%
-    {\color{secondaryGray}%
-      \rule{\dimexpr\paperwidth-\paperwidth*\insertframenumber/%
-    \inserttotalframenumber\relax}{2pt}}%
+  % [DIAGNOSTIC] progress bar disabled to isolate a build failure — see .plan
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{}
   \end{beamercolorbox}%
 
   \leavevmode%
