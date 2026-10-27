@@ -1,0 +1,10 @@
+RISCV Nx1-AMOADD
+"Nx1 amoadd"
+{
+0:x6=x; 0:x7=1;
+...
+n-1:x6=x; 3:x7=1;
+x=0;
+}
+P0                  | P.. | P(n-1)              ;
+amoadd.w x8,x7,(x6) | ... | amoadd.w x8,x7,(x6) ;
