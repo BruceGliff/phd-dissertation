@@ -536,6 +536,80 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Кластеризация}
+
+  \begin{equation}
+    \label{eq:unorder_set}
+    \begin{aligned}
+      &G_{unorder} = (V, E), \\
+      &V \text{ -- множество операций с памятью,} \\
+      &E = \{\{x, y\} \mid \{x, y\} \in D \text{ или } x <_P y \text{
+      или } y <_P x \}.
+    \end{aligned}
+  \end{equation}
+
+  \begin{itemize}
+    \item
+      \textbf{Кластером операций $C_{i}$} называется множество вершин из
+      $i$-й компоненты связности $U_i$ графа $G_{unorder}$:
+      \begin{equation}
+        C_{i} = V(U_i)
+        \label{def:set_cluster}
+      \end{equation}
+
+    \item
+
+      Вершины графа состояний для одного линейного порядка $\pi$,
+      состоящие только из операций с памятью, принадлежащих одному
+      кластеру операций, будем называть \textbf{кластером состояний
+      $C_{i}^{\pi}$}:
+      \begin{equation}
+        \forall \pi\ \exists C_{i}^{\pi} = \{ \rho_{\pi}(x) \mid x \in C_{i}\}.
+        \label{def:st_cluster}
+      \end{equation}
+  \end{itemize}
+
+  \note{
+    Стоит отметить, что любая вершина, достижимая из вершины $x$,
+    принадлежащей кластеру состояний $C_i^\pi$, также принадлежит
+    $C_i^\pi$ (см. формулу~\ref{eq:state_cluster_property}):
+    \begin{equation}
+      \label{eq:state_cluster_property}
+      \forall C_i^\pi\ \forall s \in C_i^\pi \rightarrow \text{bfs}(s)
+      \subseteq C_i^\pi.
+    \end{equation}
+    То есть все вершины кластера состояний достижимы алгоритмом обхода в
+    ширину bfs из истоков, принадлежащих этому кластеру.
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Верификация по кластерам состояний}
+
+  $C = \{C_i\}$ -- множество всех кластеров операций.
+
+  $S_i = \{C_i^{\pi} \mid \forall \pi \in L_P\}$ -- множество всех
+  кластеров состояний для данного кластера операций.
+
+  \begin{block}{Кластеризованное условие корректности}
+    Для каждого кластера операций существует
+    хотя бы один маркированный кластер состояний:
+    \[
+      \forall S_i\ \exists
+      C_i^\pi \subseteq \mathcal{M}.
+    \]
+  \end{block}
+
+  \note{
+    Если кластер состояний является подмножеством множества
+    маркированных вершин $\mathcal{M}$, то такой кластер состояний будем
+    называть \textbf{маркированным}.
+
+    Выполнение кластеризованного условие корректности условия
+    обеспечивает соответствие исполнения
+    многопоточной программы заданной модели памяти.
+  }
+
 \end{frame}
 
 \begin{frame}
