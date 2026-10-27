@@ -277,7 +277,7 @@ B^{|})}{=} 120$. Таким образом, $012 \stackrel{Eq(\pi, B)}{=} 120$,
     \State $\mathcal{B}(n-1) \gets \mathcal{B}(n-1) \cup \{\{xz,
       zx\} \in B^{|} \mid \forall z \in P,\ \forall x \mid \{xy, yx\}
     \in \mathcal{B}(n-2)\}$
-    \ForAll{$\forall x \in \min(P) : \{xy, yx\} \not \in
+    \ForAll{$\forall x \in \min(P) \mid \{xy, yx\} \not \in
     \mathcal{B}(n-2)$}\label{alg:line:traverse}
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
@@ -523,7 +523,7 @@ $D^{*}$ по правилам~\eqref{eq:rules}.
     \If{$X = \emptyset, P \not = \emptyset$}  \label{alg:line:loop}
     \State \Return \Comment{Найден цикл}
     \EndIf
-    \If{$\forall x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$}
+    \If{$\{x, y\} \not \in D \mid \forall x \in X, \forall y \in P$}
     \State \Call{ProcessSet}{$ctx$, $X$, $\pi$} \Comment{Обработка
     множества $X$}
     \State \Call{Traverse}{$P \setminus X$, $D$, $\pi

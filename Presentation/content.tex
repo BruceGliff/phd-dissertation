@@ -223,8 +223,9 @@
     \State $\mathcal{B}(n-1) \gets \mathcal{B}(n-1) \cup \{\{xz,
       zx\} \in B^{|} \mid \forall z \in P,\ \forall x \mid \{xy, yx\}
     \in \mathcal{B}(n-2)\}$
-    \ForAll{$\forall x \in \min(P) : \{xy, yx\} \not \in
-    \mathcal{B}(n-2)$}\label{alg:line:traverse}
+    \ForAll{$\forall x \in \min(P) : \textcolor{blue}{\{xy,
+        yx\} \not \in
+    \mathcal{B}(n-2)}$}\label{alg:line:traverse}
     \State \Call{Process}{$ctx$, $\pi$, $x$}
     \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$,
     $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
@@ -285,11 +286,11 @@
   \begin{algorithmic}[1]
     \Require $D$ — множество зависимых элементов.
     \Function{Traverse}{$P$, $D$, $\pi$, $ctx$}
-    \State $X \gets \{ x \in \min(P) \}$ \label{alg:line:X}
+    \State \textcolor{blue}{$X \gets \{ x \in \min(P) \}$} \label{alg:line:X}
     \If{$X = \emptyset, P \not = \emptyset$}  \label{alg:line:loop}
     \State \Return \Comment{Найден цикл}
     \EndIf
-    \If{$\forall x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$}
+    \If{$\{x, y\} \not \in D \mid \forall x \in X, \forall y \in P$}
     \State \Call{ProcessSet}{$ctx$, $X$, $\pi$} \Comment{Обработка
     множества $X$}
     \State \Call{Traverse}{$P \setminus X$, $D$, $\pi
