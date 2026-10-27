@@ -6,7 +6,8 @@
 
 # 2. Установка DockerTex
 echo "==> Downloading and updating docker image"
-sg docker -c "docker build -t raabf/texstudio-versions:latest ."
+# sg docker -c "docker build -t raabf/texstudio-versions:latest ."
+echo "docker build -t raabf/texstudio-versions:latest ." | newgrp docker
 
 # 3. Настройка DockerTex
 ## 3.1 Клонирование репозитория
