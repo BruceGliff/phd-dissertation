@@ -637,6 +637,24 @@ basicstyle=\small\ttfamily,
       \captionof{figure}{Сценарий Nx1}
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Сравнение времени вычисления всех корректных состояний
+  многопоточной программы}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+\scalebox{0.9}{  \input{Dissertation/images/exp_log_1xN_results_Nx1_results_PRESENTATION.tex}}
+  \captionof{figure}{Время построения состояний (новый подход)}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+\scalebox{0.9}{  \input{Dissertation/images/exp_log_Nx1_results_1xN_results_litmus_Nx1_results_litmus_PRESENTATION.tex}}
+  \captionof{figure}{Время построения состояний (новый подход + herdtool7)}
+    \end{column}
+    \end{columns}
+
+
 
 \end{frame}
 
