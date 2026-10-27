@@ -207,37 +207,104 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Алгоритмы топологической сортировки}
-  Разработаны алгоритмы построения линейных порядков ЧУМ:
-  \begin{itemize}
-    \item базовая топологическая сортировка;
-    \item с~учётом \textbf{независимости} операций;
-    \item с~учётом независимых \textbf{последовательностей} операций;
-    \item с~учётом \textbf{зависимостей} операций.
-  \end{itemize}
-  \begin{alertblock}{Оценка сложности}
-    Асимптотика учитывающих классы эквивалентности алгоритмов ---
-    $O(2^{|D|}n^2)$; в~предельном случае высокой независимости
-    ($p_i \approx 1$) затраты снижаются до~$O(n^2)$.
-  \end{alertblock}
+  \frametitle{Обход частично упорядоченного множества с учётом
+  независимых последовательностей операций}
+
+  \begin{algorithmic}[1]
+    \Require $B^{|}$ -- разбиение из независимых элементов.
+    \Require $\mathcal{B} = \{B_n\}$, где $B_n$ -- множество из
+    разбиений на $n$-ом шаге рекурсии. $\mathcal{B}(n) = B_n$
+    \Require $y$ -- вершина, обработанная на предыдущем шаге рекурсии.
+    \Function{Traverse}{$P$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
+    \If{$P = \emptyset$}
+    \State $L(P) \gets \pi \cup L(P)$
+    \EndIf
+    \State $\mathcal{B}(n) \gets \emptyset$
+    \State $\mathcal{B}(n-1) \gets \mathcal{B}(n-1) \cup \{\{xz,
+      zx\} \in B^{|} \mid \forall z \in P,\ \forall x \mid \{xy, yx\}
+    \in \mathcal{B}(n-2)\}$
+    \ForAll{$\forall x \in \min(P) : \{xy, yx\} \not \in
+    \mathcal{B}(n-2)$}\label{alg:line:traverse}
+    \State \Call{Process}{$ctx$, $\pi$, $x$}
+    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$,
+    $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
+    \If{$\{xy, yx\} \in B^{|}$}
+    \State $\mathcal{B}(n-2) \gets \{xy, yx\} \cup \mathcal{B}(n-2)$
+    \EndIf
+    \EndFor
+    \EndFunction
+  \end{algorithmic}
+
 \end{frame}
 
 \begin{frame}
-  \frametitle{Обход ЧУМ с~учётом независимости ($topo$-indep)}
-  Алгоритм топологической сортировки дополняется учётом разбиения $B^{|}$
-  из~независимых элементов:
-  \begin{itemize}
-    \item из~цикла обхода исключаются минимальные элементы, перестановка
-      которых с~элементом на~предыдущем шаге уже была обработана;
-    \item информация об~обработанных парах независимых элементов
-      обновляется на~каждом шаге рекурсии;
-    \item исключаются эквивалентные перестановки соседних независимых
-      элементов (например, $13452 \in Eq(13425, B^{|})$).
-  \end{itemize}
-  \begin{block}{Асимптотика}
-    При $p_i \approx 1$ сложность снижается до~$C_N = \dfrac{N(N-1)}{2}$,
-    что соответствует $O(n^2)$.
-  \end{block}
+  \frametitle{Обход частично упорядоченного множества с учётом
+  независимых последовательностей операций}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.32\textwidth}
+
+      \begin{figure}
+        \scalebox{0.6}{\input{Dissertation/images/topo-indep-poset.tex}}
+        \caption{Частично упорядоченное множество с рёбрами независимости}
+        \label{fig:topo-indep-poset}
+      \end{figure}
+
+      Порядки $13452$ и $31245$ не были обработаны, так как
+      $13452 \in Eq(13425, B^|)$ и $31245 \in Eq(31425, B^|)$
+
+    \end{column}
+
+    \begin{column}{0.32\textwidth}
+
+      \begin{figure}
+        \scalebox{0.6}{\input{Dissertation/images/topo-traversal-tree.tex}}
+        \caption{Пример построенного дерева (сжатого в ОАГ) линейных порядков}
+        \label{fig:topo-trav-tree}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{0.32\textwidth}
+
+      \begin{figure}
+        \scalebox{0.6}{\input{Dissertation/images/topo-trav-indep-tree.tex}}
+        \caption{Пример построенного дерева (сжатого в ОАГ) линейных
+        порядков с учётом независимости}
+        \label{fig:topo-trav-indep-tree}
+      \end{figure}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Обход частично упорядоченного множества с учётом зависимостей}
+
+  \label{alg:topo-dep}
+  \label{alg:topo-dep}
+  \begin{algorithmic}[1]
+    \Require $D$ — множество зависимых элементов.
+    \Function{Traverse}{$P$, $D$, $\pi$, $ctx$}
+    \State $X \gets \{ x \in \min(P) \}$ \label{alg:line:X}
+    \If{$X = \emptyset, P \not = \emptyset$}  \label{alg:line:loop}
+    \State \Return \Comment{Найден цикл}
+    \EndIf
+    \If{$\forall x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$}
+    \State \Call{ProcessSet}{$ctx$, $X$, $\pi$} \Comment{Обработка
+    множества $X$}
+    \State \Call{Traverse}{$P \setminus X$, $D$, $\pi
+    \stackrel{add}{\longleftarrow} X$, $ctx$}
+    \EndIf
+    \ForAll{$\forall x \in X, \forall y \in P \mid \{x, y\} \in D$}
+    \State $D^{*} \gets D \setminus \{x, y\}$
+    \State $P^{\rightarrow} \gets P \cup (x <_{p} y)$ \label{alg:line:pright}
+    \State $P^{\leftarrow} \gets P \cup (y <_{p} x)$ \label{alg:line:pleft}
+    \State \Call{Traverse}{$P^{\rightarrow}$, $D^{*}$, $\pi$, $ctx$}
+    \State \Call{Traverse}{$P^{\leftarrow}$, $D^{*}$, $\pi$, $ctx$}
+    \EndFor
+    \EndFunction
+  \end{algorithmic}
+
 \end{frame}
 
 \begin{frame}
