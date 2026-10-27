@@ -379,8 +379,16 @@
   \label{fig:nds-13-linext}
 \end{frame}
 
+\section{Граф состояний}
+\begin{frame}[plain, noframenumbering]
+  \begin{center}
+    \Huge
+    Граф состояний
+  \end{center}
+\end{frame}
+
 \begin{frame}
-  \frametitle{Граф состояний}
+  \frametitle{Комбинаторный взрыв}
 
   Недетерминизм порядка исполнения операций с памятью во время
   исполнения многопоточной программы порождает большое количество
@@ -396,7 +404,94 @@
     необходимо выполнить \textcolor{blue}{$2^n$} проверок
     \textcolor{blue}{$2^n$} раз.
   \end{alertblock}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Путь}
+  \begin{block}{Решение}
+    Необходимо \textbf{сохранение} результата алгоритмов обхода.
+  \end{block}
+
+  Для элемента $x$ в порядке $\pi \in L_P$ определим:
+  \begin{itemize}
+    \item $V_\pi = \{x\} \cup \{y \mid \#_{\pi}(y) <
+      \#_{\pi}(x),\ \forall y \in \pi\}$ ;
+    \item $E_\pi = \{(b, a) \mid \{a, b\} \in D \text{ или } a <_p
+        b,\ \text{где } \#_{\pi}(a) < \#_{\pi}(b),\ \forall a,b \in
+      V_\pi\}$.
+  \end{itemize}
+
+  \begin{block}{Определение}
+    \textbf{Путём} $\rho$ элемента $x$ для порядка $\pi$ назовём
+    подпорядок, состоящий из элементов $Y \subseteq \pi$, для которых
+    существует простая цепь из $x$ в $\forall y \in Y$:
+    \begin{equation}
+      \begin{aligned}
+        \rho = \{y \in \pi \mid \exists (x, y) \text{ — простая цепь от
+        вершины } x \text{ в вершину } y\}, \\
+        \text{при этом относительный порядок элементов в } \rho \text{
+        такой же, как в } \pi.
+      \end{aligned}
+      \label{eq:def_suborder}
+    \end{equation}
+    Обозначается $\rho_{\pi}(x)$.
+  \end{block}
+
+  \note{
+    $V_\pi$ -- множество вершин, находящихся ``левее'' элемента $x$
+    $E_\pi$ --  множество направленных рёбер ``справа налево'' между
+    зависимыми элементами или элементами, связанными отношением порядка.
+
+    По построению граф $G_\pi = (V_\pi, E_\pi)$ является ориентированным
+    и ацикличным. В таком графе для элемента $x$ существуют простые цепи
+    (без циклов), в которых все вершины и рёбра различны~\cite{graph-theory}.
+
+    Иными словами, $\rho_{\pi}(x)$ можно интерпретировать как порядок
+    только тех операций, от которых зависит состояние операции $x$.
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Граф состояний}
+  \begin{block}{Определение}
+
+    \textbf{Графом состояний} $SG$ (state graph) называется
+    ориентированный граф, построенный по правилу~\ref{eq:sg_def}:
+    \begin{equation}
+      \begin{aligned}
+        &V_{SG} = \{ \rho_{\pi}(x) \mid (x, \pi) \in P \times L_P \}, \\
+        &E_{SG} = \{ (\rho_{\pi}(x), \rho_{\pi}(y)) \mid (x, y) \in
+        E_\pi,\ \forall \pi \in L_P,\ \forall x, y \in P \}, \\
+        &SG = (V_{SG}, E_{SG}).
+      \end{aligned}
+      \label{eq:sg_def}
+    \end{equation}
+
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Пример графа состояний}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.28\textwidth}
+      \centering
+      \scalebox{0.6}{\input{Dissertation/images/topo-dep.tex}}
+      \captionof{figure}{Частично упорядоченное множество с рёбрами зависимости}
+    \end{column}
+
+    \begin{column}{0.6\textwidth}
+      \centering
+      \scalebox{0.8}{\input{Dissertation/images/sg-topo-dep.tex}}
+      \captionof{figure}{Граф состояний}
+      \label{fig:sg-topo-dep}
+
+    \end{column}
+  \end{columns}
+
+  \note{
+    \fixme{table in backup slide}
+  }
 \end{frame}
 
 \begin{frame}
