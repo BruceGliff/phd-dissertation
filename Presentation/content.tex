@@ -653,7 +653,21 @@ basicstyle=\small\ttfamily,
   \captionof{figure}{Время построения состояний (новый подход + herdtool7)}
     \end{column}
     \end{columns}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Сравнение времени вычисления всех корректных состояний многопоточной программы}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.59\textwidth}
+\scalebox{0.9}{  \input{Dissertation/images/exp_1xN_results_normalize_1xN_results_litmus_normalize_Nx1_results_normalize_Nx1_results_litmus_normalize_with_ref_PRESENTATION.tex}}
+  \captionof{figure}{Нормированное время построения}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \vspace{65pt}
+      Учёт аксиом модели памяти при построении допустимых линейных порядков позволил решить задачу вычисления всех корректных состояний многопоточной программы за $O(n)$
+    \end{column}
+    \end{columns}
 
 
 \end{frame}
