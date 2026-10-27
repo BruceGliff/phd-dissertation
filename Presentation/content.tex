@@ -18,8 +18,7 @@
       дополнительных ресурсов на~кристалле.
   \end{itemize}
 
-  \fixme{пример литмуса спарава на слайде от перечисления.
-  \ref{fig:exec_graph}}.
+  \fixme{пример литмуса спарава на слайде от перечисления.}.
 
 \end{frame}
 \note {
@@ -310,7 +309,6 @@
   \frametitle{Обход частично упорядоченного множества с учётом зависимостей}
 
   \label{alg:topo-dep}
-  \label{alg:topo-dep}
   \begin{algorithmic}[1]
     \Require $D$ — множество зависимых элементов.
     \Function{Traverse}{$P$, $D$, $\pi$, $ctx$}
@@ -376,7 +374,7 @@
   \captionof{figure}{Время построения линейных порядков в
     логарифмическом масштабе от вероятности зависимости. $|P| = 13$,
   $p_{P} = 0.3$.}
-  \label{fig:nds-13-linext}
+  \label{fig:nds-13-time}
 \end{frame}
 
 \section{Граф состояний}
@@ -612,10 +610,34 @@
 
 \end{frame}
 
+\section{Результаты}
+\begin{frame}[plain, noframenumbering]
+  \begin{center}
+    \Huge
+    Результаты
+  \end{center}
+\end{frame}
+
 \begin{frame}
-  \frametitle{Верификация по кластерам состояний}
-  \lstinputlisting[caption={Реализация AMOADD через AMOCAS.},
-  label={lst:amocas-loop}, captionpos=b]{src/amocas-loop.s}
+  \frametitle{Сравнение времени вычисления всех корректных состояний
+  многопоточной программы}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.3\textwidth}
+      \lstinputlisting[
+basicstyle=\small\ttfamily,
+      ]{src/litmus-1xN.txt}
+      \captionof{figure}{Сценарий 1xN}
+    \end{column}
+
+    \begin{column}{0.68\textwidth}
+      \lstinputlisting[
+basicstyle=\small\ttfamily,
+        ]{src/litmus-Nx1.txt}
+      \captionof{figure}{Сценарий Nx1}
+    \end{column}
+  \end{columns}
+
 \end{frame}
 
 \begin{frame}
