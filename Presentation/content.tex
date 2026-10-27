@@ -140,33 +140,43 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Топологическая сортировка}
-  \begin{algorithm}[H]
-    \caption{Обход частично упорядоченного множества топологической сортировкой}
-    \label{alg:topo}
-    \begin{algorithmic}[1]
-      \Require $P$ — частично упорядоченное множество.
-      \Require $\pi$ — текущий линейный порядок.
-      \Require $ctx$ — контекст алгоритма обхода.
-      \Function{Traverse}{$P$, $\pi$, $ctx$}
-      \If{$P = \emptyset$}
-      \State $L(P) \gets \pi \cup L(P)$ \Comment{Получили
-      линейный порядок}
-      \EndIf
-      \ForAll{$\forall x \in \min(P)$}
-      \State $r \gets$ \Call{Process}{$ctx$, $\pi$, $x$}
-      \Comment{Обработка элемента множества}
-      \If{$r == \text{Next}$}
-      \State \Call{Traverse}{$P \setminus \{x\}$, $\pi
-      \stackrel{add}{\longleftarrow} x$, $ctx$} \Comment{Продолжили
-      обход}
-      \ElsIf{$r == \text{Break}$}
-      \State \Return \Comment{Закончили обход}
-      \EndIf
-      \EndFor
-      \EndFunction
-    \end{algorithmic}
-  \end{algorithm}
+  \frametitle{Обход частично упорядоченного множества топологической
+  сортировкой}
+
+  \begin{columns}[T, onlytextwidth]
+    % Left column, width 48% of text width
+    \begin{column}{0.65\textwidth}
+      \label{alg:topo}
+      \begin{algorithmic}[1]
+        \Require $P$ -- частично упорядоченное множество.
+        \Require $\pi$ -- текущий линейный порядок.
+        \Require $ctx$ -- контекст алгоритма обхода.
+        \Function{Traverse}{$P$, $\pi$, $ctx$}
+        \If{$P = \emptyset$}
+        \State $L(P) \gets \pi \cup L(P)$
+        \EndIf
+        \ForAll{$\forall x \in \min(P)$}
+        \State $r \gets$ \Call{Process}{$ctx$, $\pi$, $x$}
+        \If{$r == \text{Next}$}
+        \State \Call{Traverse}{$P \setminus \{x\}$, $\pi
+        \stackrel{add}{\longleftarrow} x$, $ctx$}
+        \ElsIf{$r == \text{Break}$}
+        \State \Return
+        \EndIf
+        \EndFor
+        \EndFunction
+      \end{algorithmic}
+    \end{column}
+
+    % Right column
+    \begin{column}{0.32\textwidth}
+      \centering
+      \scalebox{0.35}{\input{Dissertation/images/topo-traversal.tex}}
+      \captionof{figure}{Пример обхода частично упорядоченного множества}
+      \label{fig:topo-trav}
+    \end{column}
+  \end{columns}
+
 \end{frame}
 
 \begin{frame}
