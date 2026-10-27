@@ -89,11 +89,20 @@ text margin right=1.2cm}
 % не учитываются.) Замечание: опция кадра [plain, noframenumbering] не
 % отключает нижний колонтитул — номер слайда при этом не инкрементируется,
 % но прогресс-бар и номер по-прежнему рисуются.
+\newcounter{presTotFrames}% total frame count; bar drawn only once
+% presentation.nav exists
 \setbeamertemplate{footline}{%
-  % [DIAGNOSTIC] progress bar disabled to isolate a build failure — see .plan
-  \begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2pt,dp=0pt]{}%
+    \IfFileExists{presentation.nav}{%
+      \setcounter{presTotFrames}{\inserttotalframenumber}%
+      \ifnum\value{presTotFrames}>0\relax
+      {\color{accentBlue}%
+      \rule{\dimexpr\paperwidth/\value{presTotFrames}*\insertframenumber\relax}{2pt}}%
+      {\color{secondaryGray}%
+      \rule{\dimexpr\paperwidth-\paperwidth/\value{presTotFrames}*\insertframenumber\relax}{2pt}}%
+      \else\relax\fi
+    }{}%
   \end{beamercolorbox}%
-
   \leavevmode%
   \hbox{%
     \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
