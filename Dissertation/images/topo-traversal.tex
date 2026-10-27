@@ -24,7 +24,7 @@
   };
 
   % Step 2
-  \node (step2) [stepnode, below left=1.0cm and 0.0cm of step1] {
+  \node (step2) [stepnode, below left=-1.5cm and 0.6cm of step1] {
     \begin{tikzpicture}
       \node[dag] (2-2) {2};
       \node[dag, right=1.0cm of 2-2] (2-3) {3};
@@ -49,7 +49,7 @@
   };
 
   % Step 4
-  \node (step4) [stepnode, below=1.0cm of step3] {
+  \node (step4) [stepnode, below right=-0.87cm and 1.0cm of step3] {
     \begin{tikzpicture}
       \node[dag] (4-4) {4};
       \node[dag, below left=0.5cm of 4-4] (4-5) {5};
@@ -66,7 +66,7 @@
   };
 
   % Step 6
-  \node (step6) [stepnode, below right=1cm and 0.0cm of step1] {
+  \node (step6) [stepnode, below right=-1.5cm and 0.6cm of step1] {
     \begin{tikzpicture}
       \node[dag] (6-1) {1};
       \node[dag, below left=0.5cm of 6-1] (6-2) {2};
