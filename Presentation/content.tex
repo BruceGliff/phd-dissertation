@@ -431,22 +431,11 @@
 \begin{frame}
   \frametitle{Обход частично упорядоченного множества с учётом зависимостей}
 
-  \begin{columns}[T]
-    \begin{column}{0.3\textwidth}
-      \begin{figure}
-        \scalebox{0.6}{\input{Dissertation/images/topo-dep.tex}}
-        \caption{Частично упорядоченное множество с зависимыми элементами}
-      \end{figure}
-    \end{column}
-    \begin{column}{0.68\textwidth}
-      \begin{figure}
-        \scalebox{0.6}{\input{Dissertation/images/detail-traversal-for-step2.tex}}
-        \caption{Обзор шага~\textbf{2}.}
-        \label{fig:detail-traversal-for-step2}
-      \end{figure}
-    \end{column}
-
-  \end{columns}
+  \begin{figure}
+    \scalebox{0.6}{\input{Dissertation/images/detail-traversal-for-step2.tex}}
+    \caption{Обзор шага~\textbf{2}.}
+    \label{fig:detail-traversal-for-step2}
+  \end{figure}
 
 \end{frame}
 
@@ -483,12 +472,11 @@
 
   \begin{itemize}
     \item
-      Сложность алгоритмов построения всех возможных порядков
-      операций с памятью, реализующих все состояния системы, растёт
+      Сложность алгоритмов построения порядков растёт
       \textcolor{accentBlue}{экспоненциально};
     \item
       количество всевозможных состояний также растёт
-      \textcolor{accentBlue}{экспоненциально};
+      \textcolor{accentBlue}{экспоненциально}.
   \end{itemize}
 
   \begin{alertblock}{}
@@ -525,7 +513,7 @@
   \end{itemize}
 
   \begin{block}{Определение}
-    \textbf{Путём} $\rho_{\pi}(x)$ элемента $x$ для порядка $\pi$ назовём
+    \textbf{Путём} $\rho$ элемента $x$ для порядка $\pi$ назовём
     подпорядок, состоящий из элементов $Y \subseteq \pi$, для которых
     существует простая цепь из $x$ в $\forall y \in Y$:
     \begin{equation}
@@ -648,10 +636,10 @@
   \begin{equation}
     \label{eq:unorder_set}
     \begin{aligned}
-      &G = (V, E), \\
       &V \text{ -- множество операций с памятью,} \\
       &E = \{\{x, y\} \mid \{x, y\} \in D \text{ или } x <_P y \text{
-      или } y <_P x \}.
+      или } y <_P x \}, \\
+      &G = (V, E).
       \nonumber
     \end{aligned}
   \end{equation}
@@ -903,6 +891,16 @@
 
 \begin{frame}
   \frametitle{Внедрение}
+  \centering
+  \includegraphics[scale=0.28]{integration.png}
+  \captionof{figure}{Сценарий использования}
+  \note{
+    Было сделано проприоритарное ПО на основе этой теории.
+    Было успешно внедрено в бизнес процессы компании синтакор.
+    Внедрено в тестирование младших/старших ядер синтакор, а чём есть
+    акт о внедрении.
+    Позволило обнаружить проблемы с многопоточными сценариями.
+  }
 \end{frame}
 
 \begin{frame}
