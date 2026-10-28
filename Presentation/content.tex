@@ -1,5 +1,5 @@
 \section{Обзор существующих подходов}
-\begin{frame}[plain, noframenumbering]
+\begin{frame}[plain]
   \begin{center}
     \Huge
     Обзор существующих подходов
@@ -86,23 +86,43 @@
   \frametitle{Обоснование необходимости нового решения}
   \begin{itemize}
     \item задача построения всех возможных состояний системы после
-      исполнения многопоточной программы ялвяется $\#P$-полной,
-      прямое построение сталкивается с комбинаторным взрывом;
-    \item существующие решения
-      накладывают существенные ограничения на структуру теста:
-      отсутствие частичного пересечения адресов в памяти,
-      предзаданное взаимодействие операций, либо существенное
-      ограничение количества
-      операций с памятию в многопоточной программы;
+      исполнения многопоточной программы ялвяется
+      $\#P$-полной~\cite{linextcount};
+    \item существующие решения накладывают существенные ограничения
+      на структуру теста;
+    \item
+      использование обобщённого представление
+      многопоточной программы позволяет ослабить ограничения существующих
+      подходов;
+    \item
+      учет перестановок, приводящих
+      систему в одно и то же состояние, позволяет преодолеть
+      комбинаторный взрыв задачи.
   \end{itemize}
 
-  \begin{block}{Вывод}
-    Использование обобщённого представление
-    многопоточной программы позволит ослабить ограничения существующих
-    подходов. А учет перестановок, приводящих
-    систему в одно и то же состояние, позволит преодолеть
-    комбинаторный взрыв задачи.
-  \end{block}
+  \note{
+    \begin{itemize}
+      \item задача построения всех возможных состояний системы после
+        исполнения многопоточной программы ялвяется
+        $\#P$-полной,
+        прямое построение сталкивается с комбинаторным взрывом;
+      \item существующие решения
+        накладывают существенные ограничения на структуру теста:
+        отсутствие частичного пересечения адресов в памяти,
+        предзаданное взаимодействие операций, либо существенное
+        ограничение количества
+        операций с памятию в многопоточной программы;
+      \item
+        использование обобщённого представление
+        многопоточной программы позволяет ослабить ограничения существующих
+        подходов;
+      \item
+        учет перестановок, приводящих
+        систему в одно и то же состояние, позволяет преодолеть
+        комбинаторный взрыв задачи.
+    \end{itemize}
+  }
+
 \end{frame}
 
 \begin{frame}
@@ -123,33 +143,37 @@
 
 \section{Представление многопоточной программы в виде частично
 упорядоченного множества}
-\begin{frame}[plain, noframenumbering]
+\begin{frame}[plain]
   \begin{center}
     \Huge
     Представление многопоточной программы в виде частично
     упорядоченного множества
   \end{center}
+  \note{
+    Многопоточная программа представляется в~виде частично упорядоченного
+    множества операций с~памятью, построенного
+    с~учётом выбранной модели памяти.
+  }
 \end{frame}
 
 \begin{frame}
   \frametitle{Частично упорядоченное множество операций с памятью}
-  \begin{block}{Математическая модель}
-    Многопоточная программа представляется в~виде частично упорядоченного
-    множества операций с~памятью, построенного
-    с~учётом выбранной модели памяти.
-  \end{block}
   \begin{itemize}
     \item Каждая операция с~памятью ($R$, $W$, $RMW$, $F$) -- элемент
       множества: \[P : \forall x \in P \equiv x \text{ -- операция с
       памятью} \]
-    \item Порядок задаётся программным порядком и~ограничениями модели
+    \item порядок задаётся программным порядком и~ограничениями модели
       памяти: \[<_p : \forall x, y \in P \mid x <_p y \equiv xy
       \text{ -- PPO}\]
-    \item Количество линейных порядков: \[ l(P) = \sum_{x \in
+    \item
+      элемент $x \in P$, для которого не существует элемента $y \in P$
+      такого, что $y <_{p} x$, называется \textbf{минимальным} в частично
+      упорядоченном множестве;
+    \item количество линейных порядков: \[ l(P) = \sum_{x \in
       \min(P)} l(P \setminus \{x\})\]
   \end{itemize}
-  \note{
 
+  \note{
     \[
       l(P) = l(A) \cdot l(B) \cdot \binom{|P|}{|A|}.
     \]
@@ -158,7 +182,7 @@
 \end{frame}
 
 \section{Линейные порядки частично упорядоченного множества}
-\begin{frame}[plain, noframenumbering]
+\begin{frame}[plain]
   \begin{center}
     \Huge
     Линейные порядки частично упорядоченного множества
@@ -181,7 +205,7 @@
         \If{$P = \emptyset$}
         \State $L(P) \gets \pi \cup L(P)$
         \EndIf
-        \ForAll{\textcolor{accentBlue}{$\forall x \in \min(P)$}}
+        \ForAll{\textcolor{accentBlue}{$x \in \min(P)$}}
         \State $r \gets$ \Call{Process}{$ctx$, $\pi$, $x$}
         \If{$r == \text{Next}$}
         \State \Call{Traverse}{\textcolor{accentBlue}{$P \setminus \{x\}$}, $\pi
@@ -218,6 +242,7 @@
   \begin{equation}
     \label{eq:verif-base}
     \exists \pi \in L(P) \mid \forall x \in P,\; reg_{\pi}(x) \in trace
+    \nonumber
   \end{equation}
   $reg_{\pi}(x)$ обозначает значение, прочитанное операцией $x$ в
   линейном порядке $\pi$, а $trace$ -- множество всех прочитанных
@@ -250,7 +275,7 @@
       порождает перестановку, эквивалентную исходной:
       $012 \stackrel{Eq(\pi, B^{|})}{=} 102 \stackrel{Eq(\pi,
       B^{|})}{=} 120$; $\Rightarrow 012 \stackrel{Eq(\pi, B)}{=} 120$,
-      где $B = \{012, 120\} \cup B^{|}$ (``теорема о проекции'').
+      где $B = \{012, 120\} \cup B^{|}$.
     \item различные порядки независимых операций приводят в~неразличимые
       состояния -- достаточно анализировать \textbf{одного представителя}
       от~каждого класса эквивалентности;
@@ -278,7 +303,7 @@
     \State $\mathcal{B}(n-1) \gets \mathcal{B}(n-1) \cup \{\{xz,
       zx\} \in B^{|} \mid \forall z \in P,\ \forall x \mid \{xy, yx\}
     \in \mathcal{B}(n-2)\}$
-    \ForAll{$\forall x \in \min(P) \mid \textcolor{accentBlue}{\{xy,
+    \ForAll{$x \in \min(P) \mid \textcolor{accentBlue}{\{xy,
         yx\} \not \in
     \mathcal{B}(n-2)}$}\label{alg:line:traverse}
     \State \Call{Process}{$ctx$, $\pi$, $x$}
@@ -351,7 +376,7 @@
     \State \Call{Traverse}{$P \setminus X$, $D$, $\pi
     \stackrel{add}{\longleftarrow} X$, $ctx$}
     \EndIf
-    \ForAll{$\forall x \in X, \forall y \in P \mid \{x, y\} \in D$}
+    \ForAll{$x \in X, \forall y \in P \mid \{x, y\} \in D$}
     \State $D^{*} \gets D \setminus \{x, y\}$
     \State $P^{\rightarrow} \gets P \cup (x <_{p} y)$ \label{alg:line:pright}
     \State $P^{\leftarrow} \gets P \cup (y <_{p} x)$ \label{alg:line:pleft}
@@ -360,6 +385,13 @@
     \EndFor
     \EndFunction
   \end{algorithmic}
+
+  \note{
+    На строках~\ref{alg:line:pright} и~\ref{alg:line:pleft}
+    алгоритма~\ref{alg:topo-dep} формируются новые частично упорядоченные
+    множества с дополнительным строгим порядком между зависимыми
+    операциями: $x <_{p} y$ или $y <_{p} x$.
+  }
 
 \end{frame}
 
@@ -372,6 +404,38 @@
         \scalebox{0.6}{\input{Dissertation/images/topo-dep.tex}}
         \caption{Частично упорядоченное множество с зависимыми элементами}
         \label{fig:topo-dep}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.68\textwidth}
+      \begin{figure}
+        \scalebox{0.7}{\input{Dissertation/images/topo-dep-tree.tex}}
+        \caption{Бинарное дерево обхода частично упорядоченного множества}
+        \label{fig:topo-dep-tree}
+      \end{figure}
+    \end{column}
+
+  \end{columns}
+
+  \note{
+
+    Такой обход удобно
+    представить в виде бинарного дерева, как показано
+    на рисунке~\ref{fig:topo-dep-tree}. Вершины дерева соответствуют
+    выбору направления неориентированного ребра, а рядом с каждой
+    вершиной указан номер шага алгоритма.
+
+  }
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Обход частично упорядоченного множества с учётом зависимостей}
+
+  \begin{columns}[T]
+    \begin{column}{0.3\textwidth}
+      \begin{figure}
+        \scalebox{0.6}{\input{Dissertation/images/topo-dep.tex}}
+        \caption{Частично упорядоченное множество с зависимыми элементами}
       \end{figure}
     \end{column}
     \begin{column}{0.68\textwidth}
@@ -407,7 +471,7 @@
 \end{frame}
 
 \section{Граф состояний}
-\begin{frame}[plain, noframenumbering]
+\begin{frame}[plain]
   \begin{center}
     \Huge
     Граф состояний
@@ -417,20 +481,32 @@
 \begin{frame}
   \frametitle{Комбинаторный взрыв}
 
-  Недетерминизм порядка исполнения операций с памятью во время
-  исполнения многопоточной программы порождает большое количество
-  возможных состояний многопроцессорной системы.
-  Сложность алгоритмов построения всех возможных порядков операций
-  с памятью, реализующих все состояния системы, растёт
-  экспоненциально, в
-  то же время рост количества всевозможных состояний также является
-  экспоненциальным.
+  \begin{itemize}
+    \item
+      Сложность алгоритмов построения всех возможных порядков
+      операций с памятью, реализующих все состояния системы, растёт
+      \textcolor{accentBlue}{экспоненциально};
+    \item
+      количество всевозможных состояний также растёт
+      \textcolor{accentBlue}{экспоненциально};
+  \end{itemize}
 
   \begin{alertblock}{}
     Для верификации всех состояний одной многопоточной программы
     необходимо выполнить \textcolor{accentBlue}{$2^n$} проверок
     \textcolor{accentBlue}{$2^n$} раз.
   \end{alertblock}
+
+  \note{
+    Недетерминизм порядка исполнения операций с памятью во время
+    исполнения многопоточной программы порождает большое количество
+    возможных состояний многопроцессорной системы.
+    Сложность алгоритмов построения всех возможных порядков операций
+    с памятью, реализующих все состояния системы, растёт
+    экспоненциально, в
+    то же время рост количества всевозможных состояний также является
+    экспоненциальным.
+  }
 \end{frame}
 
 \begin{frame}
@@ -449,19 +525,19 @@
   \end{itemize}
 
   \begin{block}{Определение}
-    \textbf{Путём} $\rho$ элемента $x$ для порядка $\pi$ назовём
+    \textbf{Путём} $\rho_{\pi}(x)$ элемента $x$ для порядка $\pi$ назовём
     подпорядок, состоящий из элементов $Y \subseteq \pi$, для которых
     существует простая цепь из $x$ в $\forall y \in Y$:
     \begin{equation}
       \begin{aligned}
-        \rho = \{y \in \pi \mid \exists (x, y) \text{ — простая цепь от
+        \rho_{\pi}(x) = \{y \in \pi \mid \exists (x, y) \text{ — простая цепь от
         вершины } x \text{ в вершину } y\}, \\
-        \text{при этом относительный порядок элементов в } \rho \text{
-        такой же, как в } \pi.
+        \text{при этом относительный порядок элементов в } \rho_{\pi}(x) \text{
+        такой же, как в } \pi
+        \nonumber
       \end{aligned}
       \label{eq:def_suborder}
     \end{equation}
-    Обозначается $\rho_{\pi}(x)$.
   \end{block}
 
   \note{
@@ -471,7 +547,7 @@
 
     По построению граф $G_\pi = (V_\pi, E_\pi)$ является ориентированным
     и ацикличным. В таком графе для элемента $x$ существуют простые цепи
-    (без циклов), в которых все вершины и рёбра различны~\cite{graph-theory}.
+    (без циклов), в которых все вершины и рёбра различны.
 
     Иными словами, $\rho_{\pi}(x)$ можно интерпретировать как порядок
     только тех операций, от которых зависит состояние операции $x$.
@@ -483,13 +559,14 @@
   \begin{block}{Определение}
 
     \textbf{Графом состояний} $SG$ (state graph) называется
-    ориентированный граф, построенный по правилу~\ref{eq:sg_def}:
+    ориентированный граф, построенный по правилу:
     \begin{equation}
       \begin{aligned}
         &V_{SG} = \{ \rho_{\pi}(x) \mid (x, \pi) \in P \times L_P \}, \\
         &E_{SG} = \{ (\rho_{\pi}(x), \rho_{\pi}(y)) \mid (x, y) \in
         E_\pi,\ \forall \pi \in L_P,\ \forall x, y \in P \}, \\
-        &SG = (V_{SG}, E_{SG}).
+        &SG = (V_{SG}, E_{SG})
+        \nonumber
       \end{aligned}
       \label{eq:sg_def}
     \end{equation}
@@ -539,6 +616,7 @@
         \label{eq:verif-1st}
         \forall x \in P\ \exists \alpha \in L_P \rightarrow
         \rho_{\alpha}(x) \in \mathcal{M}
+        \nonumber
       \end{equation}
     \item \textbf{второе условие корректности}: существует множество
       путей из истоков графа состояний,
@@ -549,6 +627,7 @@
           исток},\ \forall \rho \in \text{bfs}(l) \rightarrow \rho \in
         \mathcal{M}\}, \nonumber \\
         & \text{исполнение программы корректно, если } op(visited) = P.
+        \nonumber
       \end{align}
   \end{itemize}
 
@@ -569,20 +648,22 @@
   \begin{equation}
     \label{eq:unorder_set}
     \begin{aligned}
-      &G_{unorder} = (V, E), \\
+      &G = (V, E), \\
       &V \text{ -- множество операций с памятью,} \\
       &E = \{\{x, y\} \mid \{x, y\} \in D \text{ или } x <_P y \text{
       или } y <_P x \}.
+      \nonumber
     \end{aligned}
   \end{equation}
 
   \begin{itemize}
     \item
       \textbf{Кластером операций $C_{i}$} называется множество вершин из
-      $i$-й компоненты связности $U_i$ графа $G_{unorder}$:
+      $i$-й компоненты связности $U_i$ графа $G$:
       \begin{equation}
         C_{i} = V(U_i)
         \label{def:set_cluster}
+        \nonumber
       \end{equation}
 
     \item
@@ -595,6 +676,7 @@
         \forall \pi\ \exists C_{i}^{\pi} = \{ \rho_{\pi}(x) \mid x
         \in C_{i}\}.
         \label{def:st_cluster}
+        \nonumber
       \end{equation}
   \end{itemize}
 
@@ -641,7 +723,7 @@
 \end{frame}
 
 \section{Результаты}
-\begin{frame}[plain, noframenumbering]
+\begin{frame}[plain]
   \begin{center}
     \Huge
     Результаты
@@ -774,7 +856,7 @@
 \end{frame}
 
 \section{Заключение}
-\begin{frame}[plain, noframenumbering]
+\begin{frame}[plain]
   \begin{center}
     \Huge
     Заключение
@@ -817,6 +899,10 @@
     с~десятками тысяч операций, что выходит за~рамки применимости
     классических подходов.
   \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Внедрение}
 \end{frame}
 
 \begin{frame}
