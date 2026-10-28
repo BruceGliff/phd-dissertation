@@ -340,7 +340,8 @@
   \begin{algorithmic}[1]
     \Require $D$ — множество зависимых элементов.
     \Function{Traverse}{$P$, $D$, $\pi$, $ctx$}
-    \State \textcolor{blue}{$X \gets \{ x \in \min(P) \}$} \label{alg:line:X}
+    \State \textcolor{accentBlue}{$X \gets \{ x \in \min(P) \}$}
+    \label{alg:line:X}
     \If{$X = \emptyset, P \not = \emptyset$}  \label{alg:line:loop}
     \State \Return \Comment{Найден цикл}
     \EndIf
@@ -427,8 +428,8 @@
 
   \begin{alertblock}{}
     Для верификации всех состояний одной многопоточной программы
-    необходимо выполнить \textcolor{blue}{$2^n$} проверок
-    \textcolor{blue}{$2^n$} раз.
+    необходимо выполнить \textcolor{accentBlue}{$2^n$} проверок
+    \textcolor{accentBlue}{$2^n$} раз.
   \end{alertblock}
 \end{frame}
 
