@@ -199,6 +199,21 @@ $P^{\rightarrow}$, либо $P^{\leftarrow}$).
 многопоточной программы}
 \label{sec:ch5/litmus-comparison}
 
+\begin{minipage}[ht]{0.3\textwidth}
+  \centering
+  \lstinputlisting[caption={Сценарий 1xN},
+    label={lst:litmus-1xN}, captionpos=b,
+    basicstyle=\footnotesize\ttfamily
+  ]{src/litmus-1xN.txt}
+\end{minipage}
+\begin{minipage}[ht]{0.7\textwidth}
+  \centering
+  \lstinputlisting[caption={Сценарий Nx1},
+    label={lst:litmus-Nx1}, captionpos=b,
+    basicstyle=\footnotesize\ttfamily
+  ]{src/litmus-Nx1.txt}
+\end{minipage}
+
 \begin{figure}[htbp]
   \centering
   \input{Dissertation/images/exp_log_1xN_results_Nx1_results.tex}
