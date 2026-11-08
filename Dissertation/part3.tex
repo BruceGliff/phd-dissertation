@@ -479,58 +479,64 @@ $\mathcal{B}(n-1) = B_{n-1}$ позволяет не терять информа
   упорядоченного множества $P$, а $L$ -- всё множество линейных
   порядков, порождаемых алгоритмом обхода с учётом
   независимости~\ref{alg:topo-indep-lookup}.
-  $R = S_n \setminus L$ -- множество линейных порядков, отчесённых алгоритмом.
+  $R = S_n \setminus L$ -- множество линейных порядков, отсечённых алгоритмом.
 
+  \noindent
   Шаг 1.\\
   Множества $\mathcal{B}$ формируются на
   строках~\ref{alg:line:fillB_1}~и~\ref{alg:line:fillB_2} только при
-  выполнении условий $\{xz, zx\} \in B^|$ и $\{xy, yx\} \in B^|$
+  выполнении условий $\{xz, zx\} \in B^{|}$ и $\{xy, yx\} \in B^{|}$
   соответственно. Следовательно,
   \begin{equation}
     \forall B_n \in \mathcal{B}\ \forall \{xy, yx\} \in B_n
-    \quad\Rightarrow\quad \{xy, yx\} \in B^|.
+    \ \Rightarrow\ \{xy, yx\} \in B^{|}.
     \label{eq:step1}
   \end{equation}
   Иными словами, в $\mathcal{B}$ попадают только пары, независимость
-  которых подтверждена отношением $B^|$.
-
-  Шаг 2.\\
+  которых подтверждена отношением $B^{|}$.
   \begin{equation}
-    \text{Если } \tau \in R \text{, то } \\
-    \exists k \mid \tau = \alpha ab \beta \\
-    \text{префикс } \alpha ba \text{ был обработан } \\
-    \{ab, ba\} \in B^| \text{\ref{eq:step2}}
+    \begin{aligned}
+      \text{Если } &\tau \in R \text{, то } \\
+      &\exists k \mid \tau = \alpha ab \beta \text{ и } |\alpha| = k, \\
+      &\text{ префикс } \alpha ba \text{ был обработан, } \\
+      &\{ab, ba\} \in B^{|}.
+    \end{aligned}
+    \label{eq:step2}
   \end{equation}
 
-  Шаг 3.\\
+  \noindent
+  Шаг 2.\\
   Пусть
   \begin{equation}
-    \exists \tau \in \R \ \forall \pi \in S_n \ \pi \in Eq(\tau,
-    B^|)  \Rightarrow \pi \in R
+    \exists \tau \in R\ \forall \pi \in S_n \
+    \pi \in Eq(\tau, B^{|}) \Rightarrow \pi \in R,
     \label{eq:step3}
   \end{equation}
-  то есть весь класс эквивалентности лежит в множествве отсечённых
+  то есть весь класс эквивалентности лежит в множестве отсечённых
   линейных порядков.
-  Выберем наименьший $k$, удовлетворяющий условию на шаге 2.
-  Тогда $\tau = \alpha ab \beta$, $\tau^' = \alpha ba \beta$ и
-  $\tau^' \in Eq(\tau, B^|)$.
-  $\tau^'$ не был отсечён на шаге $k$ и по условию~\ref{eq:step3}
-  $\tau^' \in R$.
-  Применим шаг 3 на $\tau^'$, при этом наименьший $k^'$ для линейного
-  порядка $\tau^'$ больше $k$ (\ref{eq:step2}).
+  Выберем наименьший $k$, удовлетворяющий условию на шаге~2.
+  Тогда $\tau = \alpha ab \beta$, $\tau' = \alpha ba \beta$ и
+  $\tau' \in Eq(\tau, B^{|})$.
+  $\tau'$ не был отсечён на шаге $k$, и по условию~\eqref{eq:step3}
+  $\tau' \in R$.
+  Применим шаг~3 к $\tau'$, при этом наименьший $k'$ для линейного
+  порядка $\tau'$ больше $k$ (см.~\eqref{eq:step2}).
 
-  Шаг 4.\\
-  \[
-    k = |P| \Rightarrow
-    \tau^{''} = \alpha^{''} xy \in R
-    \stackrel{\text{\ref{eq:step2}}}{\Rightarrow} \pi = \alpha^{''}yx
-    \text{ -- был обработан}
-    \stackrel{k = |P|}{\Rightarrow} \pi \in L \text{ -- противоречие
-    с \ref{eq:step3}}
-  \]
-  Таким образом, $\forall \tau \in R \exists \pi \L \ \tau \in
-  Eq(\pi, B^|)$. Что и требовалось доказать.
-
+  \noindent
+  Шаг 3.\\
+  \begin{equation}
+    \begin{aligned}
+      &k = |P| \Rightarrow\\
+      &\tau^{''} = \alpha^{''} xy \in R
+      \stackrel{\eqref{eq:step2}}{\Rightarrow}\\
+      &\pi = \alpha^{''} yx \text{ -- был обработан}
+      \stackrel{k = |P|}{\Rightarrow}\\
+      &\pi \in L \text{ -- противоречие с~\eqref{eq:step3}}.
+    \end{aligned}
+    \nonumber
+  \end{equation}
+  Таким образом, $\forall \tau \in R\ \exists \pi \in L \
+  \tau \in Eq(\pi, B^{|})$. Что и требовалось доказать.
 \end{proof}
 
 \subsection{Асимптотика алгоритма построения всех линейных порядков
