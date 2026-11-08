@@ -199,6 +199,10 @@ $P^{\rightarrow}$, либо $P^{\leftarrow}$).
 многопоточной программы}
 \label{sec:ch5/litmus-comparison}
 
+\fixme{fixme: оформить результаты нормально}
+
+\fixme{fixme: добавить GenMC}
+
 \begin{minipage}[ht]{0.3\textwidth}
   \centering
   \lstinputlisting[caption={Сценарий 1xN},
@@ -461,14 +465,14 @@ $W$ -- запись. Числа после -- уникальный индекс 
 стало равно~1. То есть до тех пор, пока все возможные состояния не
 были промаркированы.
 На это потребовалось $N=81601$ итераций исполнения программы.
-Распределение частоты маркировки конкретного кластера состояния
+Визуализация распределения частоты маркировки конкретного кластера состояния
 изображено на графике~\ref{fig:example-distibution}.
 
 \begin{figure}[ht]
   \centerfloat{
     \resizebox{\textwidth}{!}{\input{Dissertation/images/realtest-distribution.tex}}
   }
-  \caption{Распределение количества маркировок кластеров за 81601
+  \caption{Визуализация количества маркировок кластеров за 81601
   итераций~\ref{fig:example-prog} (saturation == 1).}
   \label{fig:example-distibution}
 \end{figure}
