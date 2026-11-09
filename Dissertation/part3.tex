@@ -453,7 +453,7 @@ $R = S_n \setminus L$.
 Покажем, что данный обход реализует
 свойство, сформулированное в лемме~\ref{lm:n-reorder}.
 
-\fixme{здесь нумерация рекурсии верная}.
+\fixme{здесь нумерация рекурсии \textbf{верная}}.
 \begin{lemma}
   Алгоритм~\ref{alg:topo-indep-lookup} учитывает перестановки
   независимых последовательностей элементов.
@@ -465,7 +465,7 @@ $R = S_n \setminus L$.
   И все элементы подпорядка $\gamma$ независимы и неупорядоченны с $b$:
   \begin{equation}
     \begin{aligned}
-      \forall g \in \gamma \rightarrow \{gb, bg\} \in B^| \\
+      \forall g \in \gamma \rightarrow \{bg, gb\} \in B^| \\
       \nexists g \in \gamma \mid b <_P g
     \end{aligned}
     \label{eq:gInGamma}
@@ -473,49 +473,48 @@ $R = S_n \setminus L$.
   $|\alpha| = k$.
   Рассмотрим шаг $k+1$, на котором префикс $\alpha b$ уже построен и
   обрабатывается множество минимальных элементов.
-  $G = \{g \mid g \in \gamma \text{ и } g \in \min(P) \}$ --
+  $G = \{g \mid g \in \gamma \text{ и } g \in \min(P) \}$~--
   множество минимальных элементов из элементов подпорядка $\gamma$ на
   $k+1$ шаге обработки подпорядка. В контексте данного доказательства
-  $P$ -- это частично упорядоченное множество именно на
+  $P$~-- это частично упорядоченное множество именно на
   рассматриваемом шаге, а не изначальное множество.
   После того, как этот шаг полностью обработается, то есть
-  обработаются пары $bg \forall g \in G$, для множества
-  $\mathcal{B}(k+1-1)$ будет
-  выполнено~(см~\eqref{eq:gInGamma}~и~строку~\ref{alg:line:fillB_2}):
+  обработаются пары $bg$ $\forall g \in G$, для множества
+  $\mathcal{B}((k+1)-1)$ будет
+  выполнено~(см.~\eqref{eq:gInGamma}~и~строку~\ref{alg:line:fillB_2}):
   \begin{equation}
-    \{gb, bg\} \in \mathcal{B}(k+1-1) \forall g \in G
+    \{bg, gb\} \in \mathcal{B}((k+1)-1) \quad \forall g \in G
     \label{eq:bkp2m2}
   \end{equation}
 
   Рассмотрим шаг $k$. Элемент $b$ уже был обработан и $G \subseteq
   \min(P)$. Тогда выберем произвольный $g_1 \in G$ и рассмотрим
   следующий шаг $k+1$ с префиксом $\alpha g_1$.
-  Тогда~(см~\eqref{eq:gInGamma}~и~строку~\ref{alg:line:fillB_1})
+  Тогда~(см.~\eqref{eq:gInGamma},~\eqref{eq:bkp2m2}~и~строку~\ref{alg:line:fillB_1})
   \begin{equation}
-    \{bg, gb\} \in \mathcal{B}(k+1-1) \forall g \in \gamma
+    \{bg, gb\} \in \mathcal{B}(k+1) \quad \forall g \in \gamma
     \label{eq:bkp2m1}
   \end{equation}
 
   Утверждение: $\forall i \mid 1 \leq i \leq |\gamma|$ выполнено
-  $\{bg, gb\} \in \mathcal{B}(k+i) \forall g \in \gamma$.
+  $\{bg, gb\} \in \mathcal{B}(k+i)$ $\forall g \in \gamma$.
 
   \noindent
-  Для $i = 1$ -- выполнено~(см.~\ref{eq:bkp2m1}).
+  Для $i = 1$~-- выполнено~(см.~\eqref{eq:bkp2m1}).
 
   \noindent
   Пусть верно для $i$, докажем, что это верно и для $i+1$:
   \begin{equation}
     \begin{aligned}
-      &\text{префикс } \alpha g_1 \dots \g_i\g_{i+1} \text{ -- был построен},
-      &\{bg, gb\} \in \mathcal{B}((k+i) + 1 - 1) \forall g \in \gamma
+      &\text{префикс } \alpha g_1 \dots g_i g_{i+1} \text{ -- был построен,} \\
+      &\{bg, gb\} \in \mathcal{B}((k+i) + 1 - 1) \quad \forall g \in \gamma
       \Rightarrow \\
-      & \{g_{i+1}b, bg_{i+1}\} \in \mathcal{B}(k+(i+1)-1) \Rightarrow \\
-      &\text
-      {уравнение~\eqref{eq:gInGamma}~и~строка~\ref{alg:line:fillB_1}}
+      &\{bg_{i+1}, g_{i+1}b\} \in \mathcal{B}(k+(i+1)-1) \Rightarrow \\
+      &\text{уравнение~\eqref{eq:gInGamma}~и~строка~\ref{alg:line:fillB_1}}
       \Rightarrow \\
-      \{bg, gb\} \in \mathcal{B}(k+(i+1))
+      &\{bg, gb\} \in \mathcal{B}(k+(i+1))
+      \nonumber
     \end{aligned}
-    \label{eq:bkpim1}
   \end{equation}
 
   Теперь рассмотрим шаг $k+|\gamma|$, при котором префикс $\alpha
@@ -527,8 +526,9 @@ $R = S_n \setminus L$.
   \begin{equation}
     \begin{aligned}
       &\text{Если } \alpha b \gamma \beta \in L \text{, то }
-      \alpha \gamma b \beta \in R
+      \alpha \gamma b \mathellipsis \in R
     \end{aligned}
+    \label{eq:bgamma}
   \end{equation}
 
   \fixme{fixme: рассмотреть $\gamma b \in L \Rightarrow b \gamma \in R$}.
