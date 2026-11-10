@@ -635,55 +635,58 @@ $R = S_n \setminus L$.
   \tau \in Eq(\pi, B^{|})$. Что и требовалось доказать.
 \end{proof}
 
-\fixme{fixme: Доказать оптимальность}
-
 \begin{theorem}[Оптимальность алгоритма~\ref{alg:topo-indep-lookup}]
   Для любого линейного порядка $\tau$ частично упорядоченного
-  множества $P$, существует не более одного порядка $\pi$, порождённого
-  алгоритмом~\ref{alg:topo-indep-lookup}, такой что $\tau \in Eq(\pi, B^|)$.
+  множества $P$ существует не более одного порядка $\pi$,
+  порождённого алгоритмом~\ref{alg:topo-indep-lookup}, такого что
+  $\tau \in Eq(\pi, B^{|})$.
 \end{theorem}
+
 \begin{proof}
-
-  Пусть $\exists \pi \in S_n \mid \tau_1, \tau_2 \in L, \tau_1 \in
-  Eq(\pi, B^|) \text{ и }
-  \tau_2 \in Eq(\pi, B^|)$.
-  Тогда
+  Предположим противное: пусть существуют $\pi \in S_n$ и различные
+  $\tau_1, \tau_2 \in L$ такие, что
   \[
-    \tau_1 \in Eq(\tau_2, B^|)
+    \tau_1 \in Eq(\pi, B^{|})
+    \quad\text{и}\quad
+    \tau_2 \in Eq(\pi, B^{|}) \Rightarrow \tau_1 \in Eq(\tau_2, B^{|}).
   \]
 
-  \noindent
-  Пусть $\tau_1 = \alpha a \gamma_1 b \beta_1$, $\tau_2 = \alpha b
-  \gamma_2 a \beta_2$, где $\alpha$ -- общий префикс, $a,b$ -- первые
-  различные операции.
-
-  \noindent
-  $\{ab,ba\} \in B^|$ по лемме о проекции~\ref{lm:proj_lemma}.
-
-  \noindent
-  Пусть $\exists g \in \gamma_1 \mid \{ bg, gb\} \not \in B^|
-  \rightarrow \tau_2 \not \in
-  Eq(\tau_1, B^|)$ по лемме о проекции~\ref{lm:proj_lemma}.
-
-  \noindent
-  Пусть $\exists g \in \gamma_1 \mid g <_P b \rightarrow \tau_2 \not \in S_n.$
-
-  \noindent
-  Следовательно
+  Запишем порядки в виде
   \[
-    \{bg, gb\} \in B^| \ \forall g \in \gamma_1
+    \tau_1 = \alpha\, a\, \gamma_1\, b\, \beta_1,
+    \qquad
+    \tau_2 = \alpha\, b\, \gamma_2\, a\, \beta_2,
   \]
+  где $\alpha$~-- общий префикс, а $a$ и $b$~-- первые различные
+  элементы.
 
-  Тогда, по лемме о перестановки независимых последовательностей~\ref{lm:algo}:
-  \[
-    \tau_1 = \alpha a \gamma_1 b \beta_1 \in L \Rightarrow \tau_2 =
-    \alpha b \mathellipsis \in R \text{ --
-    противоречие.}
-  \]
+  По лемме о проекции~\ref{lm:proj_lemma} имеем
+  \begin{equation}
+    \{ab, ba\} \in B^{|}.
+    \label{eq:opt_th_abba}
+  \end{equation}
 
-  Таким образом, $\nexists \tau_1,\tau_2 \in L \mid \tau_1 \in Eq(\tau_2, B^|)$.
+  Далее, если бы существовал $g \in \gamma_1$ такой, что
+  $\{bg, gb\} \notin B^{|}$, то по лемме о
+  проекции~\ref{lm:proj_lemma} выполнялось бы
+  $\tau_2 \notin Eq(\tau_1, B^{|})$, что противоречит сделанному
+  предположению. Аналогично, если бы существовал $g \in \gamma_1$
+  с отношением порядка $g <_P b$, то нарушалось бы $\tau_2 \in S_n$.
+  Следовательно,
+  \begin{equation}
+    \{bg, gb\} \in B^{|} \quad \text{для всех } g \in \gamma_1.
+    \label{eq:opt_th_bggb}
+  \end{equation}
+
+  Тогда по лемме о перестановке независимых
+  последовательностей~\ref{lm:algo} и из
+  уравнений~\eqref{eq:opt_th_abba}~и~\eqref{eq:opt_th_bggb}: из
+  $\tau_1 = \alpha\, a\, \gamma_1\, b\, \beta_1 \in L$ следует
+  $\tau_2 = \alpha\, b \ldots \in R$, что противоречит предположению.
+
+  Полученное противоречие показывает, что не существует различных
+  $\tau_1, \tau_2 \in L$ таких, что $\tau_1 \in Eq(\tau_2, B^{|})$.
   Что и требовалось доказать.
-
 \end{proof}
 
 \subsection{Асимптотика алгоритма построения всех линейных порядков
