@@ -510,7 +510,7 @@ $R = S_n \setminus L$.
       &\{bg, gb\} \in \mathcal{B}((k+i) + 1 - 1) \quad \forall g \in \gamma
       \Rightarrow \\
       &\{bg_{i+1}, g_{i+1}b\} \in \mathcal{B}(k+(i+1)-1) \Rightarrow \\
-      &\text{уравнение~\eqref{eq:gInGamma}~и~строка~\ref{alg:line:fillB_1}}
+      &\text{условие~\eqref{eq:gInGamma}~и~строка~\ref{alg:line:fillB_1}}
       \Rightarrow \\
       &\{bg, gb\} \in \mathcal{B}(k+(i+1))
       \nonumber
@@ -531,8 +531,37 @@ $R = S_n \setminus L$.
     \label{eq:bgamma}
   \end{equation}
 
-  \fixme{fixme: рассмотреть $\gamma b \in L \Rightarrow b \gamma \in R$}.
+  Пусть теперь $\tau = \alpha \gamma b \beta$ -- обработан, то есть
+  $\tau \in L$.
+  Следовательно $b$ обрабатывается после любого элемента $g \in G$.
 
+  \noindent
+  После обработки всех шагов \(k = |\alpha| + 1\) с префиксом \(\alpha g\):
+  \begin{equation}
+    \{bg, gb\} \in \mathcal{B}(k-1) \quad g \in G
+    \quad \text{(см.~\eqref{eq:gInGamma} и строку~\ref{alg:line:fillB_2})}
+    \label{eq:allginb}
+  \end{equation}
+
+  Теперь рассмотрим шаг \(k = |\alpha|+1\) с префиксом \(\alpha b\).
+  Для этого шага верно: \(G \in \min(P)\) и \(\{bg, gb\} \in \mathcal{B}(k-1)\)
+  (см.~\eqref{eq:allginb}), следовательно
+  \begin{equation}
+    \alpha b g \mathellipsis \in R \quad \forall g \in G
+    \quad \text{(см.~строку~\ref{alg:line:traverse})}
+    \label{eq:gammab}
+  \end{equation}
+
+  Таким образом:
+  \begin{equation}
+    \begin{aligned}
+      &\tau = \alpha b \gamma \beta \in L \Rightarrow \alpha \gamma b
+      \mathellipsis \in R \quad \text{(см.~\eqref{eq:bgamma})}\\
+      &\tau = \alpha \gamma b \beta \in L \Rightarrow \alpha b \gamma
+      \mathellipsis \in R \quad \text{(см.~\eqref{eq:gammab})}
+    \end{aligned}
+    \label{eq:bggb}
+  \end{equation}
   Что и требовалось доказать.
 \end{proof}
 
