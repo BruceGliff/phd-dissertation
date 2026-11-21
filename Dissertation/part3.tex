@@ -82,11 +82,6 @@
 \subsection{Классы эквивалентных перестановок}
 \label{sec:ch1/eqiv-cl}
 
-\fixme{fixme: убрать $Eq^|$.}
-
-\fixme{fixme: $S_n$ в работе далее может как-то подругому обозначено
-$\rightarrow L$.}
-
 Рассмотрим множество всевозможных линейных перестановок $S_n$. Две
 перестановки из $S_n$ называются эквивалентными, если одна может быть
 получена из другой путём замены некоторой подпоследовательности
@@ -111,14 +106,10 @@ $12\textbf{543}6$ путём замены подпоследовательнос
 $\sigma_j$ принадлежат одному и тому же множеству $B_l$. Тогда
 $Eq(\pi, B)$ обозначает множество перестановок, эквивалентных $\pi$
 относительно $B$.
-
 Таким образом, $125436 \in Eq(123456, \{\{123, 321\}\})$.
-
 Ограничим дальнейшее исследование перестановками только соседних
-элементов. Обозначим через $B^{|}$ отношение эквивалентности, а через
-$Eq^{|}(\pi, B^{|})$ -- класс эквивалентности перестановки $\pi$ с учётом
-замены $B^{|}$ только для соседних элементов. То есть $2134 \in
-Eq^{|}(1234, \{\{123, 213\}\})$.
+элементов, а через $B^{|}$ Обозначим отношение эквивалентности между
+этими элементами.
 
 До конца этого раздела будем использовать термин ``трассы'' из теории
 трасс (см.~\ref{sec:trace-theory}).
@@ -128,7 +119,10 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
 Пусть:
 \begin{enumerate}
   \item $A$ -- конечный алфавит, $<_P$ -- отношение частичного
-    порядка, $P = (A, <_P)$ -- частично упорядоченное множество;
+    порядка,
+
+    \noindent
+    $P = (A, <_P)$ -- частично упорядоченное множество;
   \item $S_n$ -- всё множество линейный порядков $P$,
     отождествляемых со словами из $A$ без повторений, в которых $a$
     стоит раньше $b$ всякий раз, когда $a <_P b$;
@@ -138,7 +132,7 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
   \item $\equiv_D$ -- отношение эквивалентности слов, класс
     $[\tau]_D$ -- трасса слова $\tau$;
   \item $B^{|} = \{\{ab, ba\} \mid \forall \{a, b\} \in I \}$ --
-    шаблоны допустимых соседних перестановок, $Eq^|(\tau, B^|)$ --
+    шаблоны допустимых соседних перестановок, $Eq(\tau, B^|)$ --
     класс эквивалентности $\tau$ по последовательному применению
     этих перестановок.
 \end{enumerate}
@@ -166,7 +160,7 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
   перестановка не нарушает ни одного отношения порядка.
 \end{proof}
 \begin{corollary}
-  $Eq^|(\tau, B^|) \in S_n$ и $[\tau]_D \in S_n$ $\forall \tau \in S_n$.
+  $Eq(\tau, B^|) \in S_n$ и $[\tau]_D \in S_n\ \forall \tau \in S_n$.
 \end{corollary}
 
 \begin{lemma}[Проекционная лемма для перестановок]
@@ -206,7 +200,7 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
   Более того, каждый класс $[\tau]_D \cap S_n$ непуст и
   является классом $B^|$-эквивалентности внутри $S_n$. Иными
   словами, ограничение $\equiv_D$​ на $S_n$ совпадает с
-  $Eq^|(\cdot, B^|) \cap (S_n \times S_n)$.
+  $Eq(\cdot, B^|) \cap (S_n \times S_n)$.
   \label{th:class_is_trace}
 \end{theorem}
 
@@ -219,8 +213,8 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
   где каждый переход $w_i \rightarrow w_{i+1}$ -- замена соседней
   пары $ab \leftrightarrow ba$ при $\{a,b\} \in I$.
   Каждый такой переход есть в точности применение шаблона
-  $\{ab,ba\} \in B^∣$.
-  Значит, $\theta \in Eq^∣(π,B^∣)$.
+  $\{ab,ba\} \in B^|$.
+  Значит, $\theta \in Eq(\pi, B^|)$.
   Аналогично, из рассмотренния цепочек приобразований из шаблонов
   $B^|$, следует замена независимых пар, то есть
   ($2 \Rightarrow 1$).\\
@@ -282,40 +276,38 @@ Eq^{|}(1234, \{\{123, 213\}\})$.
 \subsection{Топологическая сортировка с учётом независимости}
 \label{sec:ch2/topo-indep}
 
-\fixme{fixme: Здесь сделать акцент не на последовательностях
-перестановок, а просто на одной перестановке пары независимых операций.}
-
-Для учёта независимости перестановок введём дополнительные параметры
+Для учёта пар независимых операций при построении линейных порядков
+введём дополнительные параметры
 в алгоритм~\ref{alg:topo}.
 
-\fixme{fixme: $n-2 \rightarrow n-1$. ЭТО ПРЯМ ВАЖНО}.
-
 \begin{algorithm}[H]
-  \caption{Обход частично упорядоченного множества с учётом независимости}
+  \caption{Обход частично упорядоченного множества с учётом
+  независимости пар операций}
   \label{alg:topo-indep}
   \begin{algorithmic}[1]
     \Require $P$ -- частично упорядоченное множество.
+    \Require $L$ -- множество линейных порядков.
     \Require $B^{|}$ -- разбиение из независимых элементов.
     \Require $\mathcal{B} = \{B_n\}$, где $B_n$ -- множество из
     разбиений на $n$-ом шаге рекурсии. $\mathcal{B}(n) = B_n$
-    \Require $\pi$ — текущий линейный порядок.
-    \Require $y$ — вершина, обработанная на предыдущем шаге рекурсии.
-    \Require $ctx$ — контекст алгоритма обхода.
-    \Function{Traverse}{$P$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
+    \Require $\pi$ -- текущий линейный порядок.
+    \Require $y$ -- вершина, обработанная на предыдущем шаге рекурсии.
+    \Require $ctx$ -- контекст алгоритма обхода.
+    \Function{Traverse}{$P$, $L$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
     \If{$P = \emptyset$}
-    \State $L(P) \gets \pi \cup L(P)$ \Comment{Полностью построили
+    \State $L \gets \pi \cup L$ \Comment{Полностью построили
     линейный порядок}
     \EndIf
     \State $n \gets |\pi|$
     \State $\mathcal{B}(n) \gets \emptyset$
     \ForAll{$\forall x \in \min(P) \mid \{xy, yx\} \not \in
-    \mathcal{B}(n-2)$} \label{alg:line:l5}
+    \mathcal{B}(n-1)$} \label{alg:line:l5}
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
-    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$,
+    \State \Call{Traverse}{$P \setminus \{x\}$, $L$, $B^{|}$,
     $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
-    \State $\mathcal{B}(n-2) \gets \{xy, yx\} \cup \mathcal{B}(n-2)$
+    \State $\mathcal{B}(n-1) \gets \{xy, yx\} \cup \mathcal{B}(n-1)$
     \label{alg:line:l9}
     \EndIf
     \EndFor
@@ -411,30 +403,31 @@ B^{|})}{=} 120$. Таким образом, $012 \stackrel{Eq(\pi, B)}{=} 120$,
   \label{alg:topo-indep-lookup}
   \begin{algorithmic}[1]
     \Require $P$ -- частично упорядоченное множество.
+    \Require $L$ -- множество линейных порядков.
     \Require $B^{|}$ -- разбиение из независимых элементов.
     \Require $\mathcal{B} = \{B_n\}$, где $B_n$ -- множество из
     разбиений на $n$-ом шаге рекурсии. $\mathcal{B}(n) = B_n$, $B_0 = \emptyset$
     \Require $\pi$ — текущий линейный порядок.
     \Require $y$ — вершина, обработанная на предыдущем шаге рекурсии.
     \Require $ctx$ — контекст алгоритма обхода.
-    \Function{Traverse}{$P$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
+    \Function{Traverse}{$P$, $L$, $B^{|}$, $\mathcal{B}$, $\pi$, $y$, $ctx$}
     \If{$P = \emptyset$}
-    \State $L(P) \gets \pi \cup L(P)$ \Comment{Полностью построили
+    \State $L \gets \pi \cup L$ \Comment{Полностью построили
     линейный порядок}
     \EndIf
-    \State $\mathcal{B}(n) \gets \emptyset$
-    \State $\mathcal{B}(n-1) \gets \mathcal{B}(n-1) \cup \{\{xz,
+    \State $n \gets |\pi|$
+    \State $\mathcal{B}(n) \gets \mathcal{B}(n) \cup \{\{xz,
       zx\} \in B^{|} \mid \forall z \in P,\ \forall x \mid \{xy, yx\}
-    \in \mathcal{B}(n-2)\}$\label{alg:line:fillB_1}
+    \in \mathcal{B}(n-1)\}$\label{alg:line:fillB_1}
     \ForAll{$x \in \min(P) \mid \{xy, yx\} \not \in
-    \mathcal{B}(n-2)$}\label{alg:line:traverse}
+    \mathcal{B}(n-1)$}\label{alg:line:traverse}
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
-    \State \Call{Traverse}{$P \setminus \{x\}$, $B^{|}$,
+    \State \Call{Traverse}{$P \setminus \{x\}$, $L$, $B^{|}$,
     $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
-    \State $\mathcal{B}(n-2) \gets \{xy, yx\} \cup
-    \mathcal{B}(n-2)$\label{alg:line:fillB_2}
+    \State $\mathcal{B}(n-1) \gets \{xy, yx\} \cup
+    \mathcal{B}(n-1)$\label{alg:line:fillB_2}
     \EndIf
     \EndFor
     \EndFunction
@@ -449,11 +442,9 @@ $\mathcal{B}(n-1) = B_{n-1}$ позволяет не терять информа
 Обозначим множество отброшенных линейных порядков как $R$, множество
 построенных линейных порядков как $L$.
 $R = S_n \setminus L$.
-\fixme{fixme: унифицировать $L$, $S_n$}
 Покажем, что данный обход реализует
 свойство, сформулированное в лемме~\ref{lm:n-reorder}.
 
-\fixme{здесь нумерация рекурсии \textbf{верная}}.
 \begin{lemma}[Перестановка независимых последовательностей]
   Алгоритм~\ref{alg:topo-indep-lookup} учитывает перестановки
   независимых последовательностей элементов.
