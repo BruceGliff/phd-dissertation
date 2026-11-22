@@ -888,23 +888,135 @@ $D^{*}$ по правилам~\eqref{eq:rules}.
     \State \Return \Comment{Найден цикл}
     \EndIf
     \If{$\{x, y\} \not \in D \mid \forall x \in X, \forall y \in P$}
+    \label{alg:line:orig_cond}
     \State \Call{ProcessSet}{$ctx$, $X$, $\pi$} \Comment{Обработка
     множества $X$}
-    \State \Call{Traverse}{$P \setminus X$, $D$, $\pi
+    \State \Call{Traverse}{$P \setminus X$, $L$, $D$, $\pi
     \stackrel{add}{\longleftarrow} X$, $ctx$}
     \EndIf
-    \ForAll{$\forall x \in X, \forall y \in P \mid \{x, y\} \in D$}
-    \State $D^{*} \gets D \setminus \{x, y\}$
+    \ForAll{$x \in X, y \in P \mid \{x, y\} \in D$}
+    \State $D^{*} \gets D \setminus \{x, y\}$ \label{alg:line:delD}
     \State $P^{\rightarrow} \gets P \cup (x <_{p} y)$
     \label{alg:line:pright}
     \State $P^{\leftarrow} \gets P \cup (y <_{p} x)$
     \label{alg:line:pleft}
-    \State \Call{Traverse}{$P^{\rightarrow}$, $D^{*}$, $\pi$, $ctx$}
-    \State \Call{Traverse}{$P^{\leftarrow}$, $D^{*}$, $\pi$, $ctx$}
+    \State \Call{Traverse}{$P^{\rightarrow}$, $L$, $D^{*}$, $\pi$, $ctx$}
+    \State \Call{Traverse}{$P^{\leftarrow}$, $L$, $D^{*}$, $\pi$, $ctx$}
     \EndFor
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
+
+\begin{theorem}[Полнота алгоритма~\ref{alg:topo-dep}]
+  Для любого линейного порядка $\tau$ частично упорядоченного
+  множества $P$, существует порядок $\pi$, порождённый
+  алгоритмом~\ref{alg:topo-dep}, такой что $\tau \in Eq(\pi, B^|)$.
+\end{theorem}
+\begin{proof}
+  Заменим условие обработки множества минимальных элементов в
+  алгоритме~\ref{alg:topo-dep} (см.~строку~\ref{alg:line:orig_cond})
+  на обработку множества по одному элементу:
+  \begin{algorithm}[H]
+    \label{alg:new-cond}
+    \begin{algorithmic}[1]
+      \setcounter{ALG@line}{8-1}
+      \ForAll{$x \in X$ такие, что $\{x, y\} \notin D \quad \forall y \in P$}
+      \State \Call{Process}{$ctx$, $x$, $\pi$} \Comment{Обработка элемента $x$}
+      \State \Call{Traverse}{$P \setminus \{x\}$, $L$, $D$, $\pi
+      \stackrel{add}{\longleftarrow} x$, $ctx$}
+      \EndFor
+    \end{algorithmic}
+  \end{algorithm}
+  Покажем, что при такой замене способа обработки минимальных
+  элементов получаем алгоритм, эквивалентный топологической
+  сортировке (см.~\ref{alg:topo}).
+
+  Пусть $L_1$ -- множество линейных порядков, построенных алгоритмом
+  топологической сортировки, $L_2$ -- множество линейных порядков,
+  построенных алгоритмом~\ref{alg:topo} с обработкой минимальных
+  элементов по одному.
+
+  \noindent
+  Докажем, что $L_1 \subseteq L_2$.
+  Пусть это неверно и $\exists \pi \in L_1 \mid \pi \notin L_2$.
+  Выберем порядок $\tau \in L_2$ с наибольшей длиной общего префикса
+  с порядком $\pi$:
+  \begin{equation}
+    \begin{aligned}
+      \pi &= \gamma a \alpha \\
+      \tau &= \gamma \beta
+    \end{aligned}
+    \nonumber
+  \end{equation}
+  Рассмотрим шаг алгоритмов, при котором префикс $\gamma$ был
+  только построен. На этом шаге частично упорядоченные множества $P$
+  в обоих алгоритмах равны, соответственно равны и множества
+  минимальных элементов $X$. Тогда, так как префикс $\gamma a$ был
+  построен топологической сортировкой, то $a \in X$.
+
+  Шаг 1.
+  Пусть $\{a, y\} \notin D \quad \forall y \in P$, тогда префикс
+  $\gamma a$ будет рассмотрен в алгоритме обработки минимальных
+  элементов по одному.
+  Следовательно, предположение, что $\gamma$ -- это наибольший общий
+  префикс, неверно, так как существует общий префикс $\gamma a$.
+
+  Шаг 2.
+  Пусть $\exists y \in P \mid \{a, y\} \in D$, тогда на
+  строках~\ref{alg:line:pright}~и~\ref{alg:line:pleft} строятся
+  частично упорядоченные множества, в которых явно задан порядок
+  между $a$ и $y$.
+  Выберем следующий вызов рекурсии с множеством $P^{\rightarrow}$ или
+  $P^{\leftarrow}$ так, чтобы было выполнено условие $a <_P y$.
+  Выбор такого множества сохранит условие $a \in \min(P)$.
+  Повторим шаг~2 до тех пор, пока $\nexists y \in P \mid \{a, y\}
+  \in D$ (мощность множества $D$ при каждом таком рекурсивном вызове
+  строго убывает на строке~\ref{alg:line:delD}).
+  Тогда выполнено условие на шаге~1, в котором доказали противоречие.
+
+  $L_2 \subseteq L_1$ следует из того, что
+  алгоритм~\ref{alg:topo-dep} лишь добавляет новые отношения
+  порядка (строки~\ref{alg:line:pright}--\ref{alg:line:pleft}), поэтому его
+  множество минимальных элементов на каждом шаге является
+  подмножеством минимальных элементов топологической
+  сортировки~\ref{alg:topo}. Следовательно, любой порядок, допустимый
+  в $L_2$, допустим и в $L_1$.
+
+  Таким образом, если заменить обработку множества минимальных
+  элементов на обработку минимальных элементов по одному, то получаем
+  алгоритм построения всех линейных порядков частично упорядоченного множества.
+  Следовательно, сокращение пространства линейных порядков
+  в алгоритме~\ref{alg:topo-dep} происходит благодаря одновременной
+  обработке множества $X$:
+  \begin{algorithm}[H]
+    \label{alg:old-cond}
+    \begin{algorithmic}[1]
+      \setcounter{ALG@line}{8-1}
+      \If{$\{x, y\} \notin D \mid \forall x \in X, \forall y \in P$}
+      \State \Call{ProcessSet}{$ctx$, $X$, $\pi$} \Comment{Обработка
+      множества $X$}
+      \State \Call{Traverse}{$P \setminus X$, $L$, $D$, $\pi
+      \stackrel{add}{\longleftarrow} X$, $ctx$}
+      \EndIf
+    \end{algorithmic}
+  \end{algorithm}
+  Пусть $\mathrm{X}$ -- множество всех переупорядочиваний элементов из $X$.
+  Зафиксируем один префикс, который был обработан: $\pi
+  \stackrel{add}{\longleftarrow} X = \pi \chi \in L$, где $\chi \in \mathrm{X}$.
+  Покажем, что данное сокращение не выходит за пределы классов
+  эквивалентности $Eq(\pi \chi, B^|)$.
+
+  Множество $R$ (сокращённых порядков) дополняется префиксами
+  $\pi \chi_i \mid \forall \chi_i \neq \chi \in \mathrm{X}$.
+  Так как $\{xy, yx\} \in B^| \quad \forall \{x,y\} \in D$, то $\forall
+  \pi \chi_i \in R$ по лемме о перестановке последовательностей
+  независимых элементов~\ref{lm:n-reorder} верно, что $\pi \chi_i
+  \in Eq(\pi \chi, B^|)$. Таким образом, во множество $R$ попадают
+  только порядки, эквивалентные уже построенным порядкам из $L$.
+
+  Что и требовалось доказать.
+
+\end{proof}
 
 На строке~\ref{alg:line:X} алгоритма~\ref{alg:topo-dep} порядок
 элементов из множества минимальных $X$ не важен. Из условия $\forall
