@@ -306,7 +306,7 @@ $Eq(\pi, B)$ обозначает множество перестановок, �
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
     \State \Call{Traverse}{$P \setminus \{x\}$, $L$, $B^{|}$,
-    $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
+    $\mathcal{B}$, $\pi x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
     \State $\mathcal{B}(n-1) \gets \{xy, yx\} \cup \mathcal{B}(n-1)$
     \label{alg:line:l9}
@@ -426,7 +426,7 @@ B^{|})}{=} 120$. Таким образом, $012 \stackrel{Eq(\pi, B)}{=} 120$,
     \State \Call{Process}{$ctx$, $\pi$, $x$} \Comment{Обработка
     элемента множества}
     \State \Call{Traverse}{$P \setminus \{x\}$, $L$, $B^{|}$,
-    $\mathcal{B}$, $\pi \stackrel{add}{\longleftarrow} x$, $x$, $ctx$}
+    $\mathcal{B}$, $\pi x$, $x$, $ctx$}
     \If{$\{xy, yx\} \in B^{|}$}
     \State $\mathcal{B}(n-1) \gets \{xy, yx\} \cup
     \mathcal{B}(n-1)$\label{alg:line:fillB_2}
@@ -925,7 +925,7 @@ $D^{*}$ по правилам~\eqref{eq:rules}.
       \ForAll{$x \in X$ такие, что $\{x, y\} \notin D \quad \forall y \in P$}
       \State \Call{Process}{$ctx$, $x$, $\pi$} \Comment{Обработка элемента $x$}
       \State \Call{Traverse}{$P \setminus \{x\}$, $L$, $D$, $\pi
-      \stackrel{add}{\longleftarrow} x$, $ctx$}
+      x$, $ctx$}
       \EndFor
     \end{algorithmic}
   \end{algorithm}
@@ -1087,6 +1087,7 @@ x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$ следует,
 принимать решение о необходимости дальнейшего направления рёбер по
 анализу множества $X$ (см.~алгоритм~\ref{alg:processset}), а не по
 одному элементу.
+\fixme{fixme:longdash}
 
 \begin{algorithm}[H]
   \caption{Обработка множества минимальных элементов}
@@ -1097,10 +1098,12 @@ x \in X, \forall y \in P \rightarrow \{x, y\} \not \in D$ следует,
     \Require $X$ — множество минимальных элементов.
     \Ensure Результат обработки элементов.
     \Function{ProcessSet}{$ctx$, $\pi$, $X$}
-    \If{$\exists x \in X \mid \text{Process}(ctx, x, \pi) ==
-    \text{Breadth}$}
+    \ForAll{$x \in X$}
+    \If{$Process(ctx, x, \pi) = \text{Breadth}$}
     \State \Return \text{Breadth} \Comment{Прерываем текущий обход}
     \EndIf
+    \State $\pi \gets \pi x$
+    \EndFor
     \State \Return \text{Next} \Comment{Продолжаем обход}
     \EndFunction
   \end{algorithmic}
